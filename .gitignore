@@ -1,0 +1,6 @@
+# Run folders hold transcripts with account details. Keep them out of the repo.
+*-out/
+*-out.tgz
+node_modules/
+__pycache__/
+.DS_Store

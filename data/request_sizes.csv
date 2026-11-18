@@ -1,0 +1,4 @@
+session,requests,first_request,last_request_before,first_request_after,pre_tokens,post_tokens,compaction_ms,all_requests
+connectors,15,49832,109209,156586,117759,28268,16227,
+no-mcp,15,33459,92583,54877,92898,13550,22835,
+context-cost,2,49760,,,,,,49760 95757
