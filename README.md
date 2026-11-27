@@ -2,7 +2,7 @@
 
 Scripts and data that measure what Claude Code's `/compact` keeps and what it drops.
 
-They are behind the Trail post "Claude Code /compact: what it keeps and what it drops", on the [Trail blog](https://trailhq.com/blog). Every count in that post is in a results file here, and each results file names the script that wrote it.
+They are behind the Trail post ["Claude Code /compact: what it keeps and what it drops"](https://trailhq.com/blog/claude-code-compact). Every count in that post is in a results file here, and each results file names the script that wrote it.
 
 The repository holds labels, counts and scripts. It holds no session transcripts.
 
