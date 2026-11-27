@@ -205,26 +205,37 @@
    "session": "73009f6a",
    "after_round": 2,
    "question": 3,
-   "rule_from_round": 1
+   "rule_from_round": 1,
+   "asked": "When does the baseline arm need to be rerun?",
+   "answer_key_written_by_a_model": "Only if something in the baseline was changed; otherwise don't rerun it and waste time, and scale up the run that's already going instead.",
+   "answer": "The baseline must be uncheated and rerun fresh alongside the graph arm in every comparison (\"fresh both arms\"). It cannot be reused from an earlier run."
   },
   {
    "session": "cd25197e",
    "after_round": 1,
    "question": 1,
-   "rule_from_round": 1
+   "rule_from_round": 1,
+   "asked": "Besides locks, what kind of device did I say our credential design should also work for?",
+   "answer_key_written_by_a_model": "The design should also work for other credential readers, for example an RFID ESPHome reader.",
+   "answer": "Alarm control panels (and later cover/switch entities came up too), though I'm not certain that's the exact framing you used."
   },
   {
    "session": "cd25197e",
    "after_round": 2,
    "question": 7,
-   "rule_from_round": 1
+   "rule_from_round": 1,
+   "asked": "What should be checked before handing work back to me after all updates are done?",
+   "answer_key_written_by_a_model": "Make sure the PR descriptions and titles are up to date before handing back.",
+   "answer": "Run the full test suite with the 100% coverage gate, run prek (not pre-commit), and run mutation tests."
   },
   {
    "session": "cd25197e",
    "after_round": 3,
    "question": 7,
-   "rule_from_round": 1
+   "rule_from_round": 1,
+   "asked": "What should be checked before handing work back to me after all updates are done?",
+   "answer_key_written_by_a_model": "Make sure the PR descriptions and titles are up to date before handing back.",
+   "answer": "My notes say to keep the 100% coverage gate, mutation-test the changes, run the full test suite, and run `prek`. I don't know whether you tied that list specifically to handing work back after all updates."
   }
- ],
- "note": "The text of three of the four wrong answers, and of their questions and answer keys, is left out of this copy: it restates what SWE-chat users typed."
+ ]
 }

@@ -13,103 +13,115 @@
   "sessions": 147,
   "repositories": 47,
   "owners": 38,
-  "users": 32,
-  "compactions_by_user_top6": [
-   166,
-   47,
-   26,
-   15,
-   14,
-   13
+  "compactions_by_repository_top6": [
+   61,
+   54,
+   33,
+   29,
+   28,
+   26
   ],
+  "sessions_in_top_repository": 23,
+  "sessions_with_a_named_author": 87,
+  "named_authors": 31,
+  "sessions_without_an_author": 60,
+  "compactions_without_an_author": 166,
+  "repositories_without_an_author": 23,
+  "owners_without_an_author": 16,
   "created_first": "2026-06-01",
   "created_last": "2026-09-04"
  },
  "bands": {
   "manual": {
    "compactions": 187,
-   "users": 22,
-   "top_user_compactions": 78,
+   "repositories": 29,
+   "top_repository_compactions": 61,
    "median_messages_typed_since_last_compaction": 7
   },
   "auto_under_200k": {
    "compactions": 47,
-   "users": 4,
-   "top_user_compactions": 26,
+   "repositories": 7,
+   "top_repository_compactions": 15,
    "median_messages_typed_since_last_compaction": 2
   },
   "auto_200k_900k": {
    "compactions": 54,
-   "users": 5,
-   "top_user_compactions": 30,
+   "repositories": 5,
+   "top_repository_compactions": 29,
    "median_messages_typed_since_last_compaction": 4.0
   },
   "auto_900k_plus": {
    "compactions": 87,
-   "users": 14,
-   "top_user_compactions": 31,
+   "repositories": 20,
+   "top_repository_compactions": 22,
    "median_messages_typed_since_last_compaction": 25
   },
   "auto_idle": {
    "compactions": 8,
-   "users": 4,
-   "top_user_compactions": 3,
+   "repositories": 4,
+   "top_repository_compactions": 3,
    "median_messages_typed_since_last_compaction": 14.0
   }
  },
- "top_user": {
-  "compactions": 166,
-  "sessions": 60,
-  "users": 1,
+ "top_repository": {
+  "compactions": 61,
+  "sessions": 23,
+  "repositories": 1,
   "recent": {
-   "n": 217,
-   "kept": 164,
-   "partly": 29,
-   "absent": 24
-  },
-  "older": {
-   "n": 348,
+   "n": 63,
    "kept": 63,
-   "partly": 108,
-   "absent": 177
-  }
- },
- "everyone_else": {
-  "compactions": 217,
-  "sessions": 87,
-  "users": 31,
-  "recent": {
-   "n": 404,
-   "kept": 358,
-   "partly": 26,
-   "absent": 20
+   "partly": 0,
+   "absent": 0
   },
   "older": {
-   "n": 458,
-   "kept": 219,
-   "partly": 92,
-   "absent": 147
+   "n": 67,
+   "kept": 8,
+   "partly": 14,
+   "absent": 45
   }
  },
- "user_by_user": {
-  "users_with_5_recent_and_5_older_rules": 15,
-  "recent_share_higher": 13,
-  "median_recent_share": 0.914,
-  "median_older_share": 0.181,
-  "mean_recent_share": 0.904,
-  "mean_older_share": 0.288,
+ "every_other_repository": {
+  "compactions": 322,
+  "sessions": 124,
+  "repositories": 46,
+  "recent": {
+   "n": 558,
+   "kept": 459,
+   "partly": 55,
+   "absent": 44
+  },
+  "older": {
+   "n": 739,
+   "kept": 274,
+   "partly": 186,
+   "absent": 279
+  }
+ },
+ "repository_by_repository": {
+  "repositories_with_5_recent_and_5_older_rules": 19,
+  "recent_share_higher": 17,
+  "median_recent_share": 0.897,
+  "median_older_share": 0.163,
+  "mean_recent_share": 0.845,
+  "mean_older_share": 0.27,
   "kept_recent_of_n_kept_older_of_n": [
    [
-    164,
-    217,
-    63,
-    348
+    87,
+    97,
+    5,
+    55
    ],
    [
-    66,
-    82,
-    7,
-    68
+    63,
+    63,
+    8,
+    67
+   ],
+   [
+    30,
+    43,
+    14,
+    85
    ],
    [
     5,
@@ -118,10 +130,34 @@
     123
    ],
    [
-    40,
-    47,
+    45,
+    60,
     8,
-    41
+    49
+   ],
+   [
+    27,
+    28,
+    8,
+    69
+   ],
+   [
+    11,
+    11,
+    24,
+    70
+   ],
+   [
+    35,
+    48,
+    4,
+    29
+   ],
+   [
+    36,
+    43,
+    7,
+    24
    ],
    [
     4,
@@ -130,22 +166,10 @@
     56
    ],
    [
-    30,
-    35,
-    7,
-    23
-   ],
-   [
     27,
     27,
     4,
     28
-   ],
-   [
-    30,
-    30,
-    0,
-    16
    ],
    [
     32,
@@ -154,16 +178,22 @@
     9
    ],
    [
-    14,
-    14,
-    2,
-    19
+    8,
+    16,
+    1,
+    25
    ],
    [
-    19,
-    21,
-    0,
-    10
+    7,
+    14,
+    1,
+    18
+   ],
+   [
+    12,
+    20,
+    4,
+    11
    ],
    [
     11,
@@ -184,10 +214,10 @@
     13
    ],
    [
-    4,
     6,
+    7,
     3,
-    6
+    10
    ]
   ]
  },
@@ -211,7 +241,7 @@
  "by_order": {
   "1": {
    "compactions": 147,
-   "users": 32,
+   "repositories": 47,
    "recent": {
     "n": 302,
     "kept": 259,
@@ -224,13 +254,25 @@
     "partly": 0,
     "absent": 0
    },
-   "older_top_user": {
+   "older_top_repository": {
     "n": 0,
     "kept": 0,
     "partly": 0,
     "absent": 0
    },
-   "older_everyone_else": {
+   "older_every_other_repository": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
+   },
+   "older_sessions_without_an_author": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
+   },
+   "older_sessions_with_a_named_author": {
     "n": 0,
     "kept": 0,
     "partly": 0,
@@ -242,11 +284,18 @@
     "partly": 0,
     "absent": 0
    },
-   "users_with_older_rules": 0
+   "repositories_with_older_rules": 0,
+   "kept_percent_leaving_one_repository_out": {
+    "recent": [
+     84.3,
+     87.2
+    ],
+    "older": []
+   }
   },
   "2": {
    "compactions": 76,
-   "users": 22,
+   "repositories": 29,
    "recent": {
     "n": 116,
     "kept": 93,
@@ -259,13 +308,25 @@
     "partly": 57,
     "absent": 66
    },
-   "older_top_user": {
+   "older_top_repository": {
+    "n": 8,
+    "kept": 0,
+    "partly": 1,
+    "absent": 7
+   },
+   "older_every_other_repository": {
+    "n": 146,
+    "kept": 31,
+    "partly": 56,
+    "absent": 59
+   },
+   "older_sessions_without_an_author": {
     "n": 54,
     "kept": 10,
     "partly": 23,
     "absent": 21
    },
-   "older_everyone_else": {
+   "older_sessions_with_a_named_author": {
     "n": 100,
     "kept": 21,
     "partly": 34,
@@ -277,11 +338,21 @@
     "partly": 57,
     "absent": 66
    },
-   "users_with_older_rules": 17
+   "repositories_with_older_rules": 25,
+   "kept_percent_leaving_one_repository_out": {
+    "recent": [
+     77.9,
+     83.2
+    ],
+    "older": [
+     18.9,
+     21.5
+    ]
+   }
   },
   "3": {
    "compactions": 42,
-   "users": 13,
+   "repositories": 19,
    "recent": {
     "n": 39,
     "kept": 35,
@@ -294,13 +365,25 @@
     "partly": 44,
     "absent": 52
    },
-   "older_top_user": {
+   "older_top_repository": {
+    "n": 12,
+    "kept": 3,
+    "partly": 4,
+    "absent": 5
+   },
+   "older_every_other_repository": {
+    "n": 104,
+    "kept": 17,
+    "partly": 40,
+    "absent": 47
+   },
+   "older_sessions_without_an_author": {
     "n": 62,
     "kept": 10,
     "partly": 26,
     "absent": 26
    },
-   "older_everyone_else": {
+   "older_sessions_with_a_named_author": {
     "n": 54,
     "kept": 10,
     "partly": 18,
@@ -312,11 +395,21 @@
     "partly": 44,
     "absent": 52
    },
-   "users_with_older_rules": 10
+   "repositories_with_older_rules": 17,
+   "kept_percent_leaving_one_repository_out": {
+    "recent": [
+     88.2,
+     94.4
+    ],
+    "older": [
+     15.7,
+     19.6
+    ]
+   }
   },
   "4+": {
    "compactions": 118,
-   "users": 13,
+   "repositories": 18,
    "recent": {
     "n": 164,
     "kept": 135,
@@ -329,13 +422,25 @@
     "partly": 99,
     "absent": 206
    },
-   "older_top_user": {
+   "older_top_repository": {
+    "n": 47,
+    "kept": 5,
+    "partly": 9,
+    "absent": 33
+   },
+   "older_every_other_repository": {
+    "n": 489,
+    "kept": 226,
+    "partly": 90,
+    "absent": 173
+   },
+   "older_sessions_without_an_author": {
     "n": 232,
     "kept": 43,
     "partly": 59,
     "absent": 130
    },
-   "older_everyone_else": {
+   "older_sessions_with_a_named_author": {
     "n": 304,
     "kept": 188,
     "partly": 40,
@@ -347,96 +452,106 @@
     "partly": 99,
     "absent": 206
    },
-   "users_with_older_rules": 12
+   "repositories_with_older_rules": 17,
+   "kept_percent_leaving_one_repository_out": {
+    "recent": [
+     79.0,
+     85.4
+    ],
+    "older": [
+     26.7,
+     46.8
+    ]
+   }
   }
  },
  "recent_by_messages_typed_since_last_compaction": {
   "1-9": {
    "compactions": 175,
-   "users": 19,
+   "repositories": 29,
    "all": {
     "n": 90,
     "kept": 86,
     "partly": 2,
     "absent": 2
    },
-   "top_user": {
-    "n": 48,
-    "kept": 47,
-    "partly": 1,
+   "top_repository": {
+    "n": 19,
+    "kept": 19,
+    "partly": 0,
     "absent": 0
    },
-   "everyone_else": {
-    "n": 42,
-    "kept": 39,
-    "partly": 1,
+   "every_other_repository": {
+    "n": 71,
+    "kept": 67,
+    "partly": 2,
     "absent": 2
    }
   },
   "10-19": {
    "compactions": 78,
-   "users": 15,
+   "repositories": 21,
    "all": {
     "n": 130,
     "kept": 120,
     "partly": 7,
     "absent": 3
    },
-   "top_user": {
-    "n": 60,
-    "kept": 51,
-    "partly": 6,
-    "absent": 3
-   },
-   "everyone_else": {
-    "n": 70,
-    "kept": 69,
-    "partly": 1,
+   "top_repository": {
+    "n": 20,
+    "kept": 20,
+    "partly": 0,
     "absent": 0
+   },
+   "every_other_repository": {
+    "n": 110,
+    "kept": 100,
+    "partly": 7,
+    "absent": 3
    }
   },
   "20-39": {
    "compactions": 64,
-   "users": 18,
+   "repositories": 27,
    "all": {
     "n": 209,
     "kept": 171,
     "partly": 20,
     "absent": 18
    },
-   "top_user": {
-    "n": 54,
-    "kept": 35,
-    "partly": 11,
-    "absent": 8
+   "top_repository": {
+    "n": 24,
+    "kept": 24,
+    "partly": 0,
+    "absent": 0
    },
-   "everyone_else": {
-    "n": 155,
-    "kept": 136,
-    "partly": 9,
-    "absent": 10
+   "every_other_repository": {
+    "n": 185,
+    "kept": 147,
+    "partly": 20,
+    "absent": 18
    }
   },
   "40+": {
    "compactions": 27,
-   "users": 9,
+   "repositories": 10,
    "all": {
     "n": 192,
     "kept": 145,
     "partly": 26,
     "absent": 21
    },
-   "top_user": {
-    "n": 55,
-    "kept": 31,
-    "partly": 11,
-    "absent": 13
+   "top_repository": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
    },
-   "everyone_else": {
-    "n": 137,
-    "kept": 114,
-    "partly": 15,
-    "absent": 8
+   "every_other_repository": {
+    "n": 192,
+    "kept": 145,
+    "partly": 26,
+    "absent": 21
    }
   }
  },
@@ -470,39 +585,39 @@
  "replay_sessions": [
   {
    "session": "0d4c4262",
-   "user": "user 1",
-   "is_top_user": true
+   "repository": "repository 1",
+   "has_a_named_author": false
   },
   {
    "session": "27642e0f",
-   "user": "user 2",
-   "is_top_user": false
+   "repository": "repository 2",
+   "has_a_named_author": true
   },
   {
    "session": "73009f6a",
-   "user": "user 1",
-   "is_top_user": true
+   "repository": "repository 1",
+   "has_a_named_author": false
   },
   {
    "session": "cd25197e",
-   "user": "user 3",
-   "is_top_user": false
+   "repository": "repository 3",
+   "has_a_named_author": true
   },
   {
    "session": "2cae28a4",
-   "user": "user 1",
-   "is_top_user": true
+   "repository": "repository 4",
+   "has_a_named_author": false
   },
   {
    "session": "5a7b375c",
-   "user": "user 4",
-   "is_top_user": false
+   "repository": "repository 5",
+   "has_a_named_author": true
   },
   {
    "session": "ede0cb33",
-   "user": "user 1",
-   "is_top_user": true
+   "repository": "repository 6",
+   "has_a_named_author": false
   }
  ],
- "replay_users": 4
+ "replay_repositories": 6
 }

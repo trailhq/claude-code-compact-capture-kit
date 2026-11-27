@@ -11,7 +11,7 @@ The repository holds labels, counts and scripts. It holds no session transcripts
 | In the post | Results file | Written by | Reads |
 | --- | --- | --- | --- |
 | 383 compactions, 147 sessions, 187 manual and 196 automatic; the text-match check (3,408 of 3,430); the second judge | `analysis/results-real.json` | `analysis/freeze1.py` | `real/judge-swechat/`, `real/judge-queued/`, `real/judge-second/`, `real/read-swechat/` |
-| 32 users; rules kept at the first, second and third compaction (the three-row chart); the one-user check; text search | `analysis/results-clusters.json` | `analysis/freeze4.py` | `real/judge-swechat/` and SWE-chat's `sessions.parquet` |
+| 47 repositories; rules kept at the first, second and third compaction (the three-row chart); the check that leaves one repository out; text search | `analysis/results-clusters.json` | `analysis/freeze4.py` | `real/judge-swechat/` and SWE-chat's `sessions.parquet` |
 | The replay: answers before and after one, two and three compactions (the first chart); the two releases compared | `analysis/results-replay.json` | `analysis/freeze2.py` | `replay/out-proto/` |
 | The 1M-token scripted session: 26 questions, seven summaries, auto memory on and off | `analysis/results-session-a.json` | `analysis/freeze3.py` | the raw run, which is not published |
 | The examples quoted in the post | `analysis/results-examples.json` | `analysis/freeze5.py` | the raw runs, which are not published |
@@ -75,7 +75,7 @@ This repository holds what we derived from it: labels, counts and session ids. T
 ## What is not here, and why
 
 - **SWE-chat transcripts and their index.** They are the dataset's to give out.
-- **The replay's questions, answer keys and answers.** They restate what SWE-chat users typed. `analysis/results-examples.json` keeps one traced example and leaves the text of the other three wrong answers out.
+- **The replay's questions, answer keys and answers.** They restate what SWE-chat users typed. `analysis/results-examples.json` keeps only the four answers graded wrong, which the post lists, and one of them traced in full.
 - **Prompts and replies of the judges (`raw/`).** They hold message text.
 - **The raw output of our own runs.** A transcript carries the account's email address and organisation ID.
 - **The author's own Claude Code sessions.** They were judged the same way, and only their counts are in `results-real.json`, under `own_meaning` and `own_reading`. `freeze1.py` keeps those counts as they are when the label files are absent.
@@ -100,7 +100,7 @@ Of the 425 judged records, 383 are counted. Eight are duplicates, and 34 come fr
 ## Limits
 
 - A model judged every summary and graded every answer. No person graded.
-- One user typed 166 of the 383 compactions and four of the seven replayed sessions.
+- The largest repository gave 61 of the 383 compactions, and two of the seven replayed sessions share a repository. The dataset names a commit author for only 87 of the 147 sessions, so we count by repository. An earlier version of `freeze4.py` counted the 60 sessions with no author as one user, and this file said "32 users". That was wrong.
 - We could not see the `CLAUDE.md` files or the disks of the real sessions. A rule missing from a summary may still have been on disk.
 - The replay and the scripted session ran on Claude Code 2.1.327, on one Mac. One copy of the scripted session crossed the limit on 2.1.311. The real sessions ran on releases 2.1.76 to 2.1.259.
 - We tested what Claude could recall, not how it then behaved.

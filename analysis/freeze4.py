@@ -1,4 +1,7 @@
-"""Who the 383 SWE-chat compactions come from, and three checks that do not pool users.
+"""Where the 383 SWE-chat compactions come from, and checks that do not pool repositories.
+
+Sessions are grouped by repository. The index names a commit author (user_id) for only some sessions,
+so an earlier version that grouped by user_id counted every session without one as a single user.
 
 Run:  KIT=<this repo> python3 analysis/freeze4.py   (needs pyarrow, and SWE-chat's sessions.parquet in data/SWE-chat/)
 Reads real/judge-swechat/judge.jsonl (labels only) and the SWE-chat index (sessions.parquet).
@@ -29,7 +32,11 @@ def sid(c):
     return os.path.basename(c["path"])[:-6]
 
 
-def user(c):
+def repo(c):
+    return by[sid(c)]["repo_id"]
+
+
+def author(c):
     return by[sid(c)]["user_id"]
 
 
@@ -55,36 +62,43 @@ out["index"] = {"sessions": len(index), "claude_code_sessions": len(claude_code)
                 "selection_rule_sessions": len(rule), "selection_rule_repositories": len({r["repo_id"] for r in rule}),
                 "selection_rule_strategies": dict(collections.Counter(str(r["strategy"]) for r in rule))}
 
-per_user = collections.Counter(user(c) for c in lines)
-top = per_user.most_common(1)[0][0]
+per_repo = collections.Counter(repo(c) for c in lines)
+top = per_repo.most_common(1)[0][0]
+named = [c for c in lines if author(c) is not None]
+unnamed = [c for c in lines if author(c) is None]
 out["who"] = {"compactions": len(lines), "sessions": len({c["path"] for c in lines}),
               "repositories": len({by[sid(c)]["repo_id"] for c in lines}), "owners": len({by[sid(c)]["owner_id"] for c in lines}),
-              "users": len(per_user), "compactions_by_user_top6": [n for _, n in per_user.most_common(6)],
+              "compactions_by_repository_top6": [n for _, n in per_repo.most_common(6)],
+              "sessions_in_top_repository": len({c["path"] for c in lines if repo(c) == top}),
+              "sessions_with_a_named_author": len({c["path"] for c in named}), "named_authors": len({author(c) for c in named}),
+              "sessions_without_an_author": len({c["path"] for c in unnamed}), "compactions_without_an_author": len(unnamed),
+              "repositories_without_an_author": len({repo(c) for c in unnamed}),
+              "owners_without_an_author": len({by[sid(c)]["owner_id"] for c in unnamed}),
               "created_first": min(str(by[sid(c)]["created_at"])[:10] for c in lines),
               "created_last": max(str(by[sid(c)]["created_at"])[:10] for c in lines)}
 out["bands"] = {}
 for b in ("manual", "auto_under_200k", "auto_200k_900k", "auto_900k_plus", "auto_idle"):
     comps = [c for c in lines if band(c) == b]
-    cu = collections.Counter(user(c) for c in comps)
-    out["bands"][b] = {"compactions": len(comps), "users": len(cu), "top_user_compactions": cu.most_common(1)[0][1],
+    cu = collections.Counter(repo(c) for c in comps)
+    out["bands"][b] = {"compactions": len(comps), "repositories": len(cu), "top_repository_compactions": cu.most_common(1)[0][1],
                        "median_messages_typed_since_last_compaction": statistics.median([typed(c, "recent") for c in comps])}
 
-for name, keep in (("top_user", lambda c: user(c) == top), ("everyone_else", lambda c: user(c) != top)):
+for name, keep in (("top_repository", lambda c: repo(c) == top), ("every_other_repository", lambda c: repo(c) != top)):
     comps = [c for c in lines if keep(c)]
-    out[name] = {"compactions": len(comps), "sessions": len({c["path"] for c in comps}), "users": len({user(c) for c in comps}),
+    out[name] = {"compactions": len(comps), "sessions": len({c["path"] for c in comps}), "repositories": len({repo(c) for c in comps}),
                  "recent": tally([i for c in comps for i in rules(c, "recent")]),
                  "older": tally([i for c in comps for i in rules(c, "older")])}
 
 g = collections.defaultdict(lambda: {"recent": [], "older": []})
 for c in lines:
     for where in ("recent", "older"):
-        g[user(c)][where] += rules(c, where)
+        g[repo(c)][where] += rules(c, where)
 both = [v for v in g.values() if len(v["recent"]) >= 5 and len(v["older"]) >= 5]
 pairs = sorted(([sum(1 for i in v["recent"] if state(i) == "kept"), len(v["recent"]),
                  sum(1 for i in v["older"] if state(i) == "kept"), len(v["older"])] for v in both), key=lambda p: -p[1] - p[3])
 rs = [p[0] / p[1] for p in pairs]
 os_ = [p[2] / p[3] for p in pairs]
-out["user_by_user"] = {"users_with_5_recent_and_5_older_rules": len(pairs),
+out["repository_by_repository"] = {"repositories_with_5_recent_and_5_older_rules": len(pairs),
                        "recent_share_higher": sum(1 for a, b in zip(rs, os_) if a > b),
                        "median_recent_share": round(statistics.median(rs), 3), "median_older_share": round(statistics.median(os_), 3),
                        "mean_recent_share": round(statistics.mean(rs), 3), "mean_older_share": round(statistics.mean(os_), 3),
@@ -100,26 +114,39 @@ out["one_session"] = {"id": os.path.basename(heavy[0])[:8], "compactions": len(h
                       "most_older_messages_at_one_compaction": max(typed(c, "older") for c in heavy[1]),
                       "all_other_sessions_older": tally(rest_older)}
 
+def leave_one_out(comps, where):
+    """Lowest and highest share kept, in percent, when any one repository is left out."""
+    shares = []
+    for r in {repo(c) for c in comps}:
+        t = tally([i for c in comps if repo(c) != r for i in rules(c, where)])
+        if t["n"]:
+            shares.append(round(100 * t["kept"] / t["n"], 1))
+    return [min(shares), max(shares)] if shares else []
+
+
 out["by_order"] = {}
 for label, pick in (("1", lambda o: o == 1), ("2", lambda o: o == 2), ("3", lambda o: o == 3), ("4+", lambda o: o >= 4)):
     comps = [c for c in lines if pick(c["order"])]
     older = [i for c in comps for i in rules(c, "older")]
     out["by_order"][label] = {
-        "compactions": len(comps), "users": len({user(c) for c in comps}),
+        "compactions": len(comps), "repositories": len({repo(c) for c in comps}),
         "recent": tally([i for c in comps for i in rules(c, "recent")]), "older": tally(older),
-        "older_top_user": tally([i for c in comps if user(c) == top for i in rules(c, "older")]),
-        "older_everyone_else": tally([i for c in comps if user(c) != top for i in rules(c, "older")]),
+        "older_top_repository": tally([i for c in comps if repo(c) == top for i in rules(c, "older")]),
+        "older_every_other_repository": tally([i for c in comps if repo(c) != top for i in rules(c, "older")]),
+        "older_sessions_without_an_author": tally([i for c in comps if author(c) is None for i in rules(c, "older")]),
+        "older_sessions_with_a_named_author": tally([i for c in comps if author(c) is not None for i in rules(c, "older")]),
         "older_without_the_one_session": tally([i for c in comps if c["path"] != heavy[0] for i in rules(c, "older")]),
-        "users_with_older_rules": len({user(c) for c in comps if rules(c, "older")})}
+        "repositories_with_older_rules": len({repo(c) for c in comps if rules(c, "older")}),
+        "kept_percent_leaving_one_repository_out": {where: leave_one_out(comps, where) for where in ("recent", "older")}}
 
 out["recent_by_messages_typed_since_last_compaction"] = {}
 for label, lo, hi in (("1-9", 1, 9), ("10-19", 10, 19), ("20-39", 20, 39), ("40+", 40, 10 ** 9)):
     comps = [c for c in lines if lo <= typed(c, "recent") <= hi]
     out["recent_by_messages_typed_since_last_compaction"][label] = {
-        "compactions": len(comps), "users": len({user(c) for c in comps}),
+        "compactions": len(comps), "repositories": len({repo(c) for c in comps}),
         "all": tally([i for c in comps for i in rules(c, "recent")]),
-        "top_user": tally([i for c in comps if user(c) == top for i in rules(c, "recent")]),
-        "everyone_else": tally([i for c in comps if user(c) != top for i in rules(c, "recent")])}
+        "top_repository": tally([i for c in comps if repo(c) == top for i in rules(c, "recent")]),
+        "every_other_repository": tally([i for c in comps if repo(c) != top for i in rules(c, "recent")])}
 
 def quoted(items):
     return {"n": len(items), "word_for_word": sum(1 for i in items if i.get("match") == "word for word"),
@@ -140,10 +167,10 @@ names = {}
 out["replay_sessions"] = []
 for short in replay:
     full = [s for s in by if s.startswith(short)]
-    u = by[full[0]]["user_id"] if full else None
-    names.setdefault(u, "user %d" % (len(names) + 1))
-    out["replay_sessions"].append({"session": short, "user": names[u], "is_top_user": u == top})
-out["replay_users"] = len(names)
+    r = by[full[0]]["repo_id"]
+    names.setdefault(r, "repository %d" % (len(names) + 1))
+    out["replay_sessions"].append({"session": short, "repository": names[r], "has_a_named_author": by[full[0]]["user_id"] is not None})
+out["replay_repositories"] = len(names)
 
 json.dump(out, open(os.path.join(KIT, "analysis/results-clusters.json"), "w"), indent=1)
 print(json.dumps(out, indent=1))
