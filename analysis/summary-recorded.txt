@@ -1,0 +1,156 @@
+This session is being continued from a previous conversation that ran out of context. The summary below covers the earlier portion of the conversation.
+
+<system-reminder>
+<tools-used-before-summary>Bash, Read, Write</tools-used-before-summary>
+</system-reminder>
+Summary:
+1. Primary Request and Intent:
+   - Work through ripgrep tickets in `tickets/` one at a time, on branch `work`, in /Users/dev/compact-capture-kit/work/ripgrep-A, cut from master at the `14.1.1` tag (commit 4649aa9).
+   - **Ground rules (verbatim intent):** "keep each change as small as the ticket allows, never push, and ask me before deleting a file."
+   - **Per-ticket workflow the user drives:**
+     1. "Read it and the code it touches, then tell me your plan. Do not change anything yet."
+     2. "The plan is fine. Go ahead and implement it."
+     3. "Run the tests for the crates you touched and fix anything that fails."
+     4. "Summarise the change for me: which files you touched, and why each one."
+     5. "Commit it on the current branch with a short message. Do not push."
+     6. Sometimes: "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."
+     7. Sometimes: "Before the next one, run the whole test suite once and tell me the result."
+   - **Tickets 15 onward and 28 onward:** "make our branch behave as this upstream report describes. First check whether it already does. If it does, show the evidence and add a regression test. If it does not, fix it and add a test." The user also said: "if our branch already behaves that way, show me the evidence and add a test instead of changing code."
+   - **Standing preferences** (saved in memory at ~/.claude/projects/-Users-dev-compact-capture-kit-work-ripgrep-A/memory/, indexed in MEMORY.md):
+     - never reformat files under tests/data/;
+     - CI builds with Rust 1.79 only (corrected from 1.74);
+     - merge commits, never rebase (new policy replacing rebase-only);
+     - release owner is Ines (changed from Marcus);
+     - on Fridays never propose merging;
+     - nightly benchmark ends 02:15 (corrected from 02:45);
+     - never suggest adding a dependency except memchr;
+     - flaky-test budget 5 retries/day (corrected from 12);
+     - address the user as "chief" (replaced "captain");
+     - code freeze starts on a Wednesday: unconfirmed whether 2026-11-18 or 2026-11-25; flag new work;
+     - staging port 7643 (corrected from 7443);
+     - in crates/printer/ keep lines under 80 chars;
+     - no on-disk directory-walk cache (inodes changed);
+     - no abbreviations in replies except CI and PR;
+     - backslashes only for Windows paths;
+     - no Cranelift backend (regex benchmarks 3x slower);
+     - never recommend #[ignore] unless the test is marked slow;
+     - examples use the INFO log level (replaced WARNING);
+     - don't suggest mmap by default (broke network drives);
+     - changelog entries only in past tense;
+     - don't pin regex-syntax 0.8.2 (broke Unicode word boundaries);
+     - shell one-liners ≤80 chars except git log;
+     - suggest a builder struct only for functions with >5 parameters;
+     - fixes target master (changed from 14.1.x);
+     - JSON log output was tried and reverted (column alignment);
+     - a 30-second global test timeout was tried and removed (Windows linking hit it).
+   - Today is 2026-11-19 (Thursday).
+
+2. Key Technical Concepts:
+   - **Workspace and toolchain:** Rust workspace with crates globset, grep, cli, matcher, pcre2, printer, regex, searcher, ignore, plus core (the rg binary). The local toolchain is 1.100 (Homebrew; no rustup, no Windows target), but code must compile on 1.79 (no LazyLock or is_none_or).
+   - **Test harness:** tests now locate the binary via `env!("CARGO_BIN_EXE_rg")` (fixed in 511f293; previously this needed a target/ symlink workaround).
+   - **Walkers:** ignore crate's serial walker (Walk, via walkdir + WalkEventIter) and parallel walker (WalkParallel, with Worker, run_one, generate_work, Stack work-stealing).
+   - **Ignore matching:** Ignore matchers (IgnoreInner with absolute_base, is_absolute_parent and a compiled cache). DirListing (ticket 17) probes ignore files from the directory listing; add_child_with_listing with an empty DirListing does no I/O.
+   - **globset:** MatchStrategy variants Literal, BasenameLiteral, Extension, Prefix, Suffix, RequiredExtension, BasenameRegex (ticket 23) and Regex. LiteralSet uses a length mask (ticket 26).
+   - **Pool:** regex-automata Pool, now `Pool::with_available_parallelism_capacity` (ticket 27; regex-automata 0.4.19, regex-syntax 0.8.12).
+   - **Mutation checking:** I temporarily broke code to prove tests catch it. For files with foreign uncommitted changes, I back up and restore with cp, verified with cmp/shasum, never git checkout.
+   - **Staging only my changelog hunk:** I built a version from HEAD plus my lines, then ran `git hash-object -w` and `git update-index --cacheinfo`.
+   - **Helper scripts:**
+     - /tmp/ed.py defines `edit(path, [(old,new),...])`, asserting each old string occurs exactly once.
+     - /tmp/fullsuite.sh runs the workspace tests with extra args and prints TOTAL.
+     - /tmp/t17.sh runs `cargo test -p ignore -p ripgrep`.
+     - /tmp/stream.py is the line-buffered streaming check.
+     - Scratch crates are /tmp/deadlock-check and /tmp/globbench (outside the repository).
+
+3. Files and Code Sections (key recent ones):
+   - **Commit history on `work`:** see the commit list in section 5. HEAD is c2e1d0d.
+   - **Uncommitted foreign changes, NOT mine, unreviewed:**
+     - crates/ignore/src/walk.rs, about 680 lines: a Checker API with `WalkBuilder::build_checker`, `Checker::is_ignored(path, is_dir)`, `Checker::invalidate`, clear, and a CheckerState with ig_root, generation and dirs HashMap.
+     - crates/ignore/src/dir.rs, about 20 lines.
+     - crates/ignore/src/lib.rs, 4 lines.
+     - crates/ignore/src/pathutil.rs, about 113 lines: `is_dent_hidden(dent: &DirEntry)` and `is_path_hidden(path: &Path)`.
+     - CHANGELOG.md line: "* Added `WalkBuilder::build_checker` to the `ignore` crate, for checking whether a walk would include a single path without walking the whole tree."
+     - These correspond to tickets 30 (incremental checking) and 31 (is-hidden routine).
+   - **Ticket 27 (c2e1d0d), mine:**
+     - Cargo.lock: regex-automata 0.4.7→0.4.19 and regex-syntax 0.8.4→0.8.12.
+     - crates/globset/Cargo.toml and crates/ignore/Cargo.toml: `[dependencies.regex-automata] version = "0.4.19"`.
+     - Four `Pool::new` calls changed to `Pool::with_available_parallelism_capacity`: globset/src/lib.rs (the RegexSetStrategy patset), ignore/src/gitignore.rs (matches) and ignore/src/types.rs (two).
+     - CHANGELOG Miscellaneous line about the per-thread pool requiring regex-automata 0.4.19 or newer.
+   - **Ticket 28 (foreign 4af4475), reviewed:** crates/ignore/src/walk.rs, `Walk::skip_entry` now reads:
+     ```rust
+     if self.max_filesize.is_some()
+         && !ent.is_dir()
+         && skip_filesize(self.max_filesize.unwrap(), ent.path(), &ent.metadata().ok())
+     {
+         return Ok(true);
+     }
+     ```
+     Its test, `filter_entry_with_max_filesize`, uses assert_paths across both walkers. The parallel walker's generate_work already computed should_skip_filesize and should_skip_filtered separately.
+   - **CHANGELOG.md:** the TBD section at the top has Bug fixes, Feature enhancements and Miscellaneous headings (there is no "Performance improvements" heading in the committed version).
+
+4. Errors and fixes (notable):
+   - **Integration tests couldn't find rg** under the Cargo 1.100 layout. I first used a symlink workaround, then fixed it permanently with CARGO_BIN_EXE_rg.
+   - **Ticket 11 FR1 (fill until full)** broke --line-buffered streaming, which was ticket 15. I reverted it in 3fd130a.
+   - **Misreading the revert/amend log output:** the reflog clarified it. Separately, a staged leftover from `git checkout <commit> -- file` was unstaged with `git restore --staged`.
+   - **Ticket 19 test** left 000-permission files after a deliberate failure. I fixed it with a Drop guard that restores permissions.
+   - **Ticket 20 integration test** sometimes passed on the buggy code with threads. I added -j1 runs.
+   - **Ticket 21:** Stack isn't Clone, so the guard only sets the quit_now flag.
+   - **Ticket 23:** the test macro `matches!` shadowed the std one; I used `std::matches!`.
+   - **Ticket 25:** a missing `Ordering` import in a test; I used the full path.
+   - **Ticket 17/18 Clippy:** I avoided `map_or` by using a `match`, or `is_some_and`, to stay 1.79-compatible.
+   - **Changelog edits:** they failed when a heading didn't exist; I inserted under Miscellaneous instead.
+   - **Ticket 28:** a `--features pcre2 -p ignore` run silently errored because ignore has no pcre2 feature; I used the full suite instead.
+
+5. Problem Solving:
+   - **All tickets 01–28 are handled.**
+   - **Commits on `work`:**
+     - Tickets 01–14: 4a9877f, 5706f7d, 56998a4, 5d1b8b0, 6bff681, 7111bf3, 0ec2c47, c429359, d0f0555, b339d60, 281658a, cd24773, 23af5e1, 45a286c.
+     - Follow-up fixes: 5963078, 511f293, d6009b3, ef529b0, e5d30c5, 43b963d, 8060771, 38f90fc (later reverted), d0a0177.
+     - Tickets 15–27: 46f88cc, 3fd130a (revert), 06f487e, 9e34e09 (ticket 15), c97a196 (16), 0bb6b60 (17), 336e734 (18), 227a20f (19), 8304dab (20), f71aef8 (21), 57a614c (22), 004b257 (23), 0c9036c (24).
+     - Foreign commits: 649e4f7 (ticket 25, my work committed by someone else), 03cae9d (26), 1021420 (many-threads gitignore test), 4af4475 (28), 5edb890 (29).
+     - Mine again: c2e1d0d (27), which is HEAD.
+   - **Latest full suite:** 1262 passed, 0 failed, 3 ignored, in both the default and PCRE2 builds.
+
+6. All user messages (abridged, in order):
+   - The initial setup with ground rules: "keep each change as small as the ticket allows, never push, and ask me before deleting a file."
+   - The repeated per-ticket messages for tickets 01–28: next ticket / read and plan, do not change anything; "The plan is fine. Go ahead and implement it."; run tests and fix; summarise; "Commit it on the current branch with a short message. Do not push."; the man page/help check; run the whole suite.
+   - Side notes giving the memory rules above, including each correction or replacement.
+   - "More work came in after all..." (tickets from 15).
+   - "Noted. Hold on a moment before the next step."
+   - Six repetitions of "Before we go on, re-read the files you changed most recently and list what is still open. Do not change any file."
+   - "That is the last ticket. Give me a short status..."
+   - "A few more upstream changes landed while we were working. Same ground rules. The specs are in tickets/, numbered from 28. As before, if our branch already behaves that way, show me the evidence and add a test instead of changing code."
+   - Ticket 28's sequence: plan, implement, tests, summary, then "Commit it on the current branch with a short message. Do not push."
+
+7. Pending Tasks:
+   - **Tickets 29–34 remain:**
+     - 29: linked worktree excludes; matches foreign commit 5edb890 → review plus mutation check.
+     - 30: incremental checking; matches the uncommitted foreign Checker work.
+     - 31: is-hidden routine; matches the uncommitted pathutil.rs changes.
+     - 32: scratch pools for empty matchers.
+     - 33: document Windows path separators and UTF-8 locale.
+     - 34: remove the Cargo `homepage` field.
+   - **Open questions for the user:**
+     - how to handle the foreign work;
+     - the freeze date (if the 18th, Ines must approve the commits, especially c2e1d0d's dependency upgrade);
+     - changelog tense (the file is imperative, the rule says past tense) and draft layout;
+     - ticket 24: keep it, precompute a flag, or tests only;
+     - ticket 23: keep the basename-regex strategy?
+     - CI's rustfmt version, given style_edition 2024.
+   - **Not verified:** the Windows build, Rust 1.79 and the fish completions.
+   - **About a dozen small review findings** are still unfixed.
+   - **Ticket 25 limitation:** --one-file-system in the serial walker.
+
+8. Current Work:
+   Ticket 28 is complete. Its fix is the foreign commit 4af4475, which I reviewed and mutation-checked (restoring walk.rs from /tmp/walk_t28_backup.rs, checksum 082c9def6e13). No files were changed. When the user asked to commit, I explained there was nothing to commit and that the only uncommitted changes are the foreign Checker work, which I won't commit under ticket 28. The last assistant message ended: "Ticket 29, linked worktree excludes, which matches commit `5edb890`, is next whenever you're ready."
+
+9. Optional Next Step:
+   Wait for the user to hand over ticket 29 (tickets/29-linked-worktree-excludes.md). When they do, follow the same approach as tickets 26 and 28:
+   - read the ticket and review foreign commit 5edb890 against it;
+   - run its tests and mutation-check them, backing up any file that holds foreign uncommitted changes and restoring it with cp rather than git checkout;
+   - add a test only if there's a gap;
+   - present the plan first, with no changes, and keep chief/no-abbreviation style in replies.
+
+If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/dev/.claude/projects/-Users-dev-compact-capture-kit-work-ripgrep-A/<session-id>.jsonl
+Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
+
+The messages after this summary are the most recent messages from before compaction, kept verbatim. The summary was written without seeing them, so something it says has not happened yet may already have happened in them.

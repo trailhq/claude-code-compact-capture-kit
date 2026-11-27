@@ -1,0 +1,155 @@
+This session is being continued from a previous conversation that ran out of context. The summary below covers the earlier portion of the conversation.
+
+<system-reminder>
+<tools-used-before-summary>Bash, Read, Write</tools-used-before-summary>
+</system-reminder>
+Summary:
+1. Primary Request and Intent:
+   - **The task:** work through tickets in `tickets/` one at a time on ripgrep, in `/Users/dev/compact-capture-kit/work/ripgrep-A`, branch `work`, with master as the main branch.
+   - **Ground rules (verbatim):** "keep each change as small as the ticket allows, never push, and ask me before deleting a file."
+   - **Per-ticket cycle:**
+     - "Read it and the code it touches, then tell me your plan. Do not change anything yet."
+     - Then "The plan is fine. Go ahead and implement it."
+     - Then "Run the tests for the crates you touched and fix anything that fails."
+     - Then "Summarise the change for me: which files you touched, and why each one."
+     - Then "Commit it on the current branch with a short message. Do not push."
+     - Occasionally "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet." and "Before the next one, run the whole test suite once and tell me the result."
+   - **Tickets 15+:** "More work came in after all: the fixes that went into the next two upstream releases, and a few from after them. Same ground rules as before. ... Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."
+   - **Latest request (ticket 26):** "Next ticket: globset: reject impossible literal lengths before hashing ... tell me your plan." Then "The plan is fine. Go ahead and implement it."
+
+2. Key Technical Concepts:
+   - The Rust workspace crates: globset, ignore, grep-searcher, grep-printer, grep-pcre2, rg core.
+   - **The serial walker:** `Walk` built on walkdir, with `WalkEventIter`.
+   - **The parallel walker:** `WalkParallel`, its `Worker`s, `run_one`, `get_work`, and the `quit_now` and `active_workers` atomics.
+   - **Ignore matchers:** the `Ignore`/`IgnoreInner` chain, `add_parents`, the `compiled` cache, `absolute_base`, `add_child_path`, `matched_ignore`, and the `any_git`/`saw_git` repository-boundary logic.
+   - **globset strategies:** `MatchStrategy` (Literal, BasenameLiteral, Extension, Prefix, Suffix, RequiredExtension, BasenameRegex [added in ticket 23], Regex), `GlobSetMatchStrategy`, `RegexSetStrategy`, and `LiteralSet` with a length bitmask (from commit 03cae9d).
+   - **Test setup:**
+     - The integration tests now locate rg via `env!("CARGO_BIN_EXE_rg")`. The symlink workaround is no longer needed.
+     - The full-suite script is `/tmp/fullsuite.sh` (run with `zsh /tmp/fullsuite.sh [--features pcre2]`).
+     - Per-crate test scripts: `/tmp/t17.sh` (ignore + ripgrep), `/tmp/t15.sh`, `/tmp/t16.sh`.
+     - The edit helper is `/tmp/ed.py`, used via `exec(open('/tmp/ed.py').read())`; its `edit(path, [(old, new), ...])` asserts each old string occurs exactly once.
+   - **Scratch programs** (outside the repo):
+     - `/tmp/deadlock-check`;
+     - `/tmp/globbench`, a gitignore build/match benchmark using the ignore crate by path dependency, with `CARGO_TARGET_DIR=/tmp/globbench/target`.
+   - **Mutation checks:** break the fix temporarily, confirm the tests fail, then restore with git checkout or from a backup.
+
+3. Files and Code Sections (recent tickets; earlier tickets 01–14 and the fixes were committed previously):
+   - **Ticket 15:** reverted 38f90fc, the fill-until-full change in `crates/searcher/src/line_buffer.rs`, as commit 3fd130a, because it broke `--line-buffered` streaming (upstream issue 3194). Tests added in 06f487e: `r3194_line_buffered_stream` and `fill_returns_after_complete_line`. The changelog bullet was dropped in 9e34e09. The earlier coverage tests were committed as 46f88cc.
+   - **Ticket 16 (c97a196):** added a `cursor` alias to `crates/printer/src/hyperlink/aliases.rs`, placed first, as `alias("cursor", "Cursor scheme (cursor://)", "cursor://file{path}:{line}:{column}")`. Updated the alias tests in `hyperlink/mod.rs` (count 11). Added the test `hyperlink_alias_cursor` (uses `-H`).
+   - **Ticket 17 (0bb6b60):** `DirListing` plus `add_child_with_listing` and `is_listing_candidate` in `crates/ignore/src/dir.rs`; `names_equal`, which ignores ASCII case on Windows and macOS; `create_gitignore` takes `listing: Option<&DirListing>`; the parallel `Work::read_dir` collects its entries first. Five `listing_*` tests, about 15% faster walk.
+   - **Ticket 18 (336e734):** `gitconfig_excludes_path` in `crates/ignore/src/gitignore.rs` honours `GIT_CONFIG_GLOBAL`, `GIT_CONFIG_SYSTEM` and `GIT_CONFIG_NOSYSTEM` (helpers `env_path`, `env_bool`, `read_config`). Test `r3275_git_config_env_vars`.
+   - **Ticket 19 (227a20f):** no code change, test only: `r3212_vcs_dir_only_when_needed`, with a `Restore` drop guard for permissions.
+   - **Ticket 20 (8304dab):** at the end of `add_parents`, if the deepest parent's `absolute_base` differs, clone that one `IgnoreInner` and set `absolute_base` to the current root. Tests: `multiple_roots_parent_gitignore`, `multiple_roots_scoped_rule_deterministic`, `r3376_multiple_roots_gitignore`, `r3320_multiple_roots_rgignore` (with `-j1` and `-j4`).
+   - **Ticket 21 (f71aef8):** a `QuitOnPanic(Arc<AtomicBool>)` drop guard in `Worker::run`, plus an idle-loop `is_quit_now()` check in `get_work`. Test `parallel_visitor_panic_does_not_deadlock`.
+   - **Ticket 22 (57a614c):** Unix `file_name` in `crates/ignore/src/pathutil.rs` returns None only when the last component is exactly `.` or `..`. Tests: unit tests, `hidden_names_ending_in_dot`, `r3564_hidden_dotfile_ending_in_dot`.
+   - **Ticket 23 (004b257):** the `BasenameRegex` strategy and `Glob::basename_regex` in `glob.rs`; `GlobSetMatchStrategy::BasenameRegex(RegexSetStrategy)` and `is_match_bytes`/`matches_into_bytes` in `lib.rs`. Tests: `basename_regex_strategy`, `basename_regex_matches_full_regex`, `r3561_gitignore_basename_patterns`. About 3% faster build.
+   - **Ticket 24 (0c9036c):** `absolute_parents_have_rules()` gating the parent block in `matched_ignore`. Tests: `absolute_parent_rules_and_repo_boundaries`, `r3557_global_gitignore_repo_above_root`. No measurable speed-up.
+   - **Ticket 25:** my work was committed by someone else as 649e4f7.
+     - `Walk` got a `max_depth` field.
+     - Skipped and max-depth folders get `add_child_with_listing(path, &DirListing::default())`.
+     - The parallel `run_one` only calls `read_dir` when `descend && !at_max_depth`.
+     - Tests: `unreachable_ignore_files_not_loaded` and `r2565_unreachable_ignore_files`.
+   - **Ticket 26:** already implemented by commit 03cae9d, which I didn't make, in `crates/globset/src/lib.rs`:
+     ```rust
+     struct LiteralSet { map: fnv::HashMap<Vec<u8>, Vec<usize>>, lengths: u64 }
+     fn add(&mut self, global_index: usize, lit: String) {
+         self.lengths |= 1 << (lit.len() % 64);
+         self.map.entry(lit.into_bytes()).or_default().push(global_index);
+     }
+     fn get(&self, bytes: &[u8]) -> Option<&[usize]> {
+         if self.lengths & (1 << (bytes.len() % 64)) == 0 { return None; }
+         self.map.get(bytes).map(|hits| hits.as_slice())
+     }
+     ```
+     Used by both `LiteralStrategy` and `BasenameLiteralStrategy` (`is_match` and `matches_into`). Tests: `literal_set_lengths` and `literal_lengths_match_full_regex`.
+   - **CHANGELOG.md:** an unreleased "TBD" section with Bug fixes, Feature enhancements and Miscellaneous headings, in the past tense.
+
+4. Errors and fixes:
+   - **Ticket 15 amend confusion:** I misread the log after amending the revert. The reflog confirmed a single revert, 3fd130a. A temporary checkout left `line_buffer.rs` staged; I unstaged it with `git restore --staged`.
+   - **Ticket 16:** the test needed `-H`, because a single-file search prints no file name and therefore no link.
+   - **Ticket 17:**
+     - the first dir.rs edit failed because of an intervening doc comment; fixed by including it in the match;
+     - `add_parents` needed `add_child_path(parent, None)`;
+     - the symlink mutation wasn't caught, so I added the `listing_symlinked_git_file` test;
+     - Clippy flagged `map_or(true, ...)`, which I replaced with a `match` (`is_none_or` needs Rust 1.82).
+   - **Ticket 18:** `TestCommand` has no `env`; used `cmd.cmd().env(...)`. Used `is_some_and` instead of `map_or(false, ...)`.
+   - **Ticket 19:** a failed mutation run left files unreadable and broke the next run, so I added the `Restore` drop guard.
+   - **Ticket 20:** an integration test passed by luck on the old code; added `-j1` runs.
+   - **Ticket 21:** `Stack` isn't `Clone`, so I simplified the guard to only set `quit_now`.
+   - **Ticket 23:** `matches!` is shadowed in the glob test module; used `std::matches!`.
+   - **Ticket 24:** the changelog edit failed because the committed section has no "Performance improvements" heading; I inserted under "Miscellaneous" instead.
+   - **Ticket 25:** `Ordering` was ambiguous in the test; used the full path `std::sync::atomic::Ordering::Relaxed`.
+
+5. Problem Solving:
+   - **Unexpected repository activity.** During the "hold", commits 649e4f7 (ticket 25, my work), 03cae9d (ticket 26), 1021420, 4af4475 and 5edb890 appeared, authored as the developer with the Claude co-author line. Uncommitted `Checker` API work (`WalkBuilder::build_checker`, about 800 lines in `crates/ignore`: dir.rs, lib.rs, pathutil.rs, walk.rs, plus a CHANGELOG line) also appeared. I reported it repeatedly and asked how to handle it; I haven't touched or committed it.
+   - **When asked to commit ticket 25:** nothing of mine was uncommitted. I declined to commit the `Checker` work and asked the user.
+   - **The latest check showed yet another new commit at HEAD:** `569e759 tests: check Unicode word boundaries`. It wasn't made by me (HEAD was 5edb890 just before).
+
+6. All user messages (recent batch; earlier ones followed the same cycle):
+   - "More work came in after all: the fixes that went into the next two upstream releases, and a few from after them. Same ground rules as before. The new specs are in tickets/, numbered from 15. Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."
+   - "Next ticket: ... Read it and the code it touches, then tell me your plan. Do not change anything yet." (tickets 15–26)
+   - "The plan is fine. Go ahead and implement it."
+   - "Run the tests for the crates you touched and fix anything that fails."
+   - "Summarise the change for me: which files you touched, and why each one."
+   - "Commit it on the current branch with a short message. Do not push."
+   - "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."
+   - "Before the next one, run the whole test suite once and tell me the result."
+   - "Noted. Hold on a moment before the next step."
+   - "Before we go on, re-read the files you changed most recently and list what is still open. Do not change any file." (asked six times)
+   - Earlier standing rules and preferences:
+     - Address the user as "chief" (replaced "captain").
+     - No abbreviations in replies except CI and PR.
+     - Windows paths with backslashes only.
+     - No shell one-liners over 80 characters except git log.
+     - Printer crate lines under 80 characters.
+     - Never reformat tests/data.
+     - CI uses Rust 1.79.
+     - Merge commits, never rebase.
+     - No merge proposals on Fridays.
+     - Never suggest new dependencies except memchr.
+     - Flaky-test budget is 5 retries a day.
+     - Never recommend #[ignore] unless the test is marked slow.
+     - Examples use the INFO log level.
+     - Changelog in the past tense.
+     - Fixes target master.
+     - Release owner is Ines.
+     - Code freeze starts on a Wednesday (date unconfirmed).
+     - Staging is on port 7643.
+     - Suggest a builder struct only above 5 parameters.
+     - Dropped approaches not to suggest: an on-disk walk cache, the Cranelift backend, mmap by default, pinning regex-syntax 0.8.2, JSON logs, a 30-second global test timeout.
+
+7. Pending Tasks:
+   - **Ticket 26:** report the results of the approved plan (mutation check and benchmark done; no code change; nothing to commit unless asked).
+   - **The latest unexpected commit:** report HEAD `569e759 "tests: check Unicode word boundaries"`, which isn't mine.
+   - **Awaiting user decisions:**
+     - how to handle the unexpected commits and the uncommitted `Checker` work;
+     - the freeze date and Ines's approval;
+     - changelog tense and layout;
+     - whether to keep tickets 23 and 24;
+     - the earlier review findings;
+     - the Windows, Rust 1.79, fish and CI rustfmt verification;
+     - merging into master.
+   - **Ticket 27** (pool capacity) remains.
+
+8. Current Work:
+   - **Ticket 26 is executed per the approved plan.** No code change, since `03cae9d` already implements it.
+   - **Mutation check on `crates/globset/src/lib.rs`** (restored with `git checkout`):
+     - inverting the length check made both tests fail;
+     - recording lengths with `% 63` made one of the two fail.
+   - **Benchmark** with `/tmp/globbench`, comparing `649e4f7`'s globset lib.rs against the current one: matching 200,000 paths went from 0.029–0.030 seconds to 0.026–0.027 seconds, about 13% faster. Building is unchanged at about 0.155–0.199 seconds, and the result is identical (80,000 ignored).
+   - **Final check:** globset tests pass (306 unit, 3 documentation), and there are no globset changes in the working tree.
+   - **New finding from the last command:** HEAD is now `569e759 tests: check Unicode word boundaries`, another commit not made by me.
+
+9. Optional Next Step:
+   Report the ticket 26 results to the user:
+   - the tests catch both deliberate breaks;
+   - matching is about 13% faster;
+   - no code change and nothing to commit;
+   - the new unexpected commit `569e759` at HEAD.
+
+   Then wait for the user's next instruction. Don't touch the `Checker` work or the unexpected commits without approval.
+
+If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/dev/.claude/projects/-Users-dev-compact-capture-kit-work-ripgrep-A/<session-id>.jsonl
+Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
+
+The messages after this summary are the most recent messages from before compaction, kept verbatim. The summary was written without seeing them, so something it says has not happened yet may already have happened in them.

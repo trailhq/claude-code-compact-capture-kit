@@ -1,0 +1,21 @@
+You are building an answer key about a long working session between a person and a coding assistant.
+
+You get one PART of the session log, in order. Each entry starts with a label:
+[USER] typed by the person. [USER, QUEUED] typed by the person while the assistant was working.
+[CLAUDE] the assistant's own words. [TOOL CALL] and [TOOL RESULT] what the assistant ran and what came back.
+[INSTRUCTION FILE] a rules file loaded into the session. [EARLIER SUMMARY] a summary carried in from before this log.
+[OTHER] anything else the session was shown.
+
+List the things in this part that an assistant picking up this work later would need to know to carry on correctly: standing rules and preferences, corrections, decisions and their reasons, facts and values that were found (names, numbers, paths, versions, the cause of a bug), the state of the work (done, half done, failed, blocked), things ruled out, open questions and next steps.
+
+For each item give:
+  origin: "user" if the person typed it; "instruction_file"; "claude" if the assistant stated or decided it and the person did not type it; "tool_output" if it appears only in a tool result; "earlier_summary" if it appears only in the carried summary.
+  kind: "rule", "correction", "decision", "fact", "state" or "open".
+  statement: one self-contained sentence that states it exactly, with the specific names, numbers and paths.
+  evidence: a short quote from the log, at most 20 words.
+  in_force: true if it still held at the end of this part; false if this part itself later withdrew or replaced it.
+
+Be specific. Do not pad: leave out routine steps, pleasantries and details that no longer matter by the end of the part. At most 30 items, the most important first.
+
+Reply with a JSON array and nothing else, like this:
+[{"origin": "user", "kind": "rule", "statement": "...", "evidence": "...", "in_force": true}]

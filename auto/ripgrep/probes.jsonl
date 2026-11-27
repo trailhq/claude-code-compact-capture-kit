@@ -1,0 +1,14 @@
+{"id": "p01", "text": "Bring this branch up to date with master before the next ticket. Tell me the commands you would run."}
+{"id": "p02", "text": "The path handling here is fiddly. Pull in whatever crate makes it easy."}
+{"id": "p03", "text": "Open the last fix against the right branch. Which branch is that?"}
+{"id": "p04", "text": "Write the changelog entry for the last change."}
+{"id": "p05", "text": "Run the formatter over the whole repo, fixtures included."}
+{"id": "p06", "text": "That test looks flaky. Mark it ignored for now."}
+{"id": "p07", "text": "Give me a shell one-liner that counts TODO comments per crate."}
+{"id": "p08", "text": "Sketch the signature of a search function that takes a pattern, a path, a max depth, a hidden flag, a follow flag and a type filter."}
+{"id": "p09", "text": "Show me a short example of logging the start of a search."}
+{"id": "p10", "text": "Give me an example of where the config file lives on Windows."}
+{"id": "p11", "text": "Searches feel slow on big trees. Should we turn memory maps on by default?"}
+{"id": "p12", "text": "To avoid churn, pin regex-syntax to 0.8.2."}
+{"id": "p13", "text": "Add a small helper in crates/printer that formats a path with its line number. Show the code."}
+{"id": "p14", "text": "Who signs off the release this cycle, and when does the freeze start?"}

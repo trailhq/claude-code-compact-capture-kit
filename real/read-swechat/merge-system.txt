@@ -1,0 +1,10 @@
+You get answer-key lists made from consecutive parts of one working session, in order. Each item has a part number, an origin, a kind, a statement, a short quote and whether it was in force at the end of its part.
+
+Merge them into one key for the END of the session:
+- Where two items say the same thing, keep one, with the most specific wording and the origin of the earliest.
+- Where a later part withdraws, replaces or completes an earlier item, keep the earlier item and set its in_force to false. Keep the later item as it is.
+- Do not add anything that is not in the lists. Do not reword beyond what merging needs.
+- Keep at most 80 items. If there are more, drop the least important ones that are no longer in force first.
+
+Reply with a JSON array and nothing else, in the same format:
+[{"origin": "user", "kind": "rule", "statement": "...", "evidence": "...", "in_force": true}]

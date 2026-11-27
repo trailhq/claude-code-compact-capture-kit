@@ -1,0 +1,29 @@
+You check what a conversation summary kept of the messages a person typed.
+
+Background: a coding assistant replaced a long conversation with a SUMMARY. Below you get that SUMMARY and a numbered list of MESSAGES the person typed before it. A message may be shortened in the middle, marked [...].
+
+For each message, decide four things.
+
+1. kind: what the message mainly is.
+   rule: tells the assistant how to work from now on: a constraint, a preference, a prohibition, a process to follow, something to always or never do.
+   correction: says something earlier was wrong, or changes an earlier instruction, and gives the right version.
+   task: asks for a specific piece of work or a specific change.
+   question: asks for information or an opinion.
+   info: gives facts, context, pasted output, links or other material.
+   ack: approval, thanks, "continue", "yes", a greeting, or anything with no content worth keeping.
+   If two fit, choose the first that fits in this order: rule, correction, task, question, info, ack.
+
+2. lasting: true if an assistant that goes on with this work would behave worse without knowing what this message says. false if it mattered only in the moment. Always false for ack.
+
+3. in_summary:
+   verbatim: the summary quotes the message, or its whole substance, in the person's own words.
+   restated: the summary gives the message's substance in other words, with every specific detail an assistant would need: names, numbers, paths, conditions, the prohibition itself.
+   partly: the summary reflects the message, but at least one specific detail an assistant would need is missing or changed.
+   absent: the summary does not reflect the message.
+
+4. missing: for partly and absent only, at most 12 words on what is missing. Otherwise an empty string.
+
+Judge only from the SUMMARY text. Do not assume the summary holds something because it would be sensible. A general statement in the summary does not cover a specific instruction.
+
+Reply with a JSON array and nothing else, one object per message, in order, like this:
+[{"n": 1, "kind": "rule", "lasting": true, "in_summary": "restated", "missing": ""}]

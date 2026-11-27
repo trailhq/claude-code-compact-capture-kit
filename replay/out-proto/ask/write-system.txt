@@ -1,0 +1,9 @@
+You get numbered instructions that a person typed to a coding assistant during a long working session.
+
+For each one, write a question the person could ask later to check whether the assistant still knows it. The question must name the subject, but must not give away the instruction or hint at the answer. It must not be answerable from general knowledge, or by guessing yes or no.
+
+Also write the answer: one sentence that states what the person asked for, with its specifics.
+
+If an instruction is too vague or too tied to one moment to test this way, set question to an empty string.
+
+Reply with a JSON array and nothing else: [{"n": 1, "question": "...", "answer": "..."}]

@@ -1,0 +1,86 @@
+This session is being continued from a previous conversation that ran out of context. The summary below covers the earlier portion of the conversation.
+
+<system-reminder>
+<tools-used-before-summary>Bash, Read, Write</tools-used-before-summary>
+</system-reminder>
+Summary:
+1. Primary Request and Intent:
+   - Work through ripgrep tickets in `tickets/` one at a time on branch `work` (repo /Users/dev/compact-capture-kit/work/ripgrep-A, base commit 4649aa9 = 14.1.1). Ground rules (verbatim intent): "keep each change as small as the ticket allows, never push, and ask me before deleting a file."
+   - Per-ticket cycle requested repeatedly: "Read it and the code it touches, then tell me your plan. Do not change anything yet." → "The plan is fine. Go ahead and implement it." → "Run the tests for the crates you touched and fix anything that fails." → "Summarise the change for me: which files you touched, and why each one." → "Commit it on the current branch with a short message. Do not push." Plus occasional "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet." and "Before the next one, run the whole test suite once and tell me the result."
+   - For tickets 15+ (and 28+): "if our branch already behaves that way, show me the evidence and add a test instead of changing code."
+   - Address user as "chief"; no abbreviations in replies except CI and PR; shell one-liners ≤80 chars except git log; Windows paths with backslashes only.
+
+2. Key Technical Concepts:
+   - Rust workspace: crates globset, ignore, grep-searcher, grep-printer, grep-pcre2, grep-regex, grep-matcher, grep-cli, core (rg). Integration tests in tests/*.rs using rgtest! macro, Dir, TestCommand (cmd.cmd() gives process::Command), sort_lines, eqnice!.
+   - ignore crate: serial `Walk` (walkdir + WalkEventIter, ig stack via add_child/Exit) and parallel `WalkParallel` workers (run_one, generate_work, get_work, quit_now flag, Stack deque). `Ignore`/`IgnoreInner`, add_parents with `compiled` cache (absolute_base fix), DirListing (ticket 17), add_child_with_listing, is_listing_candidate, names_equal (case-insensitive on macOS/Windows), absolute_parents_have_rules (ticket 24), current_dir/$PWD (ticket 14), GIT_CONFIG_GLOBAL/SYSTEM/NOSYSTEM (ticket 18).
+   - globset: MatchStrategy (incl. new BasenameRegex), GlobSet strategies, LiteralSet length mask (03cae9d), Pool from regex-automata (now with_available_parallelism_capacity, regex-automata 0.4.19, regex-syntax 0.8.12).
+   - Mutation checks to prove tests catch bugs; restore via git checkout only when file has no foreign uncommitted changes, otherwise cp backup + cmp/shasum.
+   - CI Rust 1.79 constraint (avoid is_none_or 1.82, LazyLock 1.80).
+
+3. Files and Code Sections (most recent/important):
+   - crates/ignore/src/dir.rs: add_child_path(dir, listing: Option<&DirListing>), DirListing { found: Vec<(OsString, Option<FileType>)> }, create_gitignore(..., listing), absolute_parents_have_rules(), add_parents absolute_base copy fix (ticket 20). Commit 5edb890 (other session) changed git_type lookup:
+     ```rust
+     let track_git = self.0.opts.require_git
+         && (self.0.opts.git_ignore || self.0.opts.git_exclude);
+     let git_type = if track_git || self.0.opts.git_exclude { ...listing/metadata... }
+     let has_git = track_git && git_type.is_some();
+     let gi_exclude_matcher = if !self.0.opts.git_exclude || git_type.is_none() { Gitignore::empty() } else { resolve_git_commondir(...) ... };
+     ```
+     (removed earlier `maybe_git`). dir.rs ALSO currently has ~20 lines of foreign uncommitted changes (Checker-related).
+   - crates/ignore/src/walk.rs: holds foreign uncommitted Checker API (~680 lines: build_checker, struct Checker, is_ignored, invalidate) — NOT mine. Contains my tests (listing_*, multiple_roots_*, parallel_visitor_panic_does_not_deadlock, hidden_names_ending_in_dot, unreachable_ignore_files_not_loaded, absolute_parent_rules_and_repo_boundaries, etc.) and 5edb890's test (34 lines).
+   - crates/ignore/src/pathutil.rs, lib.rs: foreign uncommitted (is_dent_hidden, is_path_hidden — ticket 31).
+   - CHANGELOG.md: unreleased "TBD" section (Bug fixes / Feature enhancements / Miscellaneous; past tense); foreign uncommitted line "Added `WalkBuilder::build_checker`..." unstaged.
+   - tests/regression.rs: many regression tests (r3194, r3275, r3212, r3376, r3320, r3564, r3561, r3557, r2565, etc.); 5edb890 added 27 lines.
+   - tests/util.rs: uses `PathBuf::from(env!("CARGO_BIN_EXE_rg"))`.
+
+4. Errors and fixes (selected):
+   - Integration tests broken by Cargo 1.100 layout → fixed via CARGO_BIN_EXE_rg (511f293).
+   - Ticket 11 FR1 fill-until-full broke --line-buffered (ticket 15) → reverted (3fd130a).
+   - Mutation checks revealed weak tests (ticket 17 symlink → added gitdir-file test; ticket 19 test left unreadable files → added Drop guard; ticket 20 integration flaky on old code → added -j1).
+   - Changelog edit failed when assuming nonexistent "Performance improvements" heading → used Miscellaneous.
+   - git stash/checkout staging leftovers (MM) → git restore --staged.
+   - `cargo test --features pcre2 -p ignore` errors (no feature) → use full suite.
+   - Committed ticket 27 while staging only my changelog hunk via git hash-object + update-index --cacheinfo.
+
+5. Problem Solving:
+   - Foreign work: discovered on 2026-11-19 commits 649e4f7 (my ticket 25 work, committed by someone else), 03cae9d (ticket 26), 1021420 (many-threads test), 4af4475 (ticket 28), 5edb890 (ticket 29), plus uncommitted Checker (ticket 30) and hidden routines (ticket 31). Handling: review + mutation-check committed ones, add tests only for gaps; never commit foreign uncommitted work without explicit approval.
+   - Latest full suite: 1262 passed, 0 failed, 3 ignored in default and pcre2 builds.
+
+6. All user messages (in order, condensed but complete):
+   - Intro: work through tickets; "keep each change as small as the ticket allows, never push, and ask me before deleting a file." Look around repo and describe.
+   - Ticket 01 plan request (+ "nightly benchmark job ends at 02:45" later corrected to 02:15); implement; run tests (+ "never reformat files under tests/data/"); summarise; commit (+ "CI builds with Rust 1.74 only", later corrected to 1.79).
+   - Ticket 02: plan; implement; run tests (+ "we rebase and never use merge commits", later replaced by "we now use merge commits and never rebase"); summarise; commit (+ "release owner this cycle is Marcus", later "Ines is the release owner, not Marcus"); man page check.
+   - Ticket 03 plan (+ "On Fridays only, do not propose merging anything"); implement; run tests; summarise; commit; "run whole test suite" (+ "Never suggest adding a dependency, except memchr").
+   - Ticket 04: plan; implement (+ "flaky-test budget is 12 retries a day", later "5 retries a day"); tests; summarise (+ "Address me as captain", later "Drop the captain thing... address me as chief"); commit.
+   - Ticket 05 plan (+ "code freeze starts on Thursday", later "on Wednesday"); implement; tests; summarise; commit; man page check (+ CI 1.79 correction).
+   - Ticket 06 plan; implement (+ "Staging listens on port 7443", later "7643"); tests; summarise (+ "In crates/printer/ only, keep lines under 80 characters"); commit; full suite (+ "tried caching the directory walk in a file... dropped... inode numbers changed").
+   - Ticket 07: plan; implement; tests (+ flaky 5); summarise; commit (+ "Do not use abbreviations in your replies, except CI and PR").
+   - Ticket 08: plan; implement (+ merge commits policy); tests; summarise (+ "When you write Windows paths, and only then, use backslashes"); commit; man page check.
+   - Ticket 09 plan (+ "tried Cranelift backend and gave up... regex benchmarks three times slower"); implement (r1380 decision accepted); tests (+ "Never recommend marking a test as ignored, unless it is marked slow"); summarise; commit (+ "In examples, use the WARNING log level by default", later "use INFO by default"); full suite.
+   - Ticket 10 plan (+ "Do not suggest turning memory maps on by default again... network drives broke"); implement; tests (+ Ines release owner); summarise; commit.
+   - Ticket 11 plan (+ "For changelog entries only, write in the past tense"); implement; tests (+ "tried pinning regex-syntax to 0.8.2 and backed it out, since Unicode word boundaries stopped matching"); summarise; commit (+ staging 7643); man page check.
+   - Ticket 12 plan (+ chief); implement; tests; summarise (+ "No shell one-liners longer than 80 characters, except for git log commands"); commit; full suite (+ INFO log level).
+   - Ticket 13 plan; implement (+ "Only for functions with more than five parameters, suggest a builder struct"); tests; summarise (+ "Fixes should target the 14.1.x branch", later "fixes should target master, not 14.1.x"); commit.
+   - Ticket 14 plan; implement (+ "Moving the logs to JSON was tried and reverted... columns"); tests; summarise (+ master); commit; man page check (+ "tried a 30-second global test timeout and removed it... Windows runners... linking").
+   - "All tickets are in. Run the whole test suite again and fix anything that fails."; "Run cargo clippy across the workspace... Fix what is ours."; "Go back over every commit... List anything we missed or did only in part."; "Fix what you listed, smallest change first, and commit each fix on its own."; "Write the changelog entries... Show them to me before you save."; "Read through crates/printer once more..."; "Now the same for crates/searcher, crates/ignore and crates/globset."; "Which of our changes has the thinnest test coverage? Add tests for the two weakest and run them."; "Run the full suite a final time and give me the numbers."; "That is the last ticket. Give me a short status..."
+   - "More work came in... tickets numbered from 15... when one does, show me the evidence and add a test instead of changing code."
+   - Tickets 15–27 each with plan/implement/tests/summarise/commit cycle (and full-suite requests, man page checks after 17, 20, 23, 26).
+   - "Noted. Hold on a moment before the next step."; then "Before we go on, re-read the files you changed most recently and list what is still open. Do not change any file." (asked six times); then ticket 25 tests/summarise/commit; ticket 26 cycle; ticket 27 cycle; full suite twice; "That is the last ticket. Give me a short status..."
+   - "A few more upstream changes landed while we were working. Same ground rules. The specs are in tickets/, numbered from 28. As before, if our branch already behaves that way, show me the evidence and add a test instead of changing code."
+   - Ticket 28 cycle (plan; implement; tests; summarise; commit).
+   - Latest: "Next ticket: ignore: respect linked worktree excludes without requiring Git. The spec is in tickets/29-linked-worktree-excludes.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."
+
+7. Pending Tasks:
+   - Ticket 29 plan (current), then tickets 30–34 when handed (30 = incremental checking ≈ foreign uncommitted Checker; 31 = is-hidden routine ≈ foreign uncommitted pathutil changes; 32 scratch pools for empty matchers; 33 doc Windows path separators/UTF-8; 34 remove Cargo homepage field).
+   - Open decisions awaiting user: foreign work handling; freeze date (Wednesday 18th or 25th; today 2026-11-19; Ines approval); changelog tense/layout; ticket 24 option (keep/flag/tests only); ticket 23 keep strategy; CI rustfmt version (style_edition 2024); unverified Windows build/Rust 1.79/fish; ~dozen review findings unfixed; ticket 25 --one-file-system limitation.
+
+8. Current Work:
+   Ticket 29 plan request. I read tickets/29-linked-worktree-excludes.md (upstream commit 65e072fa, PR #3578, no details beyond title) and commit 5edb890 (made by another session at 11-19 00:30, Co-Authored-By Claude trailer): CHANGELOG +2, crates/ignore/src/dir.rs (71 lines changed: git_type now looked up when `track_git || self.0.opts.git_exclude`; `has_git = track_git && git_type.is_some()`; exclude matcher gated on `git_type.is_none()` instead of removed `maybe_git`), crates/ignore/src/walk.rs +34 (a test), tests/regression.rs +27 (a test). Was about to present the plan, analogous to tickets 26/28: review the diff against the ticket (including interplay with ticket 17's listing and ticket 19's "only stat when needed" test r3212 — note git_type is now looked up when git_exclude is on even without require_git, which with --no-ignore-vcs/--no-ignore is off so r3212 still holds), run its tests, mutation-check them (dir.rs and walk.rs both contain foreign uncommitted changes, so back up with cp and restore with cmp/shasum verification, NOT git checkout), add a test only if a gap exists, no code change otherwise; note accepting another session's commit.
+
+9. Optional Next Step:
+   Present the ticket 29 plan (text only, no changes), per the user's latest request: "Next ticket: ignore: respect linked worktree excludes without requiring Git. The spec is in tickets/29-linked-worktree-excludes.md. Read it and the code it touches, then tell me your plan. Do not change anything yet." The plan: evidence that 5edb890 already implements it; review its dir.rs change and its two tests (walk.rs and regression.rs) against the ticket; mutation-check by temporarily restoring the old `git_type` gating (with cp backup of dir.rs because of foreign uncommitted changes, verified restore); run ignore+ripgrep tests in both builds; add a test only if there's a gap; no changelog change (commit already has one).
+
+If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/dev/.claude/projects/-Users-dev-compact-capture-kit-work-ripgrep-A/<session-id>.jsonl
+Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
+
+The messages after this summary are the most recent messages from before compaction, kept verbatim. The summary was written without seeing them, so something it says has not happened yet may already have happened in them.

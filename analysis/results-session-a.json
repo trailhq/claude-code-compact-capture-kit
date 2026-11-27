@@ -1,0 +1,289 @@
+{
+ "script_messages": 209,
+ "questions": 26,
+ "rule_tests": 14,
+ "tickets_in_script": 34,
+ "notes_in_script": 36,
+ "last_note_message_number": 80,
+ "last_note_request_tokens": 590355,
+ "main": {
+  "developer_messages_until_compaction": 181,
+  "compaction_during": "dev-t30-go",
+  "calls_until_compaction": 264,
+  "cost_at_compaction_usd": 103.2914,
+  "cost_before_compaction_step_usd": 101.3703,
+  "seconds_of_developer_steps": 11056,
+  "version": "2.1.327",
+  "key_source": "ANTHROPIC_API_KEY",
+  "compaction": {
+   "trigger": "auto",
+   "pre_tokens": 967211,
+   "post_tokens": 10876,
+   "duration_ms": 76666,
+   "other": {
+    "cumulative_dropped_tokens": 956335
+   },
+   "at_step": 264,
+   "climb": 1,
+   "after_message": "t30-go"
+  },
+  "tool_calls_before_compaction": {
+   "Bash": 607,
+   "Write": 34
+  },
+  "memory_writes": 33,
+  "memory_files": 26,
+  "first_record": "2026-11-18T14:09:02.568Z",
+  "last_record_before_compaction": "2026-11-18T19:01:43.305Z",
+  "typed_user_records": 181
+ },
+ "spent_by_claude_codes_count_usd": 198.727,
+ "compactions": {
+  "recorded": {
+   "trigger": "auto",
+   "pre_tokens": 974969,
+   "post_tokens": 17941,
+   "seconds": 97.1,
+   "kept_messages": 10,
+   "summary_words": 1975,
+   "facts_by_pattern": 26,
+   "facts_missing_by_pattern": [],
+   "files_put_back": [
+    "aliases.rs",
+    "memory/no-global-test-timeout.md",
+    "memory/fixes-target-14-1-x.md",
+    "memory/no-json-logs.md",
+    "memory/builder-struct-threshold.md"
+   ],
+   "memory_index_reattached": true,
+   "sections": 11,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  },
+  "nomem": {
+   "trigger": "auto",
+   "pre_tokens": 967110,
+   "post_tokens": 16642,
+   "seconds": 69.9,
+   "kept_messages": 5,
+   "summary_words": 2026,
+   "facts_by_pattern": 19,
+   "facts_missing_by_pattern": [
+    "q01",
+    "q21",
+    "q22",
+    "q23",
+    "q24",
+    "q25",
+    "q26"
+   ],
+   "files_put_back": [
+    "aliases.rs",
+    "memory/no-global-test-timeout.md",
+    "memory/fixes-target-14-1-x.md",
+    "memory/no-json-logs.md",
+    "memory/builder-struct-threshold.md"
+   ],
+   "memory_index_reattached": false,
+   "sections": 8,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  },
+  "old": {
+   "trigger": "auto",
+   "pre_tokens": 967894,
+   "post_tokens": 9148,
+   "seconds": 154.8,
+   "kept_messages": 5,
+   "summary_words": 1644,
+   "facts_by_pattern": 26,
+   "facts_missing_by_pattern": [],
+   "files_put_back": [
+    "memory/rebase-no-merge-commits.md",
+    "memory/address-as-captain.md",
+    "memory/code-freeze.md",
+    "aliases.rs",
+    "memory/no-global-test-timeout.md"
+   ],
+   "memory_index_reattached": true,
+   "sections": 0,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  },
+  "c1": {
+   "trigger": "auto",
+   "pre_tokens": 967211,
+   "post_tokens": 10876,
+   "seconds": 76.7,
+   "kept_messages": 4,
+   "summary_words": 2402,
+   "facts_by_pattern": 26,
+   "facts_missing_by_pattern": [],
+   "files_put_back": [
+    "aliases.rs",
+    "memory/no-global-test-timeout.md",
+    "memory/fixes-target-14-1-x.md",
+    "memory/no-json-logs.md",
+    "memory/builder-struct-threshold.md"
+   ],
+   "memory_index_reattached": true,
+   "sections": 12,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  },
+  "man": {
+   "trigger": "manual",
+   "pre_tokens": 902673,
+   "post_tokens": 8938,
+   "seconds": 78.5,
+   "kept_messages": 2,
+   "summary_words": 1831,
+   "facts_by_pattern": 20,
+   "facts_missing_by_pattern": [
+    "q21",
+    "q22",
+    "q23",
+    "q24",
+    "q25",
+    "q26"
+   ],
+   "files_put_back": [
+    "aliases.rs",
+    "memory/no-global-test-timeout.md",
+    "memory/fixes-target-14-1-x.md",
+    "memory/no-json-logs.md",
+    "memory/builder-struct-threshold.md"
+   ],
+   "memory_index_reattached": false,
+   "sections": 9,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  },
+  "r1": {
+   "trigger": "auto",
+   "pre_tokens": 967767,
+   "post_tokens": 10472,
+   "seconds": 58.4,
+   "kept_messages": 3,
+   "summary_words": 2044,
+   "facts_by_pattern": 26,
+   "facts_missing_by_pattern": [],
+   "files_put_back": [
+    "aliases.rs",
+    "memory/no-global-test-timeout.md",
+    "memory/fixes-target-14-1-x.md",
+    "memory/no-json-logs.md",
+    "memory/builder-struct-threshold.md"
+   ],
+   "memory_index_reattached": true,
+   "sections": 9,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  },
+  "r2": {
+   "trigger": "auto",
+   "pre_tokens": 968810,
+   "post_tokens": 11075,
+   "seconds": 89.5,
+   "kept_messages": 5,
+   "summary_words": 2450,
+   "facts_by_pattern": 22,
+   "facts_missing_by_pattern": [
+    "q22",
+    "q24",
+    "q25",
+    "q26"
+   ],
+   "files_put_back": [
+    "aliases.rs",
+    "memory/no-global-test-timeout.md",
+    "memory/fixes-target-14-1-x.md",
+    "memory/no-json-logs.md",
+    "memory/builder-struct-threshold.md"
+   ],
+   "memory_index_reattached": true,
+   "sections": 9,
+   "opens_with_ran_out": true,
+   "points_at_transcript": true
+  }
+ },
+ "memory_index_chars": 3183,
+ "memory_index_keys": [
+  "files",
+  "type"
+ ],
+ "after_compaction_copies": {
+  "c1|p": {
+   "copies": 14,
+   "with_tool_calls": 14,
+   "read_memory_folder": 2,
+   "read_a_transcript": 0
+  },
+  "c1|q": {
+   "copies": 4,
+   "with_tool_calls": 0,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  },
+  "man|p": {
+   "copies": 14,
+   "with_tool_calls": 11,
+   "read_memory_folder": 2,
+   "read_a_transcript": 0
+  },
+  "man|q": {
+   "copies": 4,
+   "with_tool_calls": 0,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  },
+  "nomem|p": {
+   "copies": 14,
+   "with_tool_calls": 13,
+   "read_memory_folder": 5,
+   "read_a_transcript": 0
+  },
+  "nomem|q": {
+   "copies": 4,
+   "with_tool_calls": 0,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  },
+  "old|p": {
+   "copies": 14,
+   "with_tool_calls": 12,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  },
+  "old|q": {
+   "copies": 4,
+   "with_tool_calls": 0,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  },
+  "r1|p": {
+   "copies": 14,
+   "with_tool_calls": 14,
+   "read_memory_folder": 1,
+   "read_a_transcript": 0
+  },
+  "r1|q": {
+   "copies": 4,
+   "with_tool_calls": 0,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  },
+  "r2|p": {
+   "copies": 14,
+   "with_tool_calls": 13,
+   "read_memory_folder": 2,
+   "read_a_transcript": 0
+  },
+  "r2|q": {
+   "copies": 4,
+   "with_tool_calls": 0,
+   "read_memory_folder": 0,
+   "read_a_transcript": 0
+  }
+ }
+}

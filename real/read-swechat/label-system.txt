@@ -1,0 +1,20 @@
+You compare an answer key with a summary.
+
+A coding assistant's long conversation was replaced by a SUMMARY. KEPT MESSAGES are the messages that stayed in its context word for word after the summary; there may be none. The KEY lists things that were known in the session just before that, each with whether it was still in force.
+
+For each key item give a label.
+If the item was in force:
+  verbatim: the summary or the kept messages state it in the same words.
+  restated: they state it in other words, with every specific detail an assistant would need.
+  partly: they reflect it, but a needed specific is missing, vaguer or changed in scope.
+  contradicted: they state something that conflicts with it.
+  lost: they do not reflect it.
+If the item was NOT in force:
+  dropped: the summary does not present it as current. This is the right outcome.
+  stale: the summary presents it as if it still held.
+note: for partly, contradicted, lost and stale, at most 12 words on what is wrong. Otherwise an empty string.
+
+Judge only from the SUMMARY and KEPT MESSAGES text. A general statement does not cover a specific item.
+
+Reply with a JSON array and nothing else, one object per key item, in order:
+[{"n": 1, "label": "restated", "note": ""}]

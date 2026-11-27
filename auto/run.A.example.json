@@ -1,0 +1,12 @@
+{
+  "repo_dir": "../work/ripgrep-A",
+  "out_dir": "../auto-out/A",
+  "script": "developer-A.jsonl",
+  "questions": "questions.jsonl",
+  "claude": ["npx", "-y", "@anthropic-ai/claude-code@2.1.327"],
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "permission_mode": "acceptEdits",
+  "climbs": 3,
+  "guard": 0.5
+}

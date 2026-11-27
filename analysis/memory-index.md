@@ -1,0 +1,26 @@
+- [Never reformat tests/data](never-reformat-tests-data.md) — fixture files under tests/data/ must keep exact bytes
+- [CI uses Rust 1.79](ci-rust-1-74.md) — code must compile on 1.79 (corrected from 1.74); flag tickets needing newer Rust
+- [Merge commits, never rebase](rebase-no-merge-commits.md) — integrate via merge commits; never rebase (replaced old rebase policy)
+- [Release owner](release-owner.md) — Ines owns the current release cycle (changed from Marcus, 2026-11-18)
+- [No merge proposals on Fridays](no-merge-proposals-fridays.md) — on Fridays never suggest merging
+- [Nightly benchmark window](nightly-benchmark-window.md) — nightly benchmark job ends at 02:15
+- [No new dependencies](no-new-dependencies.md) — never suggest adding a dependency, except memchr
+- [Flaky-test budget](flaky-test-budget.md) — 5 flaky-test retries per day (corrected from 12); rerun sparingly
+- [Address as chief](address-as-captain.md) — call the user "chief" in replies (replaced "captain")
+- [Code freeze](code-freeze.md) — freeze starts on a Wednesday (today 2026-11-18 or 2026-11-25? unconfirmed); flag new work
+- [Staging port](staging-port.md) — staging listens on port 7643 (corrected from 7443)
+- [Printer line length](printer-line-length.md) — in crates/printer/ keep lines < 80 chars
+- [No on-disk walk cache](no-walk-cache-file.md) — file-based directory-walk cache was tried and dropped (inodes changed between runs)
+- [No abbreviations](no-abbreviations.md) — no abbreviations in replies except CI and PR
+- [Windows paths use backslashes](windows-path-backslashes.md) — only Windows paths get backslashes; others keep forward slashes
+- [No Cranelift backend](no-cranelift-backend.md) — Cranelift build tried and dropped (regex benchmarks 3x slower)
+- [No ignoring tests](no-ignoring-tests.md) — never recommend #[ignore] unless the test is marked slow
+- [Examples use INFO log level](examples-warning-log-level.md) — default log level in examples is INFO (replaced WARNING)
+- [No mmap by default](no-mmap-by-default.md) — enabling memory maps by default broke network-drive searches; do not suggest
+- [Changelog in past tense](changelog-past-tense.md) — CHANGELOG entries only: past tense
+- [Do not pin regex-syntax 0.8.2](no-pin-regex-syntax-082.md) — pinning broke Unicode word boundaries; backed out
+- [Shell one-liners within 80 chars](shell-one-liner-length.md) — max 80 chars per one-liner, except git log
+- [Builder struct threshold](builder-struct-threshold.md) — suggest a builder only for functions with more than 5 parameters
+- [Fixes target master](fixes-target-14-1-x.md) — bug fixes target master (changed from 14.1.x)
+- [No JSON logs](no-json-logs.md) — JSON log output was tried and reverted (broke column alignment)
+- [No global test timeout](no-global-test-timeout.md) — 30s global timeout removed (Windows linking hit it)

@@ -1,10 +1,113 @@
 # compact-capture-kit
 
-Scripts that measure what Claude Code's `/compact` keeps and what it drops.
+Scripts and data that measure what Claude Code's `/compact` keeps and what it drops.
 
-They ran every test in the Trail post "Claude Code /compact: what it keeps and what it drops, measured up to 804K tokens", on the [Trail blog](https://trailhq.com/blog). The numbers behind that post's two charts are in `data/`.
+They are behind the Trail post "Claude Code /compact: what it keeps and what it drops", on the [Trail blog](https://trailhq.com/blog). Every count in that post is in a results file here, and each results file names the script that wrote it.
+
+The repository holds labels, counts and scripts. It holds no session transcripts.
+
+## Where each number in the post comes from
+
+| In the post | Results file | Written by | Reads |
+| --- | --- | --- | --- |
+| 383 compactions, 147 sessions, 187 manual and 196 automatic; the text-match check (3,408 of 3,430); the second judge | `analysis/results-real.json` | `analysis/freeze1.py` | `real/judge-swechat/`, `real/judge-queued/`, `real/judge-second/`, `real/read-swechat/` |
+| 32 users; rules kept at the first, second and third compaction (the three-row chart); the one-user check; text search | `analysis/results-clusters.json` | `analysis/freeze4.py` | `real/judge-swechat/` and SWE-chat's `sessions.parquet` |
+| The replay: answers before and after one, two and three compactions (the first chart); the two releases compared | `analysis/results-replay.json` | `analysis/freeze2.py` | `replay/out-proto/` |
+| The 1M-token scripted session: 26 questions, seven summaries, auto memory on and off | `analysis/results-session-a.json` | `analysis/freeze3.py` | the raw run, which is not published |
+| The examples quoted in the post | `analysis/results-examples.json` | `analysis/freeze5.py` | the raw runs, which are not published |
+
+The two charts are `analysis/figure-01-rules-after-compactions.png` and `analysis/figure-03-kept-by-compaction.png`. `analysis/make_chart_v5.py` draws them from the results files. The post's second picture is a screenshot of `/context`, so there is no script for it.
+
+## What you can rerun from this repository
+
+These need Python 3 only, and they reproduce the published results files byte for byte:
+
+```bash
+git clone https://github.com/trailhq/claude-code-compact-capture-kit.git ~/compact-capture-kit
+cd ~/compact-capture-kit
+KIT=$PWD python3 analysis/freeze1.py     # writes analysis/results-real.json
+KIT=$PWD python3 analysis/freeze2.py     # writes analysis/results-replay.json
+python3 analysis/make_chart_v5.py        # redraws the two charts; needs matplotlib
+```
+
+A chart you redraw can differ from ours by a pixel, because fonts and matplotlib versions differ.
+
+`freeze4.py` also reproduces its file, once you have SWE-chat's index. It needs pyarrow and `data/SWE-chat/sessions.parquet`, which you download yourself (see "The dataset").
+
+`freeze3.py` and `freeze5.py` read the raw output of our own runs. They are here to show how the numbers were counted. To run them, make your own run with `auto/` first.
+
+The shell wrappers (`*.sh` under `real/`, `replay/` and `auto/`) expect the repository at `~/compact-capture-kit`.
 
 ## What is here
+
+| Folder | What it holds |
+| --- | --- |
+| `real/` | The study of real compactions. `scan_swechat.py` finds compactions in transcripts. `judge.py` has a model compare each summary with the messages the user typed before it. `read_all.py` is the full reading of 24 compactions. The `judge-*/` and `read-swechat/` folders hold our labels and the prompts the judges were given. |
+| `replay/` | The replay of seven real sessions on Claude Code 2.1.327. `slice.py` cuts a transcript at each original compaction. `replay.py` lets the automatic compaction run. `replay_ask.py` writes questions from the rules a user typed and asks them of copies. `out-proto/` holds the sizes, the grades and the labels. |
+| `auto/` | The scripted session that ran to the 1M-token limit. `build_script.py` writes the developer's messages, the 36 side notes and the 26 questions. `auto_run.py` types them into one session, and `cross.sh` takes saved copies over the limit. See `auto/README.md`. |
+| `analysis/` | The freeze scripts, the results files, the chart script and the charts. Also the seven summaries of the scripted session (`summary-*.txt`), its memory index, and the answers to the 26 questions after each compaction (`session-a/`). |
+| Top level, `tools/`, `data/` | The first scripted tests, on Claude Code 2.1.311. The post quotes one answer pair from the ladder at 804K tokens. See "The first scripted tests". |
+
+### The label files
+
+`judge.jsonl` has one line per compaction. `path` is the SWE-chat transcript, and `order` is which compaction of the session it is. `trigger`, `pre_tokens`, `summary_words`, `time` and `version` come from the transcript. `cost` and `input_tokens` are what the judge's call used.
+
+`items` has one entry per message the user typed:
+
+- `where`: `recent` if the message was typed since the previous compaction, `older` if before it.
+- `chars`: the length of the message. The text itself is not stored.
+- `match`: what a plain text search of the summary found: `word for word`, `mostly` or `absent`.
+- `tail`: true if Claude Code kept the message itself after the compaction. The judge skipped those.
+- `kind`: `rule`, `correction`, `task`, `question`, `info` or `ack`.
+- `lasting`: true if an assistant going on with the work would behave worse without knowing the message.
+- `in_summary`: the judge's label, `verbatim`, `restated`, `partly` or `absent`.
+
+`read-swechat/read.jsonl` has one line per compaction of the full reading. Each item has an `origin` (`user`, `claude`, `tool_output` or `earlier_summary`), a `kind`, `in_force` and a `label`.
+
+`replay/out-proto/ask/ask.jsonl` has one line per session and round. Each item is one question, with the round its rule was typed in and a grade: `right`, `partly`, `wrong` or `unknown`.
+
+## The dataset
+
+The real sessions come from [SWE-chat](https://huggingface.co/datasets/SALT-NLP/SWE-chat), a dataset of real coding-agent sessions by [Baumann et al.](https://arxiv.org/abs/2604.20779). When we read its dataset card in November 2026, the licence was ODC-By and access needed a request on Hugging Face.
+
+This repository holds what we derived from it: labels, counts and session ids. To get the transcripts, request access there, then run `real/fetch_swechat.sh` with one of the list files in `real/`.
+
+## What is not here, and why
+
+- **SWE-chat transcripts and their index.** They are the dataset's to give out.
+- **The replay's questions, answer keys and answers.** They restate what SWE-chat users typed. `analysis/results-examples.json` keeps one traced example and leaves the text of the other three wrong answers out.
+- **Prompts and replies of the judges (`raw/`).** They hold message text.
+- **The raw output of our own runs.** A transcript carries the account's email address and organisation ID.
+- **The author's own Claude Code sessions.** They were judged the same way, and only their counts are in `results-real.json`, under `own_meaning` and `own_reading`. `freeze1.py` keeps those counts as they are when the label files are absent.
+- **`auto/ripgrep/tickets/`.** These are task files from the SWE-Milestone benchmark. `build_script.py` copies them from the benchmark's data, which you download yourself.
+
+## What the runs cost
+
+By the API's own count, on `claude-opus-5-5` unless noted:
+
+| Run | Cost in USD |
+| --- | --- |
+| Judging 425 compaction records of SWE-chat (`real/judge-swechat/`) | 48.83 |
+| Judging 290 records for messages typed while Claude was working (`real/judge-queued/`) | 25.67 |
+| Second judge, `claude-sonnet-5-5`, 50 compactions | 3.62 |
+| Full reading of 24 compactions | 40.88 |
+| Replay, the 7 of 23 rows that report a cost. The other 16 rounds were ended once the summary was on disk, and Claude Code reports no cost for those. | 14.12 |
+| Judging the replay's 21 summaries | 3.34 |
+| The scripted session, as its driver summed the cost Claude Code reported | 198.73 |
+
+Of the 425 judged records, 383 are counted. Eight are duplicates, and 34 come from sessions that did not run on a Claude model (`real/swe-chat-not-claude.json`).
+
+## Limits
+
+- A model judged every summary and graded every answer. No person graded.
+- One user typed 166 of the 383 compactions and four of the seven replayed sessions.
+- We could not see the `CLAUDE.md` files or the disks of the real sessions. A rule missing from a summary may still have been on disk.
+- The replay and the scripted session ran on Claude Code 2.1.327, on one Mac. One copy of the scripted session crossed the limit on 2.1.311. The real sessions ran on releases 2.1.76 to 2.1.259.
+- We tested what Claude could recall, not how it then behaved.
+
+## The first scripted tests
+
+These are the scripts at the top level. They ran on Claude Code 2.1.311 on 17 Nov 2026, with a manual `/compact` and sessions up to 804K tokens.
 
 | File | What it does |
 | --- | --- |
@@ -16,10 +119,10 @@ They ran every test in the Trail post "Claude Code /compact: what it keeps and w
 | `analyze_capture.py`, `analyze_ladder.py`, `analyze_rounds.py`, `analyze_stress.py` | Each prints a plain-text report for one run. |
 | `tools/ladder_kinds.py` | Counts the ladder's right answers by where each fact came from. |
 | `tools/request_sizes.py` | Reads request sizes around a compaction from session transcripts. |
-| `tools/make_charts.py` | Draws the post's charts from the two files in `data/`. |
-| `data/ladder_kinds.csv`, `data/request_sizes.csv` | Our results, from the runs of 17 Nov 2026. |
+| `tools/make_charts.py` | Draws two charts of an earlier draft from the files in `data/`. |
+| `data/ladder_kinds.csv`, `data/request_sizes.csv` | Our results from those runs. |
 
-## What you need
+### What you need
 
 - macOS or Linux, with bash, git and Python 3.
 - Claude Code, signed in, as the `claude` command. We used version 2.1.311.
@@ -28,7 +131,7 @@ They ran every test in the Trail post "Claude Code /compact: what it keeps and w
 
 Every script asks its questions of copies of the session, made with `--fork-session`. The questions never enter the session that gets compacted.
 
-## What a run costs
+### What a run costs
 
 These are real Claude Code sessions. They use your plan or your credit.
 
@@ -44,7 +147,7 @@ By Claude Code's own count, our runs on claude-opus-5-5 at medium effort cost:
 
 Each script caps what one step may spend with `MAX_BUDGET_PER_STEP_USD`. The ladder also stops once the run has cost more than `MAX_TOTAL_USD`, which is 20 unless you set it.
 
-## Run a test
+### Run a test
 
 Give each run a directory that does not exist yet. A script stops if the directory is already there.
 
@@ -83,7 +186,7 @@ The ladder has four settings:
 
 A script writes in the directory you name, in a sibling `<directory>-out` folder and in `<directory>-out.tgz`. It deletes nothing. Claude Code keeps its own records of each session under `~/.claude/projects/`, as it does for any session.
 
-## Read a run
+### Read a run
 
 ```bash
 python3 -I analyze_capture.py ~/compact-capture-out
@@ -92,7 +195,7 @@ python3 -I analyze_rounds.py ~/compact-rounds-out
 python3 -I analyze_stress.py ~/compact-stress-out
 ```
 
-To count the ladder's answers by where each fact came from, and to draw the charts:
+To count the ladder's answers by where each fact came from, and to draw the charts of an earlier draft:
 
 ```bash
 python3 tools/ladder_kinds.py ~/compact-ladder-out data/ladder_kinds.csv
@@ -101,11 +204,11 @@ python3 tools/make_charts.py data img
 
 `ladder_kinds.py` looks every planted value up in the transcript before it counts. It stops if a value turns up somewhere its kind says it should not.
 
-## Before you share a run
+### Before you share a run
 
 An `-out` folder holds a copy of the session's transcript. A transcript carries your account's email address and organisation ID. A recording made with MCP servers loaded lists every tool they offer. Read both before you publish them.
 
-## The data
+### The data
 
 `data/ladder_kinds.csv` has one row for each compaction, kind of fact and counting rule.
 
@@ -115,13 +218,8 @@ An `-out` folder holds a copy of the session's transcript. A transcript carries 
 
 `data/request_sizes.csv` has one row for each recorded session: its first request, the last request before `/compact`, the first one after, and Claude Code's own `preTokens` and `postTokens`.
 
-## Limits
+### Limits of these tests
 
 - One run of each setup, on one Mac, one account and one model.
-- Claude Code 2.1.311. Later versions may differ.
-- A manual `/compact` with no instructions. No automatic or idle compaction was run.
+- A manual `/compact` with no instructions.
 - A script scores each answer against a pattern. Read the answers it flags.
-
-## An experiment to try
-
-The stress test's 36 notes fit in one summary. Add notes to `compact-stress.sh` until an answer comes back wrong.

@@ -1,0 +1,26 @@
+{"id": "q01", "text": "What time does the nightly benchmark job end?"}
+{"id": "q02", "text": "Which Rust version does our CI build with?"}
+{"id": "q03", "text": "Who is the release owner this cycle?"}
+{"id": "q04", "text": "What is the flaky-test budget per day?"}
+{"id": "q05", "text": "Which port does staging listen on?"}
+{"id": "q06", "text": "On which day does the code freeze start?"}
+{"id": "q07", "text": "State my rule about reformatting files, including where it applies."}
+{"id": "q08", "text": "State my rule about proposing merges, including when it applies."}
+{"id": "q09", "text": "State my rule about line length, including where it applies."}
+{"id": "q10", "text": "State my rule about backslashes, including when it applies."}
+{"id": "q11", "text": "State my rule about tense, including where it applies."}
+{"id": "q12", "text": "State my rule about suggesting a builder struct, including when it applies."}
+{"id": "q13", "text": "State my rule about adding dependencies, including any exception."}
+{"id": "q14", "text": "State my rule about abbreviations, including any exception."}
+{"id": "q15", "text": "State my rule about ignoring tests, including any exception."}
+{"id": "q16", "text": "State my rule about shell one-liners, including any exception."}
+{"id": "q17", "text": "Do we rebase or use merge commits on this repo?"}
+{"id": "q18", "text": "How should you address me?"}
+{"id": "q19", "text": "Which log level should examples use by default?"}
+{"id": "q20", "text": "Which branch should fixes target?"}
+{"id": "q21", "text": "Why did we drop the file cache of the directory walk?"}
+{"id": "q22", "text": "Why did we give up on the Cranelift backend?"}
+{"id": "q23", "text": "Why should you not suggest turning memory maps on by default?"}
+{"id": "q24", "text": "Why did we back out the regex-syntax 0.8.2 pin?"}
+{"id": "q25", "text": "Why was moving the logs to JSON reverted?"}
+{"id": "q26", "text": "Why did we remove the 30-second global test timeout?"}

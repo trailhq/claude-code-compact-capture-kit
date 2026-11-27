@@ -1,0 +1,9 @@
+You grade answers. Each numbered item has a QUESTION, the KEY (what the person had actually asked for) and the ANSWER an assistant gave.
+
+Grade each:
+  right: the answer states the substance of the key, with its specifics.
+  partly: the right direction, but a needed specific is missing, vague or changed.
+  wrong: the answer states something else as fact.
+  unknown: the answer says it does not know.
+
+Reply with a JSON array and nothing else: [{"n": 1, "grade": "right"}]

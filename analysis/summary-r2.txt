@@ -1,0 +1,121 @@
+This session is being continued from a previous conversation that ran out of context. The summary below covers the earlier portion of the conversation.
+
+<system-reminder>
+<tools-used-before-summary>Bash, ListAgents, Read, Write</tools-used-before-summary>
+</system-reminder>
+Summary:
+1. Primary Request and Intent:
+   - The user is working through tickets in tickets/ on a ripgrep fork (repo /Users/dev/compact-capture-kit/work/ripgrep-A, branch `work`, based on tag 14.1.1, commit 4649aa9). Session-wide ground rules (verbatim intent): "keep each change as small as the ticket allows, never push, and ask me before deleting a file."
+   - Per-ticket workflow the user drives: "Next ticket: <title>. The spec is in tickets/NN-....md. Read it and the code it touches, then tell me your plan. Do not change anything yet." → "The plan is fine. Go ahead and implement it." → "Run the tests for the crates you touched and fix anything that fails." → "Summarise the change for me: which files you touched, and why each one." → "Commit it on the current branch with a short message. Do not push." Occasionally "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet." and "Before the next one, run the whole test suite once and tell me the result."
+   - For tickets 15+: "Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."
+   - Durable preferences/rules (saved to memory): never reformat files under tests/data/; CI builds with Rust 1.79 only (corrected from 1.74); integrate via merge commits, never rebase (replaced earlier rebase-only policy); release owner is Ines (changed from Marcus); on Fridays never propose merging; nightly benchmark job ends 02:15; never suggest adding a dependency except memchr; flaky-test budget 5 retries/day; address the user as "chief" (replaced "captain"); code freeze starts on a Wednesday (unconfirmed whether 2026-11-18 or 2026-11-25); staging on port 7643; in crates/printer/ keep lines under 80 chars; no on-disk walk cache (inodes changed); no abbreviations in replies except CI and PR; Windows paths only use backslashes; no Cranelift backend; never recommend marking a test ignored unless marked slow; examples use INFO log level (replaced WARNING); don't suggest mmap by default; changelog entries only in past tense; don't pin regex-syntax 0.8.2; shell one-liners ≤80 chars except git log; suggest builder struct only for functions with more than five parameters; fixes target master (changed from 14.1.x); JSON logs were reverted (no JSON log suggestion); no 30s global test timeout.
+   - Most recent explicit request: "Run the tests for the crates you touched and fix anything that fails." (after ticket 26 verification).
+
+2. Key Technical Concepts:
+   - Rust workspace crates: globset, ignore, grep-searcher, grep-printer, grep-pcre2, grep-regex, grep-cli, grep-matcher, ripgrep core (crates/core).
+   - Integration tests now locate rg via `env!("CARGO_BIN_EXE_rg")` (tests/util.rs) — no symlink workaround needed.
+   - ignore crate: `Ignore`/`IgnoreInner` matcher chain, `add_parents` cache (`compiled`), `absolute_base`, `DirListing` (from ticket 17) with `add_child_with_listing`, serial `Walk` (walkdir) vs parallel `WalkParallel` workers, `Worker::run`/`get_work` quit coordination, `QuitOnPanic` guard.
+   - globset: `MatchStrategy` (Literal, BasenameLiteral, Extension, Prefix, Suffix, RequiredExtension, BasenameRegex, Regex), `GlobSetMatchStrategy`, `RegexSetStrategy` with `is_match_bytes`/`matches_into_bytes`, `LiteralSet` with a 64-bit length mask (ticket 26 commit by others).
+   - searcher: line buffer fill semantics (returns on first complete line; full-fill reverted due to upstream #3194), roll keeps only before_context lines (ticket 11 FR2), max_matches in searcher.
+   - Testing techniques used: mutation checks (temporarily break code, confirm test fails, restore via backup or git checkout), benchmarks in /tmp scratch crates with path dependencies, stash-based before/after builds.
+   - Helper scripts: /tmp/ed.py (python `edit(path, [(old,new),...])` asserting each old string occurs exactly once), /tmp/fullsuite.sh (whole workspace suite with TOTAL), /tmp/t17.sh (ignore+ripgrep tests), /tmp/t15.sh, /tmp/t16.sh.
+
+3. Files and Code Sections (most recent work emphasized):
+   - Commits on `work` by me: 4a9877f (01), 5706f7d (02), 56998a4 (03), 5d1b8b0 (04), 6bff681 (05), 7111bf3 (06), 0ec2c47 (07), c429359 (08), d0f0555 (09), b339d60 (10), 281658a (11 FR2), cd24773 (12), 23af5e1 (13), 45a286c (14), 5963078 (clippy fixes), 511f293 (CARGO_BIN_EXE_rg), d6009b3 (Gitignore::global cwd), ef529b0 (inline format args), e5d30c5 (bytes searched test), 43b963d (per-branch unclosed classes), 8060771 (BOM logging), 38f90fc (fill-until-full, later reverted), d0a0177 (changelog TBD section), 46f88cc (fish + symlinked cwd tests), 3fd130a (revert of 38f90fc, ticket 15), 06f487e (r3194 tests), 9e34e09 (changelog drop), c97a196 (16 cursor alias), 0bb6b60 (17 listing probing), 336e734 (18 GIT_CONFIG_*), 227a20f (19 test), 8304dab (20 multi-root parents), f71aef8 (21 deadlock), 57a614c (22 dotfiles), 004b257 (23 basename regexes), 0c9036c (24 skip empty absolute parents).
+   - Commits made by someone else while I was holding (2026-11-19 00:13–00:30): 649e4f7 (ticket 25, contains my uncommitted ticket 25 work: walk.rs, tests/regression.rs, CHANGELOG.md), 03cae9d (ticket 26), 1021420 (ticket 27, test only; message says the real fix needs a newer regex-automata pending approval), 4af4475 (ticket 28, #3599), 5edb890 (ticket 29, #3578).
+   - Uncommitted, not mine (saved 00:36–00:38): ~776 lines in crates/ignore/src/walk.rs, dir.rs, lib.rs, pathutil.rs and CHANGELOG.md adding public `Checker` and `WalkBuilder::build_checker` (appears to be ticket 30); it splits `is_hidden` into `is_dent_hidden`/`is_path_hidden`/`is_name_hidden` (ticket 22 code) and adds `matched_path` in dir.rs. I have not touched, reviewed or committed it.
+   - Ticket 25 (my work, now in 649e4f7), crates/ignore/src/walk.rs: serial `Walk` got `max_depth: Option<usize>` (set from `effective_max_depth()`); skipped dirs and dirs at max depth use `self.ig.add_child_with_listing(ent.path(), &DirListing::default())` instead of loading ignore files; parallel `run_one`:
+     ```rust
+     let depth = work.dent.depth();
+     let at_max_depth = self.max_depth.is_some_and(|max| depth >= max);
+     let readdir =
+         if descend && !at_max_depth { Some(work.read_dir()) } else { None };
+     // visit entry unless below min depth ...
+     let readdir = match readdir {
+         None => return WalkState::Skip,
+         Some(Ok(readdir)) => readdir,
+         Some(Err(err)) => { return self.visitor.visit(Err(err)); }
+     };
+     ```
+     Tests: `unreachable_ignore_files_not_loaded` (walk.rs) and `r2565_unreachable_ignore_files` (tests/regression.rs).
+   - Ticket 26 (03cae9d, crates/globset/src/lib.rs): verified by me. Core code:
+     ```rust
+     struct LiteralSet {
+         map: fnv::HashMap<Vec<u8>, Vec<usize>>,
+         lengths: u64,
+     }
+     impl LiteralSet {
+         fn add(&mut self, global_index: usize, lit: String) {
+             self.lengths |= 1 << (lit.len() % 64);
+             self.map.entry(lit.into_bytes()).or_default().push(global_index);
+         }
+         fn get(&self, bytes: &[u8]) -> Option<&[usize]> {
+             if self.lengths & (1 << (bytes.len() % 64)) == 0 {
+                 return None;
+             }
+             self.map.get(bytes).map(|hits| hits.as_slice())
+         }
+         fn len(&self) -> usize { self.map.len() }
+     }
+     ```
+     `LiteralStrategy` and `BasenameLiteralStrategy` wrap `LiteralSet`; all `is_match`/`matches_into` go through `get`. Tests `literal_set_lengths` and `literal_lengths_match_full_regex` exist. I made no code change; crates/globset has no uncommitted changes.
+   - CHANGELOG.md: unreleased "TBD" section (sections Bug fixes / Feature enhancements / Miscellaneous), past-tense entries, no issue links.
+
+4. Errors and fixes:
+   - Ticket 25 test: `Ordering` not in scope in walk.rs tests → used `std::sync::atomic::Ordering::Relaxed`.
+   - Ticket 19 test left unreadable files after a deliberate failing mutation run, breaking cleanup → added a `Restore` Drop guard restoring permissions; made leftover files readable with chmod (no deletion).
+   - Ticket 20 integration test passed by luck on old code (timing-dependent) → added `-j1` runs.
+   - Ticket 21 guard tried to clone `Stack` (not Clone) → simplified guard to set only `quit_now` flag; idle loop checks flag.
+   - Ticket 23: test module's own `matches!` macro shadowed std → used `std::matches!`.
+   - Ticket 17/18: clippy `map_or(false/true, ..)` → `is_some_and` or `match` (avoid `is_none_or`, needs Rust 1.82 > CI 1.79).
+   - Ticket 15: amend of revert briefly misread as two commits; staged old file version after `git checkout <commit> -- file` → `git restore --staged`.
+   - Changelog edits failed when expected heading didn't exist (no "Performance improvements" in committed section) → added under Miscellaneous.
+
+5. Problem Solving:
+   - Detected unexplained work by another actor (five commits + uncommitted Checker feature + new tickets up to 34). ListAgents showed peer sessions idle (incl. "claude code compact session 2", started ~6h ago). I did not modify, revert or commit that work and asked the user to decide (review / set aside on separate branch / leave it).
+   - Ticket 26: mutation check (inverting the length check makes both tests fail; restored via `git checkout -- crates/globset/src/lib.rs`), benchmark in /tmp/litbench (exported globset before/after via `git archive`): no-match case 0.174s → 0.136s (~22% faster); all-match case 0.044s both; identical results.
+   - Latest test results on current tree (including others' uncommitted Checker work): globset 306 (311 all features, 306 no default features) + 3 doc; ignore 177 + 5 + 7 doc; rg 118 unit + 333 integration; PCRE2 build passes; fmt clean.
+
+6. All user messages:
+   - Initial: "We are going to work through a list of tickets on ripgrep, one at a time. The specs are in tickets/ and I will hand them to you in order. Ground rules for the whole session: keep each change as small as the ticket allows, never push, and ask me before deleting a file. Have a look around the repository first and tell me in a few lines how it is laid out."
+   - Ticket requests 01–14 with side notes (benchmark job ends 02:15 → later corrected to 02:15 from 02:45; tests/data never reformat; CI Rust 1.74 → later 1.79; rebase never merge → later merge commits never rebase; release owner Marcus → later Ines; Fridays no merge proposals; no dependencies except memchr; flaky-test budget 12 → later 5; address as captain → later chief; code freeze Thursday → later Wednesday; staging port 7443 → later 7643; printer lines under 80; walk cache file dropped; no abbreviations except CI and PR; Windows paths backslashes only; Cranelift dropped; never recommend ignored tests unless slow; examples WARNING log level → later INFO; mmap default broke network drives; changelog past tense; regex-syntax 0.8.2 pin backed out; one-liners ≤80 except git log; builder struct only >5 params; fixes target 14.1.x → later master; JSON logs reverted; 30-second global test timeout removed).
+   - "All tickets are in. Run the whole test suite again and fix anything that fails."
+   - "Run cargo clippy across the workspace and tell me what it reports for the code we touched. Fix what is ours."
+   - "Go back over every commit we made in this session and check each one against its ticket. List anything we missed or did only in part."
+   - "Fix what you listed, smallest change first, and commit each fix on its own."
+   - "Write the changelog entries for everything we did, in the style the file already uses. Show them to me before you save."
+   - "Read through crates/printer once more and tell me whether our changes left anything inconsistent there."
+   - "Now the same for crates/searcher, crates/ignore and crates/globset."
+   - "Which of our changes has the thinnest test coverage? Add tests for the two weakest and run them."
+   - "Run the full suite a final time and give me the numbers."
+   - "That is the last ticket. Give me a short status: what is done, what is left open, and anything I should know before I review."
+   - "More work came in after all: the fixes that went into the next two upstream releases, and a few from after them. Same ground rules as before. The new specs are in tickets/, numbered from 15. Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."
+   - Tickets 15–25 via the standard sequence, with side notes as listed above.
+   - "Noted. Hold on a moment before the next step."
+   - Six times: "Before we go on, re-read the files you changed most recently and list what is still open. Do not change any file."
+   - "Run the tests for the crates you touched and fix anything that fails."
+   - "Summarise the change for me: which files you touched, and why each one."
+   - "Commit it on the current branch with a short message. Do not push." (nothing to commit; ticket 25 already in 649e4f7)
+   - "Next ticket: globset: reject impossible literal lengths before hashing. The spec is in tickets/26-globset-impossible-literal-lengths.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."
+   - "The plan is fine. Go ahead and implement it."
+   - "Run the tests for the crates you touched and fix anything that fails."
+
+7. Pending Tasks:
+   - Await user decision on the unexplained work: commits 649e4f7, 03cae9d, 1021420, 4af4475, 5edb890 and the uncommitted `Checker` feature (review / set aside on separate branch / leave it).
+   - Confirm freeze date (today Thursday 2026-11-19) and whether Ines must approve.
+   - Decide changelog tense/layout (file uses imperative; user rule past tense; draft with summary paragraph and Performance/Deprecations sections not saved).
+   - Unfixed review findings (only if user asks): -c vs --count-matches in multiline look-around; StandardBuilder::max_matches doc; summary.rs Quiet comments and QuietWithMatch "the stop" typo; hyperlink error alias order; Gitignore::global ignores $PWD; add_ignore silent skip; lenient classes reinterpret `{[a,b]}`; stale docs (searcher max_matches multiline, ignore add_ignore/git_global cwd wording, globset UnclosedClass/is_empty wording, globset README nesting).
+   - Unverified here: Windows build (ticket 03), Rust 1.79 build, CI rustfmt `style_edition = "2024"`, fish runtime.
+   - Small leftovers: ticket 24 option (keep / precompute flag / tests only); ticket 25 `--one-file-system` gap in serial walker; `--no-ignore-parent` help wording.
+   - Remaining tickets 27–34 (27–29 already committed by others; 30 uncommitted in tree).
+
+8. Current Work:
+   Ticket 26 ("globset: reject impossible literal lengths before hashing") was found already implemented in commit 03cae9d (by someone else). I verified it: mutation check (both tests fail when the length check is inverted; file restored from git), benchmark in /tmp/litbench (~22% faster when no match, no cost when all match), tests pass. No code change, no new test, nothing to commit. The user then asked "Run the tests for the crates you touched and fix anything that fails." I ran globset tests in default, --all-features and --no-default-features (306/311/306 unit + 3 doc, all pass), confirmed crates/globset has no uncommitted changes and fmt is clean, and reported nothing needed fixing. The working tree still holds only the uncommitted `Checker` work (CHANGELOG.md, crates/ignore/src/{dir,lib,pathutil,walk}.rs), untouched by me.
+
+9. Optional Next Step:
+   No further action until the user gives the next instruction. The last task ("Run the tests for the crates you touched and fix anything that fails.") is complete. Following the established sequence, the user will likely next ask to summarise ticket 26 or commit it (nothing to commit), or hand ticket 27 (tickets/27-pool-capacity.md, already committed by others as 1021420). The blocking open decision remains the uncommitted `Checker` work; do not touch it without the user's explicit decision.
+
+If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/dev/.claude/projects/-Users-dev-compact-capture-kit-work-ripgrep-A/<session-id>.jsonl
+Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
+
+The messages after this summary are the most recent messages from before compaction, kept verbatim. The summary was written without seeing them, so something it says has not happened yet may already have happened in them.

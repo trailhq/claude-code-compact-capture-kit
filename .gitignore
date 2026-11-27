@@ -4,3 +4,17 @@
 node_modules/
 __pycache__/
 .DS_Store
+
+# The gated dataset, raw prompts and replies, and replayed sessions hold message text.
+data/SWE-chat/
+raw/
+real/sessions/
+real/judge-own/
+real/read-own*/
+replay/out-*/*/
+!replay/out-proto/ask/
+!replay/out-proto/judge/
+replay/out-proto/ask/raw/
+auto-out/
+work/
+*.log

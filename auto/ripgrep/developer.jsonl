@@ -1,0 +1,209 @@
+{"id": "open", "text": "We are going to work through a list of tickets on ripgrep, one at a time. The specs are in tickets/ and I will hand them to you in order. Ground rules for the whole session: keep each change as small as the ticket allows, never push, and ask me before deleting a file. Have a look around the repository first and tell me in a few lines how it is laid out."}
+{"id": "t01-plan", "text": "Next ticket: Critical Bug Fixes. The spec is in tickets/01-maintenance_fixes_1_sub-01.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. By the way: The nightly benchmark job ends at 02:45 each night."}
+{"id": "t01-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t01-test", "text": "Run the tests for the crates you touched and fix anything that fails. One more thing: A rule for files under tests/data/ only: never reformat them."}
+{"id": "t01-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t01-commit", "text": "Commit it on the current branch with a short message. Do not push. Also, for later: Our CI builds with Rust 1.74 only."}
+{"id": "t02-plan", "text": "Next ticket: Minor Fixes and Enhancements. The spec is in tickets/02-maintenance_fixes_1_sub-02.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t02-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t02-test", "text": "Run the tests for the crates you touched and fix anything that fails. Before I forget: On this repo we rebase and never use merge commits."}
+{"id": "t02-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t02-commit", "text": "Commit it on the current branch with a short message. Do not push. Unrelated: The release owner this cycle is Marcus."}
+{"id": "t02-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t03-plan", "text": "Next ticket: Windows Hyperlink Path Performance. The spec is in tickets/03-milestone_seed_119407d_1_sub-01.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. Side note: On Fridays only, do not propose merging anything."}
+{"id": "t03-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t03-test", "text": "Run the tests for the crates you touched and fix anything that fails. By the way: Correction to something I said earlier: the nightly benchmark job ends at 02:15, not 02:45."}
+{"id": "t03-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t03-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t03-suite", "text": "Before the next one, run the whole test suite once and tell me the result. One more thing: Never suggest adding a dependency, except memchr, which we already ship."}
+{"id": "t04-plan", "text": "Next ticket: JSON Output Replace Support. The spec is in tickets/04-milestone_seed_292bc54_1.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t04-go", "text": "The plan is fine. Go ahead and implement it. Also, for later: The flaky-test budget is 12 retries a day."}
+{"id": "t04-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t04-why", "text": "Summarise the change for me: which files you touched, and why each one. Before I forget: Address me as captain in your replies."}
+{"id": "t04-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t05-plan", "text": "Next ticket: Glob Nested Alternates Support. The spec is in tickets/05-milestone_seed_5f5da48_1_sub-01.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. Unrelated: The code freeze starts on Thursday."}
+{"id": "t05-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t05-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t05-why", "text": "Summarise the change for me: which files you touched, and why each one. Side note: Actually no, the code freeze starts on Wednesday."}
+{"id": "t05-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t05-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet. By the way: I had this wrong before: CI builds with Rust 1.79 only, not 1.74."}
+{"id": "t06-plan", "text": "Next ticket: Glob Unclosed Class Toggle. The spec is in tickets/06-milestone_seed_5f5da48_1_sub-02.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t06-go", "text": "The plan is fine. Go ahead and implement it. One more thing: Staging listens on port 7443."}
+{"id": "t06-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t06-why", "text": "Summarise the change for me: which files you touched, and why each one. Also, for later: In crates/printer/ only, keep lines under 80 characters. Elsewhere I do not mind."}
+{"id": "t06-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t06-suite", "text": "Before the next one, run the whole test suite once and tell me the result. Before I forget: We tried caching the directory walk in a file last month and dropped it, because inode numbers changed between runs."}
+{"id": "t07-plan", "text": "Next ticket: GlobSet API Enhancements. The spec is in tickets/07-milestone_seed_624bbf7_1.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t07-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t07-test", "text": "Run the tests for the crates you touched and fix anything that fails. Unrelated: Correction: the flaky-test budget is 5 retries a day, not 12."}
+{"id": "t07-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t07-commit", "text": "Commit it on the current branch with a short message. Do not push. Side note: Do not use abbreviations in your replies, except CI and PR."}
+{"id": "t08-plan", "text": "Next ticket: Max Matches Searcher Migration Core. The spec is in tickets/08-milestone_seed_a6e0be3_1_sub-01.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t08-go", "text": "The plan is fine. Go ahead and implement it. By the way: New policy that replaces the old one: we now use merge commits and never rebase."}
+{"id": "t08-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t08-why", "text": "Summarise the change for me: which files you touched, and why each one. One more thing: When you write Windows paths, and only then, use backslashes."}
+{"id": "t08-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t08-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t09-plan", "text": "Next ticket: Max Matches Printer Cleanup. The spec is in tickets/09-milestone_seed_a6e0be3_1_sub-02.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. Also, for later: We also tried building with the Cranelift backend and gave up, because the regex benchmarks were three times slower."}
+{"id": "t09-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t09-test", "text": "Run the tests for the crates you touched and fix anything that fails. Before I forget: Never recommend marking a test as ignored, unless it is marked slow."}
+{"id": "t09-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t09-commit", "text": "Commit it on the current branch with a short message. Do not push. Unrelated: In examples, use the WARNING log level by default."}
+{"id": "t09-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t10-plan", "text": "Next ticket: Add min_depth option to WalkBuilder. The spec is in tickets/10-milestone_seed_2924d0c_1.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. Side note: Do not suggest turning memory maps on by default again: we tried it and searches on network drives broke."}
+{"id": "t10-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t10-test", "text": "Run the tests for the crates you touched and fix anything that fails. By the way: Change of plan: Ines is the release owner this cycle, not Marcus."}
+{"id": "t10-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t10-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t11-plan", "text": "Next ticket: Fix performance bugs with -A/--after-context flag. The spec is in tickets/11-milestone_seed_8c6595c_1.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. One more thing: For changelog entries only, write in the past tense."}
+{"id": "t11-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t11-test", "text": "Run the tests for the crates you touched and fix anything that fails. Also, for later: We tried pinning regex-syntax to 0.8.2 and backed it out, since Unicode word boundaries stopped matching."}
+{"id": "t11-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t11-commit", "text": "Commit it on the current branch with a short message. Do not push. Before I forget: Sorry, staging is on port 7643, not 7443."}
+{"id": "t11-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t12-plan", "text": "Next ticket: Hyperlink Alias System Restructuring. The spec is in tickets/12-milestone_seed_119407d_1_sub-02.md. Read it and the code it touches, then tell me your plan. Do not change anything yet. Unrelated: Drop the captain thing. From now on address me as chief."}
+{"id": "t12-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t12-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t12-why", "text": "Summarise the change for me: which files you touched, and why each one. Side note: No shell one-liners longer than 80 characters, except for git log commands."}
+{"id": "t12-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t12-suite", "text": "Before the next one, run the whole test suite once and tell me the result. By the way: Scrap what I said about log levels: use INFO by default in examples."}
+{"id": "t13-plan", "text": "Next ticket: Code Style and Refactoring. The spec is in tickets/13-maintenance_style_1.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t13-go", "text": "The plan is fine. Go ahead and implement it. One more thing: Only for functions with more than five parameters, suggest a builder struct."}
+{"id": "t13-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t13-why", "text": "Summarise the change for me: which files you touched, and why each one. Also, for later: Fixes should target the 14.1.x branch."}
+{"id": "t13-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t14-plan", "text": "Next ticket: Fix global gitignore bug with absolute paths. The spec is in tickets/14-milestone_seed_b610d1c_1.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t14-go", "text": "The plan is fine. Go ahead and implement it. Before I forget: Moving the logs to JSON was tried and reverted: the terminal output could no longer align its columns."}
+{"id": "t14-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t14-why", "text": "Summarise the change for me: which files you touched, and why each one. Unrelated: Changed my mind: fixes should target master, not 14.1.x."}
+{"id": "t14-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t14-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet. Side note: We tried a 30-second global test timeout and removed it, as slow Windows runners hit it during linking."}
+{"id": "w01-suite", "text": "All tickets are in. Run the whole test suite again and fix anything that fails."}
+{"id": "w02-clippy", "text": "Run cargo clippy across the workspace and tell me what it reports for the code we touched. Fix what is ours."}
+{"id": "w03-audit", "text": "Go back over every commit we made in this session and check each one against its ticket. List anything we missed or did only in part."}
+{"id": "w04-fix", "text": "Fix what you listed, smallest change first, and commit each fix on its own."}
+{"id": "w05-changelog", "text": "Write the changelog entries for everything we did, in the style the file already uses. Show them to me before you save."}
+{"id": "w06-printer", "text": "Read through crates/printer once more and tell me whether our changes left anything inconsistent there."}
+{"id": "w07-others", "text": "Now the same for crates/searcher, crates/ignore and crates/globset."}
+{"id": "w08-tests", "text": "Which of our changes has the thinnest test coverage? Add tests for the two weakest and run them."}
+{"id": "w09-suite", "text": "Run the full suite a final time and give me the numbers."}
+{"id": "close", "text": "That is the last ticket. Give me a short status: what is done, what is left open, and anything I should know before I review."}
+{"id": "x-more", "text": "More work came in after all: the fixes that went into the next two upstream releases, and a few from after them. Same ground rules as before. The new specs are in tickets/, numbered from 15. Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."}
+{"id": "t15-plan", "text": "Next ticket: Line buffering appears broken in 15.0.0. The spec is in tickets/15-line-buffering.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t15-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t15-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t15-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t15-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t15-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t16-plan", "text": "Next ticket: add Cursor hyperlink alias. The spec is in tickets/16-cursor-hyperlink-alias.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t16-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t16-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t16-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t16-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t17-plan", "text": "Next ticket: Performance penalty of probing ignore files under every subdirectory (especially on Windows), and a possible solution. The spec is in tickets/17-ignore-file-probing-cost.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t17-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t17-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t17-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t17-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t17-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t18-plan", "text": "Next ticket: Support GIT_CONFIG_GLOBAL and GIT_CONFIG_SYSTEM environment variables for finding core.excludesFile. The spec is in tickets/18-git-config-env-vars.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t18-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t18-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t18-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t18-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t18-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t19-plan", "text": "Next ticket: ignore: only stat .jj if we actually care. The spec is in tickets/19-jj-stat-only-when-needed.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t19-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t19-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t19-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t19-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t20-plan", "text": "Next ticket: .gitignore not taken into account when multiple search paths are provided. The spec is in tickets/20-gitignore-multiple-roots.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t20-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t20-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t20-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t20-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t20-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t21-plan", "text": "Next ticket: ignore: fix deadlock when visitor panics. The spec is in tickets/21-walker-deadlock-on-panic.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t21-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t21-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t21-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t21-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t21-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t22-plan", "text": "Next ticket: ignore: treat dotfiles ending in a dot as hidden (#3564). The spec is in tickets/22-dotfiles-ending-in-dot.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t22-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t22-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t22-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t22-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t23-plan", "text": "Next ticket: globset: match filename-only regexes against basenames. The spec is in tickets/23-globset-basename-regexes.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t23-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t23-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t23-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t23-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t23-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t24-plan", "text": "Next ticket: ignore: skip empty absolute parent matchers (#3557). The spec is in tickets/24-empty-absolute-parent-matchers.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t24-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t24-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t24-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t24-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t24-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t25-plan", "text": "Next ticket: ignore: skip loading unreachable ignore files. The spec is in tickets/25-unreachable-ignore-files.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t25-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t25-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t25-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t25-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t26-plan", "text": "Next ticket: globset: reject impossible literal lengths before hashing. The spec is in tickets/26-globset-impossible-literal-lengths.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t26-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t26-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t26-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t26-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t26-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t27-plan", "text": "Next ticket: ignore,globset: increase pool capacity. The spec is in tickets/27-pool-capacity.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t27-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t27-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t27-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t27-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t27-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "x-suite", "text": "That is everything. Run the whole test suite one last time and give me the numbers."}
+{"id": "x-close", "text": "That is the last ticket. Give me a short status: what is done, what is left open, and anything I should know before I review."}
+{"id": "y-more", "text": "A few more upstream changes landed while we were working. Same ground rules. The specs are in tickets/, numbered from 28. As before, if our branch already behaves that way, show me the evidence and add a test instead of changing code."}
+{"id": "t28-plan", "text": "Next ticket: ignore: respect custom filters with a maximum file size (#3599). The spec is in tickets/28-custom-filters-max-filesize.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t28-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t28-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t28-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t28-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t29-plan", "text": "Next ticket: ignore: respect linked worktree excludes without requiring Git. The spec is in tickets/29-linked-worktree-excludes.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t29-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t29-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t29-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t29-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t29-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t30-plan", "text": "Next ticket: ignore: add incremental checking. The spec is in tickets/30-incremental-ignore-checking.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t30-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t30-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t30-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t30-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t30-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t31-plan", "text": "Next ticket: ignore: add routine for checking if a path is hidden or not. The spec is in tickets/31-is-hidden-routine.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t31-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t31-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t31-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t31-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t32-plan", "text": "Next ticket: ignore: avoid scratch pools for empty matchers. The spec is in tickets/32-scratch-pools-empty-matchers.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t32-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t32-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t32-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t32-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t32-docs", "text": "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."}
+{"id": "t33-plan", "text": "Next ticket: doc: document Windows path separators and UTF-8 locale. The spec is in tickets/33-doc-windows-paths-utf8.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t33-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t33-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t33-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t33-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "t33-suite", "text": "Before the next one, run the whole test suite once and tell me the result."}
+{"id": "t34-plan", "text": "Next ticket: cargo: remove the homepage field. The spec is in tickets/34-cargo-homepage-field.md. Read it and the code it touches, then tell me your plan. Do not change anything yet."}
+{"id": "t34-go", "text": "The plan is fine. Go ahead and implement it."}
+{"id": "t34-test", "text": "Run the tests for the crates you touched and fix anything that fails."}
+{"id": "t34-why", "text": "Summarise the change for me: which files you touched, and why each one."}
+{"id": "t34-commit", "text": "Commit it on the current branch with a short message. Do not push."}
+{"id": "y-suite", "text": "That is everything. Run the whole test suite one last time and give me the numbers."}
+{"id": "y-close", "text": "That is the last ticket. Give me a short status: what is done, what is left open, and anything I should know before I review."}

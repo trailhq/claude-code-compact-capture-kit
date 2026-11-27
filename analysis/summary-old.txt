@@ -1,0 +1,142 @@
+This session is being continued from a previous conversation that ran out of context. The summary below covers the earlier portion of the conversation.
+
+<system-reminder>
+<tools-used-before-summary>Bash, Read, Write</tools-used-before-summary>
+</system-reminder>
+Summary:
+1. **Primary Request and Intent**
+
+   The user works through ripgrep tickets in tickets/ one at a time, using a repeated cycle:
+   - Read the ticket and the code it touches, then tell the plan without changing anything.
+   - Implement on "The plan is fine."
+   - "Run the tests for the crates you touched and fix anything that fails."
+   - "Summarise the change for me: which files you touched, and why each one."
+   - "Commit it on the current branch with a short message. Do not push."
+   - Sometimes: "Does this change affect the man page or the --help text? Check and tell me, but do not edit them yet."
+   - Periodically: "Before the next one, run the whole test suite once and tell me the result."
+
+   Ground rules, verbatim: "keep each change as small as the ticket allows, never push, and ask me before deleting a file."
+
+   Second-batch instruction, verbatim: "Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."
+
+   Standing user rules (all saved in memory):
+   - **Formatting and style:**
+     - Never reformat files under tests/data/.
+     - In crates/printer/ only, keep lines under 80 characters.
+     - No shell one-liners longer than 80 characters, except git log.
+     - Changelog entries go in the past tense.
+     - Examples use the INFO log level by default (replaced WARNING).
+   - **Replies:**
+     - Address the user as "chief" (replaced "captain").
+     - No abbreviations except CI and PR.
+     - Backslashes only when writing Windows paths.
+   - **Git and release:**
+     - Merge commits, never rebase (replaced the old rebase-only rule).
+     - Never propose merging on Fridays.
+     - Fixes target master (changed from 14.1.x).
+     - Release owner is Ines (changed from Marcus).
+     - Code freeze starts on a Wednesday; unconfirmed whether 2026-11-18 or 2026-11-25.
+   - **Dependencies and toolchain:**
+     - CI builds with Rust 1.79 only (corrected from 1.74).
+     - Never suggest adding a dependency, except memchr.
+   - **Tests:**
+     - Flaky-test budget is 5 retries a day.
+     - Never recommend marking a test ignored unless it is marked slow.
+   - **Design:** suggest a builder struct only for functions with more than 5 parameters.
+   - **Environment facts:** the nightly benchmark ends at 02:15; staging is on port 7643.
+   - **Do not suggest again:**
+     - an on-disk directory-walk cache (inodes changed between runs);
+     - the Cranelift backend (3x slower regex benchmarks);
+     - memory maps on by default (broke network drives);
+     - pinning regex-syntax 0.8.2 (broke Unicode word boundaries);
+     - JSON logs (broke column alignment);
+     - a 30-second global test timeout (Windows linking hit it).
+
+2. **Key Technical Concepts**
+   - ripgrep workspace crates: globset, grep-cli, grep-matcher, grep-pcre2, grep-printer, grep-regex, grep-searcher, ignore, and ripgrep (crates/core plus tests/).
+   - Serial walker (`Walk`, built on walkdir) and parallel walker (`WalkParallel`, `Worker::run_one`, `get_work`, `quit_now`).
+   - `Ignore` matchers: `add_child`, `add_child_with_listing`, `DirListing`, `add_parents`, the `absolute_base` cache, `matched_ignore`, `absolute_parents_have_rules`.
+   - globset `MatchStrategy` variants, including `BasenameRegex`; `LiteralSet`, which uses a modulo-64 length mask (from the other session).
+   - The regex-automata `Pool` and `with_available_parallelism_capacity` (needs 0.4.19).
+   - The test harness `SearcherTester`, the `rgtest!` macro, and `assert_paths` (serial plus parallel).
+   - Mutation checks: break the code on purpose to confirm a test fails, then restore it.
+   - Integration tests find the binary with `env!("CARGO_BIN_EXE_rg")`.
+   - Test scripts used: /tmp/fullsuite.sh (whole workspace, takes cargo arguments) and /tmp/t17.sh (`ignore` plus ripgrep).
+
+3. **Files and Code Sections**
+
+   - **tests/regression.rs** (most recent work): two tests appended.
+     - Ticket 26, `r3558_gitignore_literal_lengths`:
+       - `.gitignore` contains `abc`, a 70-character name of `d`s, and `sub/exactname`.
+       - Expected `rg --files` output: "abcd\ndddddd\nsub/exactnamx\n".
+     - Ticket 27, `unicode_word_boundaries`:
+       ```rust
+       rgtest!(unicode_word_boundaries, |dir: Dir, _cmd: TestCommand| {
+           dir.create("haystack", "привет мир\nприветствие\nон сказал привет.\n\
+                a naïve idea\nnaïveté\n");
+           // -w привет → "привет мир\nон сказал привет.\n"
+           // -w naïve → "a naïve idea\n"
+           // \bмир\b → "привет мир\n"
+       });
+       ```
+   - **Other session's files, which I must not modify:**
+     - crates/globset/src/lib.rs: `LiteralSet` from commit `03cae9d`.
+     - The pool changes in commit `c2e1d0d`: crates/globset/src/lib.rs, crates/ignore/src/gitignore.rs, crates/ignore/src/types.rs, both Cargo.toml files, and Cargo.lock.
+     - Uncommitted `build_checker` work in CHANGELOG.md and crates/ignore/src/{walk,dir,lib,pathutil}.rs.
+   - **crates/ignore/src/walk.rs** (ticket 25):
+     - Serial walker: skipped and max-depth directories get `add_child_with_listing(path, &DirListing::default())`; a `max_depth` field was added to `Walk`.
+     - Parallel walker: `let readdir = if descend && !at_max_depth { Some(work.read_dir()) } else { None };`.
+
+4. **Errors and fixes**
+   - A deliberately failing run of the ticket 19 test left files without permissions, which broke later runs. Fixed with a `Restore` guard that restores permissions on drop.
+   - The ticket 20 integration test passed by luck on the old code because of thread timing. Fixed by adding `-j1` runs.
+   - Ticket 21: the panic guard could not copy `Stack`. It was simplified to an `Arc<AtomicBool>` that only sets the quit flag.
+   - Ticket 23: the glob test module shadows `matches!`. Fixed by calling `std::matches!`.
+   - A `map_or(true, …)` was flagged by Clippy. Replaced with a plain `match`, because `is_none_or` needs Rust 1.82.
+   - Ticket 26: I used rustfmt on the single file only, so the other session's files were not reformatted. Verified their diff stayed at 776 insertions and 45 deletions.
+   - The changelog edit for ticket 17 failed because the committed unreleased section has no "Performance improvements" heading; the line was put under "Miscellaneous".
+   - The `d0a0177` changelog was committed before I showed it to the user. I admitted this; the tense question is still open.
+
+5. **Problem Solving**
+   - Discovered the concurrent session through unexpected commits and uncommitted changes. I reported it and asked the user to stop that session or move it to its own worktree. I commit only my own files.
+   - Verified that HEAD passes in clean exports to /tmp (/tmp/rg-head-check, /tmp/rg-old, /tmp/rg-new).
+   - Checked that regex-automata 0.4.19 and regex-syntax 0.8.12 declare `rust-version = 1.65`, so they are compatible with CI's Rust 1.79.
+   - Timing for ticket 27 showed no measurable difference on this 10-core Mac.
+
+6. **All user messages** (the recent cycle, tickets 15 to 27, beyond the standard cycle messages listed above)
+   - "More work came in after all: the fixes that went into the next two upstream releases, and a few from after them. Same ground rules as before. The new specs are in tickets/, numbered from 15. Some of these may already hold on our branch; when one does, show me the evidence and add a test instead of changing code."
+   - Ticket prompts for tickets 15 through 27, each phrased "Next ticket: <title>. The spec is in tickets/NN-....md. Read it and the code it touches, then tell me your plan. Do not change anything yet."
+   - "Noted. Hold on a moment before the next step."
+   - "Before we go on, re-read the files you changed most recently and list what is still open. Do not change any file." (sent repeatedly, six times)
+   - The final message: "Before the next one, run the whole test suite once and tell me the result." It came with a critical instruction to respond with text only and call no tools.
+
+7. **Pending Tasks**
+   - Run the whole test suite and report the result. This could not be done this turn because tools were forbidden.
+   - **Open decisions for the user:**
+     - Which session continues in this checkout; the other session's uncommitted `build_checker` work is still present.
+     - The freeze date, and Ines's sign-off on everything committed since the freeze may have started, including the dependency upgrade in `c2e1d0d`.
+     - The changelog tense: past tense per the rule, or imperative to match the file.
+     - Ticket 24's option.
+     - The rustfmt version in CI, because ticket 13 set `style_edition = "2024"`.
+   - **Known gaps:**
+     - The Windows build is untested, as is fish at run time and building on Rust 1.79.
+     - Review findings still open: `-c` and `--count-matches` disagree in one case; `Gitignore::global()` ignores `$PWD`; `add_ignore` skips a file silently when the current directory is unknown; unclosed classes inside braces are reinterpreted; about eight stale comments; the `--no-ignore-parent` wording.
+     - Limitations: ticket 25 with `--one-file-system`, ticket 14 with symlinked paths, ticket 07 not stopping early, and zsh needing quoted format strings (ticket 12).
+     - Optional: rename three misnamed memory files (`address-as-captain.md`, `ci-rust-1-74.md`, `fixes-target-14-1-x.md`), which needs the user's permission because renaming deletes the old file.
+
+8. **Current Work**
+   - Ticket 27 is complete and committed as `569e759` ("tests: check Unicode word boundaries"), with only tests/regression.rs staged.
+   - HEAD is `569e759`. Parents in order: `1661692`, then `c2e1d0d`.
+   - The last full suite, run before that commit, passed 1,264 with 0 failures and 3 skipped, in both the default and PCRE2 builds. That run included the other session's uncommitted work.
+   - The user then asked for a full suite run, which could not be executed this turn.
+
+9. **Optional Next Step**
+   - When tools are allowed, run the full suite to answer the user's request, verbatim: "Before the next one, run the whole test suite once and tell me the result."
+   - Use `zsh /tmp/fullsuite.sh` and `zsh /tmp/fullsuite.sh --features pcre2`.
+   - Report the totals, noting that the run includes the other session's uncommitted `build_checker` changes.
+   - Do not modify any of the other session's files.
+
+If you need specific details from before compaction (like exact code snippets, error messages, or content you generated), read the full transcript at: /Users/dev/.claude/projects/-Users-dev-compact-capture-kit-work-ripgrep-A/<session-id>.jsonl
+Continue the conversation from where it left off without asking the user any further questions. Resume directly — do not acknowledge the summary, do not recap what was happening, do not preface with "I'll continue" or similar. Pick up the last task as if the break never happened.
+
+The messages after this summary are the most recent messages from before compaction, kept verbatim. The summary was written without seeing them, so something it says has not happened yet may already have happened in them.

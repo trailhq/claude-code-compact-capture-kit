@@ -1,0 +1,37 @@
+note	message_number	message_id	text
+1	2	t01-plan	The nightly benchmark job ends at 02:45 each night.
+2	4	t01-test	A rule for files under tests/data/ only: never reformat them.
+3	6	t01-commit	Our CI builds with Rust 1.74 only.
+4	9	t02-test	On this repo we rebase and never use merge commits.
+5	11	t02-commit	The release owner this cycle is Marcus.
+6	13	t03-plan	On Fridays only, do not propose merging anything.
+7	15	t03-test	Correction to something I said earlier: the nightly benchmark job ends at 02:15, not 02:45.
+8	18	t03-suite	Never suggest adding a dependency, except memchr, which we already ship.
+9	20	t04-go	The flaky-test budget is 12 retries a day.
+10	22	t04-why	Address me as captain in your replies.
+11	24	t05-plan	The code freeze starts on Thursday.
+12	27	t05-why	Actually no, the code freeze starts on Wednesday.
+13	29	t05-docs	I had this wrong before: CI builds with Rust 1.79 only, not 1.74.
+14	31	t06-go	Staging listens on port 7443.
+15	33	t06-why	In crates/printer/ only, keep lines under 80 characters. Elsewhere I do not mind.
+16	35	t06-suite	We tried caching the directory walk in a file last month and dropped it, because inode numbers changed between runs.
+17	38	t07-test	Correction: the flaky-test budget is 5 retries a day, not 12.
+18	40	t07-commit	Do not use abbreviations in your replies, except CI and PR.
+19	42	t08-go	New policy that replaces the old one: we now use merge commits and never rebase.
+20	44	t08-why	When you write Windows paths, and only then, use backslashes.
+21	47	t09-plan	We also tried building with the Cranelift backend and gave up, because the regex benchmarks were three times slower.
+22	49	t09-test	Never recommend marking a test as ignored, unless it is marked slow.
+23	51	t09-commit	In examples, use the WARNING log level by default.
+24	53	t10-plan	Do not suggest turning memory maps on by default again: we tried it and searches on network drives broke.
+25	55	t10-test	Change of plan: Ines is the release owner this cycle, not Marcus.
+26	58	t11-plan	For changelog entries only, write in the past tense.
+27	60	t11-test	We tried pinning regex-syntax to 0.8.2 and backed it out, since Unicode word boundaries stopped matching.
+28	62	t11-commit	Sorry, staging is on port 7643, not 7443.
+29	64	t12-plan	Drop the captain thing. From now on address me as chief.
+30	67	t12-why	No shell one-liners longer than 80 characters, except for git log commands.
+31	69	t12-suite	Scrap what I said about log levels: use INFO by default in examples.
+32	71	t13-go	Only for functions with more than five parameters, suggest a builder struct.
+33	73	t13-why	Fixes should target the 14.1.x branch.
+34	76	t14-go	Moving the logs to JSON was tried and reverted: the terminal output could no longer align its columns.
+35	78	t14-why	Changed my mind: fixes should target master, not 14.1.x.
+36	80	t14-docs	We tried a 30-second global test timeout and removed it, as slow Windows runners hit it during linking.

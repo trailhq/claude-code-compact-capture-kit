@@ -1,0 +1,611 @@
+{
+ "rounds": [
+  {
+   "session": "ede0cb33",
+   "round": 1,
+   "original_pre_tokens": 177099,
+   "pre_tokens": 177373,
+   "post_tokens": 3377,
+   "seconds": 42.6,
+   "kept_after": 5,
+   "version": "2.1.327"
+  },
+  {
+   "session": "ede0cb33",
+   "round": 2,
+   "original_pre_tokens": 169443,
+   "pre_tokens": 169469,
+   "post_tokens": 2917,
+   "seconds": 50.7,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "ede0cb33",
+   "round": 3,
+   "original_pre_tokens": 188800,
+   "pre_tokens": 188826,
+   "post_tokens": 4406,
+   "seconds": 61.8,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "2cae28a4",
+   "round": 1,
+   "original_pre_tokens": 167438,
+   "pre_tokens": 167523,
+   "post_tokens": 3581,
+   "seconds": 66.2,
+   "kept_after": 5,
+   "version": "2.1.327"
+  },
+  {
+   "session": "2cae28a4",
+   "round": 2,
+   "original_pre_tokens": 167190,
+   "pre_tokens": 167216,
+   "post_tokens": 3093,
+   "seconds": 49.7,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "2cae28a4",
+   "round": 3,
+   "original_pre_tokens": 167691,
+   "pre_tokens": 167717,
+   "post_tokens": 2693,
+   "seconds": 36.6,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "5a7b375c",
+   "round": 1,
+   "original_pre_tokens": 169143,
+   "pre_tokens": 169527,
+   "post_tokens": 3715,
+   "seconds": 64.5,
+   "kept_after": 6,
+   "version": "2.1.327"
+  },
+  {
+   "session": "5a7b375c",
+   "round": 2,
+   "original_pre_tokens": 169855,
+   "pre_tokens": 169881,
+   "post_tokens": 3070,
+   "seconds": 43.2,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "5a7b375c",
+   "round": 3,
+   "original_pre_tokens": 167890,
+   "pre_tokens": 168091,
+   "post_tokens": 3693,
+   "seconds": 50.2,
+   "kept_after": 4,
+   "version": "2.1.327"
+  },
+  {
+   "session": "27642e0f",
+   "round": 1,
+   "original_pre_tokens": 999772,
+   "pre_tokens": 1000107,
+   "post_tokens": 4586,
+   "seconds": 67.2,
+   "kept_after": 6,
+   "version": "2.1.327"
+  },
+  {
+   "session": "27642e0f",
+   "round": 2,
+   "original_pre_tokens": 999387,
+   "pre_tokens": 999125,
+   "post_tokens": 3217,
+   "seconds": 134.4,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "27642e0f",
+   "round": 3,
+   "original_pre_tokens": 999403,
+   "pre_tokens": 999604,
+   "post_tokens": 3231,
+   "seconds": 60.3,
+   "kept_after": 4,
+   "version": "2.1.327"
+  },
+  {
+   "session": "73009f6a",
+   "round": 1,
+   "original_pre_tokens": 1000049,
+   "pre_tokens": 1000603,
+   "post_tokens": 2314,
+   "seconds": 66.1,
+   "kept_after": 9,
+   "version": "2.1.327"
+  },
+  {
+   "session": "73009f6a",
+   "round": 2,
+   "original_pre_tokens": 1000487,
+   "pre_tokens": 1000541,
+   "post_tokens": 2714,
+   "seconds": 51.6,
+   "kept_after": 5,
+   "version": "2.1.327"
+  },
+  {
+   "session": "73009f6a",
+   "round": 3,
+   "original_pre_tokens": 1000375,
+   "pre_tokens": 1000429,
+   "post_tokens": 3036,
+   "seconds": 61.9,
+   "kept_after": 5,
+   "version": "2.1.327"
+  },
+  {
+   "session": "0d4c4262",
+   "round": 1,
+   "original_pre_tokens": 1000997,
+   "pre_tokens": 1001338,
+   "post_tokens": 3477,
+   "seconds": 69.1,
+   "kept_after": 6,
+   "version": "2.1.327"
+  },
+  {
+   "session": "0d4c4262",
+   "round": 2,
+   "original_pre_tokens": 1000822,
+   "pre_tokens": 1000733,
+   "post_tokens": 3134,
+   "seconds": 57.0,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "0d4c4262",
+   "round": 3,
+   "original_pre_tokens": 999926,
+   "pre_tokens": 999952,
+   "post_tokens": 3653,
+   "seconds": 67.1,
+   "kept_after": 3,
+   "version": "2.1.327"
+  },
+  {
+   "session": "cd25197e",
+   "round": 1,
+   "original_pre_tokens": 1001975,
+   "pre_tokens": 1001991,
+   "post_tokens": 3550,
+   "seconds": 58.3,
+   "kept_after": 6,
+   "version": "2.1.327"
+  },
+  {
+   "session": "cd25197e",
+   "round": 2,
+   "original_pre_tokens": 997083,
+   "pre_tokens": 997253,
+   "post_tokens": 3749,
+   "seconds": 61.0,
+   "kept_after": 4,
+   "version": "2.1.327"
+  },
+  {
+   "session": "cd25197e",
+   "round": 3,
+   "original_pre_tokens": 1000687,
+   "pre_tokens": 1000303,
+   "post_tokens": 3528,
+   "seconds": 61.0,
+   "kept_after": 4,
+   "version": "2.1.327"
+  }
+ ],
+ "sessions_1m": [
+  "0d4c4262",
+  "27642e0f",
+  "73009f6a",
+  "cd25197e"
+ ],
+ "sessions_small": [
+  "2cae28a4",
+  "5a7b375c",
+  "ede0cb33"
+ ],
+ "two_summaries": {
+  "1M|round 1|recent|original": {
+   "kept": 17,
+   "partly": 6,
+   "absent": 3
+  },
+  "1M|round 1|recent|replay": {
+   "kept": 21,
+   "partly": 8,
+   "absent": 1
+  },
+  "1M|round 2|recent|original": {
+   "kept": 13,
+   "absent": 4,
+   "partly": 1
+  },
+  "1M|round 2|older|original": {
+   "kept": 4,
+   "partly": 12,
+   "absent": 13
+  },
+  "1M|round 2|recent|replay": {
+   "kept": 16
+  },
+  "1M|round 2|older|replay": {
+   "absent": 14,
+   "kept": 3,
+   "partly": 7
+  },
+  "1M|round 3|recent|original": {
+   "kept": 6,
+   "partly": 2
+  },
+  "1M|round 3|older|original": {
+   "partly": 7,
+   "kept": 6,
+   "absent": 19
+  },
+  "1M|round 3|recent|replay": {
+   "kept": 7
+  },
+  "1M|round 3|older|replay": {
+   "absent": 20,
+   "kept": 5,
+   "partly": 1
+  },
+  "small|round 1|recent|original": {
+   "partly": 2,
+   "kept": 3
+  },
+  "small|round 2|older|original": {
+   "partly": 3,
+   "kept": 1
+  },
+  "small|round 3|recent|original": {
+   "kept": 1
+  },
+  "small|round 3|recent|replay": {
+   "kept": 1
+  },
+  "small|round 1|recent|replay": {
+   "kept": 3
+  },
+  "small|round 2|older|replay": {
+   "kept": 2,
+   "partly": 1
+  },
+  "small|round 3|older|original": {
+   "partly": 3,
+   "kept": 1,
+   "absent": 1
+  },
+  "small|round 3|older|replay": {
+   "kept": 2,
+   "partly": 1,
+   "absent": 1
+  },
+  "small|round 2|recent|original": {
+   "kept": 1
+  },
+  "small|round 2|recent|replay": {
+   "kept": 1
+  }
+ },
+ "summary_words": {
+  "1M|original": [
+   1658,
+   2592
+  ],
+  "1M|replay": [
+   893,
+   2271
+  ],
+  "small|original": [
+   462,
+   2215
+  ],
+  "small|replay": [
+   1190,
+   2161
+  ]
+ },
+ "original_versions": {
+  "0d4c4262": "2.1.220",
+  "27642e0f": "2.1.226",
+  "2cae28a4": "2.1.85",
+  "5a7b375c": "2.1.76",
+  "73009f6a": "2.1.220",
+  "cd25197e": "2.1.231",
+  "ede0cb33": "2.1.152"
+ },
+ "questions": {
+  "1M|0": {
+   "right": 19,
+   "partly": 3,
+   "wrong": 0,
+   "unknown": 0
+  },
+  "1M|1": {
+   "right": 28,
+   "partly": 8,
+   "wrong": 1,
+   "unknown": 5
+  },
+  "1M|2": {
+   "right": 5,
+   "partly": 2,
+   "wrong": 2,
+   "unknown": 25
+  },
+  "1M|3": {
+   "right": 0,
+   "partly": 2,
+   "wrong": 1,
+   "unknown": 21
+  },
+  "small|0": {
+   "right": 5,
+   "partly": 0,
+   "wrong": 0,
+   "unknown": 0
+  },
+  "small|1": {
+   "right": 5,
+   "partly": 2,
+   "wrong": 0,
+   "unknown": 0
+  },
+  "small|2": {
+   "right": 3,
+   "partly": 2,
+   "wrong": 0,
+   "unknown": 1
+  },
+  "small|3": {
+   "right": 0,
+   "partly": 2,
+   "wrong": 0,
+   "unknown": 3
+  }
+ },
+ "questions_as_graded": {
+  "1M|0": {
+   "right": 19,
+   "partly": 3,
+   "wrong": 0,
+   "unknown": 0
+  },
+  "1M|1": {
+   "right": 28,
+   "partly": 8,
+   "wrong": 2,
+   "unknown": 5
+  },
+  "1M|2": {
+   "right": 5,
+   "partly": 2,
+   "wrong": 4,
+   "unknown": 25
+  },
+  "1M|3": {
+   "right": 0,
+   "partly": 2,
+   "wrong": 1,
+   "unknown": 21
+  },
+  "small|0": {
+   "right": 5,
+   "partly": 0,
+   "wrong": 0,
+   "unknown": 0
+  },
+  "small|1": {
+   "right": 5,
+   "partly": 2,
+   "wrong": 0,
+   "unknown": 0
+  },
+  "small|2": {
+   "right": 3,
+   "partly": 2,
+   "wrong": 0,
+   "unknown": 1
+  },
+  "small|3": {
+   "right": 0,
+   "partly": 2,
+   "wrong": 0,
+   "unknown": 3
+  }
+ },
+ "questions_dropped_for_stale_keys": [
+  {
+   "session": "27642e0f",
+   "after_round": 2,
+   "question": 6,
+   "grade": "wrong",
+   "since": 1
+  },
+  {
+   "session": "27642e0f",
+   "after_round": 3,
+   "question": 6,
+   "grade": "wrong",
+   "since": 2
+  },
+  {
+   "session": "27642e0f",
+   "after_round": 3,
+   "question": 7,
+   "grade": "wrong",
+   "since": 2
+  }
+ ],
+ "questions_per_session": {
+  "0d4c4262|0": {
+   "right": 2
+  },
+  "0d4c4262|1": {
+   "right": 6,
+   "partly": 1
+  },
+  "0d4c4262|2": {
+   "unknown": 4
+  },
+  "0d4c4262|3": {
+   "partly": 1,
+   "unknown": 1
+  },
+  "27642e0f|0": {
+   "right": 3
+  },
+  "27642e0f|1": {
+   "right": 8,
+   "unknown": 1
+  },
+  "27642e0f|2": {
+   "unknown": 4,
+   "right": 1
+  },
+  "27642e0f|3": {
+   "unknown": 4
+  },
+  "2cae28a4|0": {
+   "right": 1
+  },
+  "2cae28a4|1": {
+   "partly": 1,
+   "right": 1
+  },
+  "2cae28a4|2": {
+   "partly": 1
+  },
+  "2cae28a4|3": {
+   "partly": 1
+  },
+  "5a7b375c|0": {
+   "right": 2
+  },
+  "5a7b375c|1": {
+   "right": 1,
+   "partly": 1
+  },
+  "5a7b375c|2": {
+   "right": 2
+  },
+  "5a7b375c|3": {
+   "unknown": 2
+  },
+  "73009f6a|0": {
+   "partly": 3,
+   "right": 6
+  },
+  "73009f6a|1": {
+   "partly": 3,
+   "unknown": 3,
+   "right": 7
+  },
+  "73009f6a|2": {
+   "right": 3,
+   "unknown": 7,
+   "wrong": 1,
+   "partly": 1
+  },
+  "73009f6a|3": {
+   "unknown": 10
+  },
+  "cd25197e|0": {
+   "right": 8
+  },
+  "cd25197e|1": {
+   "wrong": 1,
+   "unknown": 1,
+   "partly": 4,
+   "right": 7
+  },
+  "cd25197e|2": {
+   "unknown": 10,
+   "partly": 1,
+   "wrong": 1,
+   "right": 1
+  },
+  "cd25197e|3": {
+   "unknown": 6,
+   "wrong": 1,
+   "partly": 1
+  },
+  "ede0cb33|0": {
+   "right": 2
+  },
+  "ede0cb33|1": {
+   "right": 3
+  },
+  "ede0cb33|2": {
+   "right": 1,
+   "partly": 1,
+   "unknown": 1
+  },
+  "ede0cb33|3": {
+   "partly": 1,
+   "unknown": 1
+  }
+ },
+ "control_cuts": {
+  "0d4c4262": 846536,
+  "27642e0f": 832763,
+  "73009f6a": 846634,
+  "cd25197e": 849696
+ },
+ "questions_written": {
+  "0d4c4262": [
+   2,
+   2,
+   3
+  ],
+  "27642e0f": [
+   4,
+   3,
+   3
+  ],
+  "73009f6a": [
+   10,
+   2,
+   1
+  ],
+  "cd25197e": [
+   8,
+   5,
+   0
+  ],
+  "2cae28a4": [
+   1,
+   0,
+   1
+  ],
+  "5a7b375c": [
+   2,
+   0,
+   0
+  ],
+  "ede0cb33": [
+   2,
+   1,
+   0
+  ]
+ }
+}

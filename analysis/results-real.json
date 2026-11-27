@@ -1,0 +1,2615 @@
+{
+ "swechat_meaning": {
+  "compactions": 383,
+  "sessions": 147,
+  "messages": 10646,
+  "bands": {
+   "auto_900k_plus": {
+    "compactions": 87,
+    "sessions": 43,
+    "recent": {
+     "messages": 2472,
+     "rules_that_matter": {
+      "n": 311,
+      "kept": 237,
+      "partly": 42,
+      "absent": 32
+     },
+     "every_message_that_matters": {
+      "n": 764,
+      "kept": 578,
+      "partly": 106,
+      "absent": 80
+     },
+     "by_kind": {
+      "rule": {
+       "n": 229,
+       "kept": 168,
+       "partly": 31,
+       "absent": 30
+      },
+      "correction": {
+       "n": 127,
+       "kept": 98,
+       "partly": 11,
+       "absent": 18
+      },
+      "task": {
+       "n": 1177,
+       "kept": 827,
+       "partly": 107,
+       "absent": 243
+      },
+      "question": {
+       "n": 675,
+       "kept": 459,
+       "partly": 20,
+       "absent": 196
+      },
+      "info": {
+       "n": 165,
+       "kept": 115,
+       "partly": 15,
+       "absent": 35
+      },
+      "ack": {
+       "n": 80,
+       "kept": 55,
+       "partly": 0,
+       "absent": 25
+      }
+     },
+     "compactions_with_rules": 75,
+     "compactions_with_a_rule_not_fully_kept": 38
+    },
+    "older": {
+     "messages": 1727,
+     "rules_that_matter": {
+      "n": 277,
+      "kept": 44,
+      "partly": 82,
+      "absent": 151
+     },
+     "every_message_that_matters": {
+      "n": 573,
+      "kept": 65,
+      "partly": 152,
+      "absent": 356
+     },
+     "by_kind": {
+      "rule": {
+       "n": 231,
+       "kept": 38,
+       "partly": 73,
+       "absent": 120
+      },
+      "correction": {
+       "n": 74,
+       "kept": 7,
+       "partly": 10,
+       "absent": 57
+      },
+      "task": {
+       "n": 778,
+       "kept": 35,
+       "partly": 73,
+       "absent": 670
+      },
+      "question": {
+       "n": 505,
+       "kept": 13,
+       "partly": 15,
+       "absent": 477
+      },
+      "info": {
+       "n": 95,
+       "kept": 2,
+       "partly": 4,
+       "absent": 89
+      },
+      "ack": {
+       "n": 44,
+       "kept": 1,
+       "partly": 0,
+       "absent": 43
+      }
+     },
+     "compactions_with_rules": 50,
+     "compactions_with_a_rule_not_fully_kept": 47
+    }
+   },
+   "manual": {
+    "compactions": 187,
+    "sessions": 99,
+    "recent": {
+     "messages": 1903,
+     "rules_that_matter": {
+      "n": 242,
+      "kept": 224,
+      "partly": 10,
+      "absent": 8
+     },
+     "every_message_that_matters": {
+      "n": 634,
+      "kept": 573,
+      "partly": 35,
+      "absent": 26
+     },
+     "by_kind": {
+      "rule": {
+       "n": 170,
+       "kept": 154,
+       "partly": 10,
+       "absent": 6
+      },
+      "correction": {
+       "n": 100,
+       "kept": 92,
+       "partly": 0,
+       "absent": 8
+      },
+      "task": {
+       "n": 963,
+       "kept": 833,
+       "partly": 39,
+       "absent": 91
+      },
+      "question": {
+       "n": 419,
+       "kept": 351,
+       "partly": 11,
+       "absent": 57
+      },
+      "info": {
+       "n": 191,
+       "kept": 157,
+       "partly": 18,
+       "absent": 16
+      },
+      "ack": {
+       "n": 59,
+       "kept": 44,
+       "partly": 0,
+       "absent": 15
+      }
+     },
+     "compactions_with_rules": 97,
+     "compactions_with_a_rule_not_fully_kept": 11
+    },
+    "older": {
+     "messages": 2051,
+     "rules_that_matter": {
+      "n": 248,
+      "kept": 93,
+      "partly": 66,
+      "absent": 89
+     },
+     "every_message_that_matters": {
+      "n": 579,
+      "kept": 139,
+      "partly": 162,
+      "absent": 278
+     },
+     "by_kind": {
+      "rule": {
+       "n": 158,
+       "kept": 48,
+       "partly": 51,
+       "absent": 59
+      },
+      "correction": {
+       "n": 124,
+       "kept": 46,
+       "partly": 16,
+       "absent": 62
+      },
+      "task": {
+       "n": 955,
+       "kept": 63,
+       "partly": 107,
+       "absent": 785
+      },
+      "question": {
+       "n": 448,
+       "kept": 24,
+       "partly": 47,
+       "absent": 377
+      },
+      "info": {
+       "n": 276,
+       "kept": 15,
+       "partly": 19,
+       "absent": 242
+      },
+      "ack": {
+       "n": 90,
+       "kept": 3,
+       "partly": 0,
+       "absent": 87
+      }
+     },
+     "compactions_with_rules": 64,
+     "compactions_with_a_rule_not_fully_kept": 54
+    }
+   },
+   "auto_under_200k": {
+    "compactions": 47,
+    "sessions": 10,
+    "recent": {
+     "messages": 203,
+     "rules_that_matter": {
+      "n": 23,
+      "kept": 21,
+      "partly": 2,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 98,
+      "kept": 95,
+      "partly": 2,
+      "absent": 1
+     },
+     "by_kind": {
+      "rule": {
+       "n": 8,
+       "kept": 6,
+       "partly": 2,
+       "absent": 0
+      },
+      "correction": {
+       "n": 16,
+       "kept": 16,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 109,
+       "kept": 107,
+       "partly": 0,
+       "absent": 2
+      },
+      "question": {
+       "n": 37,
+       "kept": 34,
+       "partly": 0,
+       "absent": 3
+      },
+      "info": {
+       "n": 19,
+       "kept": 17,
+       "partly": 0,
+       "absent": 2
+      },
+      "ack": {
+       "n": 12,
+       "kept": 9,
+       "partly": 0,
+       "absent": 3
+      }
+     },
+     "compactions_with_rules": 16,
+     "compactions_with_a_rule_not_fully_kept": 2
+    },
+    "older": {
+     "messages": 756,
+     "rules_that_matter": {
+      "n": 128,
+      "kept": 70,
+      "partly": 20,
+      "absent": 38
+     },
+     "every_message_that_matters": {
+      "n": 260,
+      "kept": 129,
+      "partly": 48,
+      "absent": 83
+     },
+     "by_kind": {
+      "rule": {
+       "n": 98,
+       "kept": 62,
+       "partly": 9,
+       "absent": 27
+      },
+      "correction": {
+       "n": 46,
+       "kept": 10,
+       "partly": 11,
+       "absent": 25
+      },
+      "task": {
+       "n": 302,
+       "kept": 78,
+       "partly": 29,
+       "absent": 195
+      },
+      "question": {
+       "n": 184,
+       "kept": 28,
+       "partly": 9,
+       "absent": 147
+      },
+      "info": {
+       "n": 52,
+       "kept": 23,
+       "partly": 1,
+       "absent": 28
+      },
+      "ack": {
+       "n": 74,
+       "kept": 11,
+       "partly": 0,
+       "absent": 63
+      }
+     },
+     "compactions_with_rules": 31,
+     "compactions_with_a_rule_not_fully_kept": 21
+    }
+   },
+   "auto_200k_900k": {
+    "compactions": 54,
+    "sessions": 12,
+    "recent": {
+     "messages": 294,
+     "rules_that_matter": {
+      "n": 33,
+      "kept": 32,
+      "partly": 1,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 114,
+      "kept": 112,
+      "partly": 2,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 21,
+       "kept": 20,
+       "partly": 1,
+       "absent": 0
+      },
+      "correction": {
+       "n": 13,
+       "kept": 13,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 154,
+       "kept": 148,
+       "partly": 3,
+       "absent": 3
+      },
+      "question": {
+       "n": 71,
+       "kept": 68,
+       "partly": 0,
+       "absent": 3
+      },
+      "info": {
+       "n": 24,
+       "kept": 21,
+       "partly": 1,
+       "absent": 2
+      },
+      "ack": {
+       "n": 11,
+       "kept": 10,
+       "partly": 0,
+       "absent": 1
+      }
+     },
+     "compactions_with_rules": 20,
+     "compactions_with_a_rule_not_fully_kept": 1
+    },
+    "older": {
+     "messages": 1013,
+     "rules_that_matter": {
+      "n": 146,
+      "kept": 74,
+      "partly": 28,
+      "absent": 44
+     },
+     "every_message_that_matters": {
+      "n": 287,
+      "kept": 97,
+      "partly": 46,
+      "absent": 144
+     },
+     "by_kind": {
+      "rule": {
+       "n": 121,
+       "kept": 65,
+       "partly": 22,
+       "absent": 34
+      },
+      "correction": {
+       "n": 35,
+       "kept": 12,
+       "partly": 8,
+       "absent": 15
+      },
+      "task": {
+       "n": 375,
+       "kept": 44,
+       "partly": 29,
+       "absent": 302
+      },
+      "question": {
+       "n": 332,
+       "kept": 22,
+       "partly": 3,
+       "absent": 307
+      },
+      "info": {
+       "n": 102,
+       "kept": 24,
+       "partly": 2,
+       "absent": 76
+      },
+      "ack": {
+       "n": 48,
+       "kept": 19,
+       "partly": 0,
+       "absent": 29
+      }
+     },
+     "compactions_with_rules": 38,
+     "compactions_with_a_rule_not_fully_kept": 27
+    }
+   },
+   "auto_idle": {
+    "compactions": 8,
+    "sessions": 7,
+    "recent": {
+     "messages": 141,
+     "rules_that_matter": {
+      "n": 12,
+      "kept": 8,
+      "partly": 0,
+      "absent": 4
+     },
+     "every_message_that_matters": {
+      "n": 44,
+      "kept": 32,
+      "partly": 4,
+      "absent": 8
+     },
+     "by_kind": {
+      "rule": {
+       "n": 9,
+       "kept": 6,
+       "partly": 0,
+       "absent": 3
+      },
+      "correction": {
+       "n": 3,
+       "kept": 2,
+       "partly": 0,
+       "absent": 1
+      },
+      "task": {
+       "n": 59,
+       "kept": 40,
+       "partly": 8,
+       "absent": 11
+      },
+      "question": {
+       "n": 35,
+       "kept": 23,
+       "partly": 2,
+       "absent": 10
+      },
+      "info": {
+       "n": 6,
+       "kept": 5,
+       "partly": 0,
+       "absent": 1
+      },
+      "ack": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 5,
+     "compactions_with_a_rule_not_fully_kept": 2
+    },
+    "older": {
+     "messages": 86,
+     "rules_that_matter": {
+      "n": 7,
+      "kept": 1,
+      "partly": 4,
+      "absent": 2
+     },
+     "every_message_that_matters": {
+      "n": 29,
+      "kept": 7,
+      "partly": 6,
+      "absent": 16
+     },
+     "by_kind": {
+      "rule": {
+       "n": 5,
+       "kept": 1,
+       "partly": 3,
+       "absent": 1
+      },
+      "correction": {
+       "n": 3,
+       "kept": 1,
+       "partly": 1,
+       "absent": 1
+      },
+      "task": {
+       "n": 45,
+       "kept": 8,
+       "partly": 4,
+       "absent": 33
+      },
+      "question": {
+       "n": 29,
+       "kept": 4,
+       "partly": 1,
+       "absent": 24
+      },
+      "info": {
+       "n": 3,
+       "kept": 0,
+       "partly": 0,
+       "absent": 3
+      },
+      "ack": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 3,
+     "compactions_with_a_rule_not_fully_kept": 3
+    }
+   },
+   "all": {
+    "compactions": 383,
+    "sessions": 147,
+    "recent": {
+     "messages": 5013,
+     "rules_that_matter": {
+      "n": 621,
+      "kept": 522,
+      "partly": 55,
+      "absent": 44
+     },
+     "every_message_that_matters": {
+      "n": 1654,
+      "kept": 1390,
+      "partly": 149,
+      "absent": 115
+     },
+     "by_kind": {
+      "rule": {
+       "n": 437,
+       "kept": 354,
+       "partly": 44,
+       "absent": 39
+      },
+      "correction": {
+       "n": 259,
+       "kept": 221,
+       "partly": 11,
+       "absent": 27
+      },
+      "task": {
+       "n": 2462,
+       "kept": 1955,
+       "partly": 157,
+       "absent": 350
+      },
+      "question": {
+       "n": 1237,
+       "kept": 935,
+       "partly": 33,
+       "absent": 269
+      },
+      "info": {
+       "n": 405,
+       "kept": 315,
+       "partly": 34,
+       "absent": 56
+      },
+      "ack": {
+       "n": 163,
+       "kept": 119,
+       "partly": 0,
+       "absent": 44
+      }
+     },
+     "compactions_with_rules": 213,
+     "compactions_with_a_rule_not_fully_kept": 54
+    },
+    "older": {
+     "messages": 5633,
+     "rules_that_matter": {
+      "n": 806,
+      "kept": 282,
+      "partly": 200,
+      "absent": 324
+     },
+     "every_message_that_matters": {
+      "n": 1728,
+      "kept": 437,
+      "partly": 414,
+      "absent": 877
+     },
+     "by_kind": {
+      "rule": {
+       "n": 613,
+       "kept": 214,
+       "partly": 158,
+       "absent": 241
+      },
+      "correction": {
+       "n": 282,
+       "kept": 76,
+       "partly": 46,
+       "absent": 160
+      },
+      "task": {
+       "n": 2455,
+       "kept": 228,
+       "partly": 242,
+       "absent": 1985
+      },
+      "question": {
+       "n": 1498,
+       "kept": 91,
+       "partly": 75,
+       "absent": 1332
+      },
+      "info": {
+       "n": 528,
+       "kept": 64,
+       "partly": 26,
+       "absent": 438
+      },
+      "ack": {
+       "n": 257,
+       "kept": 35,
+       "partly": 0,
+       "absent": 222
+      }
+     },
+     "compactions_with_rules": 186,
+     "compactions_with_a_rule_not_fully_kept": 152
+    }
+   }
+  },
+  "judged_lines": 425,
+  "not_claude_lines": 34,
+  "claude_lines": 391,
+  "duplicates": 8,
+  "versions": [
+   "2.1.76",
+   "2.1.259"
+  ],
+  "first_time": "2026-03-28T03:40:53",
+  "last_time": "2026-09-04T10:23:59",
+  "text_match_agreement": {
+   "agree": 3408,
+   "of": 3430
+  },
+  "summary_words_median": {
+   "auto_900k_plus": 2076,
+   "auto_200k_900k": 1815.0,
+   "auto_under_200k": 1863,
+   "manual": 2018
+  },
+  "summary_words_range": [
+   462,
+   5866
+  ],
+  "summary_words_median_all": 1992,
+  "auto_200k_900k_sizes": [
+   200885,
+   201926,
+   201973,
+   206265,
+   211145,
+   230349,
+   248747,
+   254015,
+   264137,
+   264730,
+   269735,
+   294069,
+   294718,
+   294786,
+   295774,
+   298794,
+   299314,
+   299957,
+   308121,
+   327267,
+   347356,
+   347769,
+   348604,
+   349070,
+   366932,
+   367178,
+   367331,
+   367340,
+   367416,
+   367513,
+   367526,
+   367740,
+   367828,
+   368386,
+   368434,
+   368438,
+   368541,
+   368586,
+   368587,
+   368784,
+   368855,
+   368991,
+   369057,
+   369069,
+   369103,
+   369400,
+   369767,
+   369813,
+   370898,
+   370975,
+   371073,
+   372184,
+   374458,
+   858198
+  ],
+  "order_counts": {
+   "1": 147,
+   "2": 76,
+   "3": 42,
+   "4": 118
+  }
+ },
+ "swechat_auto_sizes": [
+  159952,
+  161423,
+  166285,
+  166935,
+  167071,
+  167190,
+  167194,
+  167205,
+  167261,
+  167273,
+  167353,
+  167438,
+  167551,
+  167596,
+  167669,
+  167691,
+  167802,
+  167808,
+  167852,
+  167890,
+  167935,
+  167992,
+  168059,
+  168069,
+  168222,
+  168877,
+  169143,
+  169172,
+  169443,
+  169855,
+  171307,
+  177099,
+  177751,
+  183448,
+  188800,
+  195094,
+  195477,
+  197052,
+  197175,
+  197419,
+  197437,
+  197617,
+  197663,
+  197725,
+  197802,
+  198000,
+  198951,
+  199155,
+  199403,
+  199470,
+  200885,
+  201926,
+  201973,
+  206265,
+  211145,
+  216070,
+  230349,
+  248747,
+  254015,
+  264137,
+  264730,
+  269735,
+  294069,
+  294718,
+  294786,
+  295774,
+  298794,
+  299314,
+  299957,
+  308121,
+  327267,
+  347356,
+  347769,
+  348604,
+  349070,
+  366932,
+  367178,
+  367331,
+  367340,
+  367416,
+  367513,
+  367526,
+  367740,
+  367828,
+  368386,
+  368434,
+  368438,
+  368541,
+  368586,
+  368587,
+  368784,
+  368855,
+  368991,
+  369057,
+  369069,
+  369103,
+  369400,
+  369767,
+  369813,
+  370898,
+  370975,
+  371073,
+  372184,
+  374458,
+  858198,
+  907511,
+  933346,
+  935953,
+  966989,
+  967263,
+  968009,
+  968020,
+  968044,
+  968245,
+  968580,
+  968600,
+  968831,
+  971133,
+  983434,
+  996879,
+  996997,
+  997083,
+  998521,
+  998654,
+  998741,
+  998952,
+  999157,
+  999244,
+  999387,
+  999403,
+  999465,
+  999547,
+  999772,
+  999811,
+  999860,
+  999866,
+  999891,
+  999926,
+  999943,
+  999991,
+  1000049,
+  1000100,
+  1000118,
+  1000258,
+  1000276,
+  1000314,
+  1000349,
+  1000375,
+  1000386,
+  1000427,
+  1000463,
+  1000487,
+  1000497,
+  1000577,
+  1000652,
+  1000653,
+  1000656,
+  1000687,
+  1000723,
+  1000822,
+  1000844,
+  1000845,
+  1000886,
+  1000914,
+  1000997,
+  1001144,
+  1001222,
+  1001244,
+  1001255,
+  1001290,
+  1001314,
+  1001494,
+  1001554,
+  1001612,
+  1001714,
+  1001752,
+  1001858,
+  1001903,
+  1001928,
+  1001975,
+  1002002,
+  1002046,
+  1002137,
+  1002434,
+  1002609,
+  1002620,
+  1003035,
+  1003724,
+  1003790,
+  1004364,
+  1005263,
+  1005358,
+  1007798,
+  1008163,
+  1010861,
+  1019560
+ ],
+ "swechat_manual_sizes": [
+  44579,
+  85580,
+  110998,
+  111632,
+  127301,
+  127883,
+  128326,
+  130633,
+  130690,
+  143501,
+  150660,
+  150825,
+  153247,
+  153307,
+  167252,
+  171477,
+  176539,
+  181658,
+  183480,
+  183861,
+  198750,
+  207235,
+  209428,
+  216604,
+  218293,
+  221758,
+  224958,
+  228750,
+  229082,
+  231504,
+  233294,
+  245540,
+  247097,
+  248473,
+  254358,
+  255306,
+  266555,
+  273258,
+  274702,
+  276175,
+  289537,
+  290162,
+  294393,
+  297111,
+  297190,
+  300085,
+  301663,
+  301695,
+  301733,
+  304436,
+  305189,
+  311278,
+  311444,
+  313607,
+  318689,
+  329314,
+  330780,
+  331051,
+  334171,
+  347157,
+  349673,
+  351487,
+  354690,
+  356706,
+  357852,
+  364242,
+  364334,
+  364534,
+  366716,
+  367549,
+  368409,
+  372725,
+  373302,
+  374829,
+  379693,
+  382428,
+  382543,
+  383416,
+  390733,
+  391794,
+  393898,
+  394233,
+  395933,
+  399972,
+  400950,
+  402998,
+  404909,
+  404999,
+  406387,
+  417140,
+  418474,
+  421364,
+  433605,
+  442262,
+  442367,
+  443389,
+  448421,
+  455948,
+  457959,
+  462555,
+  463031,
+  468871,
+  469189,
+  470075,
+  473339,
+  476066,
+  478031,
+  478057,
+  479919,
+  489944,
+  499229,
+  504431,
+  506278,
+  515103,
+  527356,
+  529139,
+  530621,
+  532902,
+  536122,
+  537699,
+  539714,
+  541559,
+  544724,
+  551481,
+  555996,
+  560077,
+  568509,
+  570855,
+  570959,
+  580170,
+  580257,
+  583409,
+  590115,
+  590533,
+  606127,
+  610196,
+  618102,
+  619416,
+  639165,
+  645887,
+  648042,
+  653557,
+  657931,
+  667746,
+  668619,
+  674706,
+  674748,
+  684885,
+  687941,
+  690770,
+  694086,
+  696567,
+  709715,
+  716849,
+  717634,
+  725035,
+  733327,
+  739006,
+  741892,
+  742978,
+  745361,
+  750614,
+  752661,
+  760628,
+  774337,
+  791466,
+  814861,
+  825753,
+  860018,
+  866908,
+  877806,
+  880951,
+  882320,
+  885305,
+  898928,
+  909775,
+  919175,
+  937870,
+  955250,
+  958263,
+  959833,
+  960840,
+  986517,
+  994653,
+  999362,
+  1000001,
+  1000597
+ ],
+ "swechat_queued": {
+  "compactions": 261,
+  "sessions": 101,
+  "messages": 2484,
+  "bands": {
+   "manual": {
+    "compactions": 127,
+    "sessions": 70,
+    "recent": {
+     "messages": 420,
+     "rules_that_matter": {
+      "n": 97,
+      "kept": 85,
+      "partly": 5,
+      "absent": 7
+     },
+     "every_message_that_matters": {
+      "n": 180,
+      "kept": 151,
+      "partly": 13,
+      "absent": 16
+     },
+     "by_kind": {
+      "rule": {
+       "n": 75,
+       "kept": 66,
+       "partly": 4,
+       "absent": 5
+      },
+      "correction": {
+       "n": 38,
+       "kept": 35,
+       "partly": 1,
+       "absent": 2
+      },
+      "task": {
+       "n": 161,
+       "kept": 131,
+       "partly": 8,
+       "absent": 22
+      },
+      "question": {
+       "n": 82,
+       "kept": 61,
+       "partly": 0,
+       "absent": 21
+      },
+      "info": {
+       "n": 57,
+       "kept": 42,
+       "partly": 3,
+       "absent": 12
+      },
+      "ack": {
+       "n": 7,
+       "kept": 4,
+       "partly": 0,
+       "absent": 3
+      }
+     },
+     "compactions_with_rules": 57,
+     "compactions_with_a_rule_not_fully_kept": 7
+    },
+    "older": {
+     "messages": 497,
+     "rules_that_matter": {
+      "n": 109,
+      "kept": 32,
+      "partly": 21,
+      "absent": 56
+     },
+     "every_message_that_matters": {
+      "n": 212,
+      "kept": 37,
+      "partly": 36,
+      "absent": 139
+     },
+     "by_kind": {
+      "rule": {
+       "n": 88,
+       "kept": 21,
+       "partly": 17,
+       "absent": 50
+      },
+      "correction": {
+       "n": 64,
+       "kept": 12,
+       "partly": 5,
+       "absent": 47
+      },
+      "task": {
+       "n": 187,
+       "kept": 4,
+       "partly": 15,
+       "absent": 168
+      },
+      "question": {
+       "n": 64,
+       "kept": 3,
+       "partly": 3,
+       "absent": 58
+      },
+      "info": {
+       "n": 85,
+       "kept": 7,
+       "partly": 4,
+       "absent": 74
+      },
+      "ack": {
+       "n": 9,
+       "kept": 0,
+       "partly": 0,
+       "absent": 9
+      }
+     },
+     "compactions_with_rules": 43,
+     "compactions_with_a_rule_not_fully_kept": 34
+    }
+   },
+   "auto_200k_900k": {
+    "compactions": 39,
+    "sessions": 10,
+    "recent": {
+     "messages": 48,
+     "rules_that_matter": {
+      "n": 10,
+      "kept": 10,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 37,
+      "kept": 37,
+      "partly": 0,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 8,
+       "kept": 8,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 2,
+       "kept": 2,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 26,
+       "kept": 26,
+       "partly": 0,
+       "absent": 0
+      },
+      "question": {
+       "n": 8,
+       "kept": 8,
+       "partly": 0,
+       "absent": 0
+      },
+      "info": {
+       "n": 4,
+       "kept": 4,
+       "partly": 0,
+       "absent": 0
+      },
+      "ack": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 8,
+     "compactions_with_a_rule_not_fully_kept": 0
+    },
+    "older": {
+     "messages": 151,
+     "rules_that_matter": {
+      "n": 36,
+      "kept": 4,
+      "partly": 14,
+      "absent": 18
+     },
+     "every_message_that_matters": {
+      "n": 105,
+      "kept": 8,
+      "partly": 29,
+      "absent": 68
+     },
+     "by_kind": {
+      "rule": {
+       "n": 36,
+       "kept": 4,
+       "partly": 14,
+       "absent": 18
+      },
+      "correction": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 70,
+       "kept": 3,
+       "partly": 14,
+       "absent": 53
+      },
+      "question": {
+       "n": 21,
+       "kept": 4,
+       "partly": 4,
+       "absent": 13
+      },
+      "info": {
+       "n": 23,
+       "kept": 0,
+       "partly": 3,
+       "absent": 20
+      },
+      "ack": {
+       "n": 1,
+       "kept": 0,
+       "partly": 0,
+       "absent": 1
+      }
+     },
+     "compactions_with_rules": 24,
+     "compactions_with_a_rule_not_fully_kept": 22
+    }
+   },
+   "auto_900k_plus": {
+    "compactions": 67,
+    "sessions": 29,
+    "recent": {
+     "messages": 489,
+     "rules_that_matter": {
+      "n": 95,
+      "kept": 82,
+      "partly": 7,
+      "absent": 6
+     },
+     "every_message_that_matters": {
+      "n": 237,
+      "kept": 185,
+      "partly": 29,
+      "absent": 23
+     },
+     "by_kind": {
+      "rule": {
+       "n": 74,
+       "kept": 64,
+       "partly": 5,
+       "absent": 5
+      },
+      "correction": {
+       "n": 24,
+       "kept": 19,
+       "partly": 2,
+       "absent": 3
+      },
+      "task": {
+       "n": 213,
+       "kept": 149,
+       "partly": 25,
+       "absent": 39
+      },
+      "question": {
+       "n": 131,
+       "kept": 95,
+       "partly": 4,
+       "absent": 32
+      },
+      "info": {
+       "n": 38,
+       "kept": 22,
+       "partly": 0,
+       "absent": 16
+      },
+      "ack": {
+       "n": 8,
+       "kept": 4,
+       "partly": 0,
+       "absent": 4
+      }
+     },
+     "compactions_with_rules": 39,
+     "compactions_with_a_rule_not_fully_kept": 12
+    },
+    "older": {
+     "messages": 703,
+     "rules_that_matter": {
+      "n": 149,
+      "kept": 27,
+      "partly": 33,
+      "absent": 89
+     },
+     "every_message_that_matters": {
+      "n": 332,
+      "kept": 39,
+      "partly": 74,
+      "absent": 219
+     },
+     "by_kind": {
+      "rule": {
+       "n": 136,
+       "kept": 26,
+       "partly": 30,
+       "absent": 80
+      },
+      "correction": {
+       "n": 22,
+       "kept": 1,
+       "partly": 3,
+       "absent": 18
+      },
+      "task": {
+       "n": 279,
+       "kept": 19,
+       "partly": 47,
+       "absent": 213
+      },
+      "question": {
+       "n": 187,
+       "kept": 12,
+       "partly": 11,
+       "absent": 164
+      },
+      "info": {
+       "n": 74,
+       "kept": 0,
+       "partly": 5,
+       "absent": 69
+      },
+      "ack": {
+       "n": 5,
+       "kept": 0,
+       "partly": 0,
+       "absent": 5
+      }
+     },
+     "compactions_with_rules": 34,
+     "compactions_with_a_rule_not_fully_kept": 28
+    }
+   },
+   "auto_under_200k": {
+    "compactions": 23,
+    "sessions": 7,
+    "recent": {
+     "messages": 21,
+     "rules_that_matter": {
+      "n": 7,
+      "kept": 6,
+      "partly": 1,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 16,
+      "kept": 14,
+      "partly": 2,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 5,
+       "kept": 4,
+       "partly": 1,
+       "absent": 0
+      },
+      "correction": {
+       "n": 3,
+       "kept": 3,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 4,
+       "kept": 4,
+       "partly": 0,
+       "absent": 0
+      },
+      "question": {
+       "n": 5,
+       "kept": 5,
+       "partly": 0,
+       "absent": 0
+      },
+      "info": {
+       "n": 4,
+       "kept": 3,
+       "partly": 1,
+       "absent": 0
+      },
+      "ack": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 6,
+     "compactions_with_a_rule_not_fully_kept": 1
+    },
+    "older": {
+     "messages": 62,
+     "rules_that_matter": {
+      "n": 10,
+      "kept": 3,
+      "partly": 2,
+      "absent": 5
+     },
+     "every_message_that_matters": {
+      "n": 34,
+      "kept": 6,
+      "partly": 16,
+      "absent": 12
+     },
+     "by_kind": {
+      "rule": {
+       "n": 7,
+       "kept": 3,
+       "partly": 2,
+       "absent": 2
+      },
+      "correction": {
+       "n": 3,
+       "kept": 0,
+       "partly": 0,
+       "absent": 3
+      },
+      "task": {
+       "n": 16,
+       "kept": 0,
+       "partly": 2,
+       "absent": 14
+      },
+      "question": {
+       "n": 33,
+       "kept": 4,
+       "partly": 12,
+       "absent": 17
+      },
+      "info": {
+       "n": 3,
+       "kept": 0,
+       "partly": 2,
+       "absent": 1
+      },
+      "ack": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 8,
+     "compactions_with_a_rule_not_fully_kept": 6
+    }
+   },
+   "auto_idle": {
+    "compactions": 5,
+    "sessions": 4,
+    "recent": {
+     "messages": 57,
+     "rules_that_matter": {
+      "n": 9,
+      "kept": 6,
+      "partly": 1,
+      "absent": 2
+     },
+     "every_message_that_matters": {
+      "n": 20,
+      "kept": 15,
+      "partly": 1,
+      "absent": 4
+     },
+     "by_kind": {
+      "rule": {
+       "n": 8,
+       "kept": 5,
+       "partly": 1,
+       "absent": 2
+      },
+      "correction": {
+       "n": 3,
+       "kept": 3,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 23,
+       "kept": 17,
+       "partly": 0,
+       "absent": 6
+      },
+      "question": {
+       "n": 6,
+       "kept": 2,
+       "partly": 0,
+       "absent": 4
+      },
+      "info": {
+       "n": 8,
+       "kept": 5,
+       "partly": 0,
+       "absent": 3
+      },
+      "ack": {
+       "n": 2,
+       "kept": 2,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 3,
+     "compactions_with_a_rule_not_fully_kept": 2
+    },
+    "older": {
+     "messages": 36,
+     "rules_that_matter": {
+      "n": 13,
+      "kept": 3,
+      "partly": 3,
+      "absent": 7
+     },
+     "every_message_that_matters": {
+      "n": 22,
+      "kept": 4,
+      "partly": 4,
+      "absent": 14
+     },
+     "by_kind": {
+      "rule": {
+       "n": 10,
+       "kept": 3,
+       "partly": 3,
+       "absent": 4
+      },
+      "correction": {
+       "n": 3,
+       "kept": 0,
+       "partly": 0,
+       "absent": 3
+      },
+      "task": {
+       "n": 14,
+       "kept": 2,
+       "partly": 1,
+       "absent": 11
+      },
+      "question": {
+       "n": 6,
+       "kept": 0,
+       "partly": 0,
+       "absent": 6
+      },
+      "info": {
+       "n": 3,
+       "kept": 0,
+       "partly": 0,
+       "absent": 3
+      },
+      "ack": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 4,
+     "compactions_with_a_rule_not_fully_kept": 4
+    }
+   },
+   "all": {
+    "compactions": 261,
+    "sessions": 101,
+    "recent": {
+     "messages": 1035,
+     "rules_that_matter": {
+      "n": 218,
+      "kept": 189,
+      "partly": 14,
+      "absent": 15
+     },
+     "every_message_that_matters": {
+      "n": 490,
+      "kept": 402,
+      "partly": 45,
+      "absent": 43
+     },
+     "by_kind": {
+      "rule": {
+       "n": 170,
+       "kept": 147,
+       "partly": 11,
+       "absent": 12
+      },
+      "correction": {
+       "n": 70,
+       "kept": 62,
+       "partly": 3,
+       "absent": 5
+      },
+      "task": {
+       "n": 427,
+       "kept": 327,
+       "partly": 33,
+       "absent": 67
+      },
+      "question": {
+       "n": 232,
+       "kept": 171,
+       "partly": 4,
+       "absent": 57
+      },
+      "info": {
+       "n": 111,
+       "kept": 76,
+       "partly": 4,
+       "absent": 31
+      },
+      "ack": {
+       "n": 17,
+       "kept": 10,
+       "partly": 0,
+       "absent": 7
+      }
+     },
+     "compactions_with_rules": 113,
+     "compactions_with_a_rule_not_fully_kept": 22
+    },
+    "older": {
+     "messages": 1449,
+     "rules_that_matter": {
+      "n": 317,
+      "kept": 69,
+      "partly": 73,
+      "absent": 175
+     },
+     "every_message_that_matters": {
+      "n": 705,
+      "kept": 94,
+      "partly": 159,
+      "absent": 452
+     },
+     "by_kind": {
+      "rule": {
+       "n": 277,
+       "kept": 57,
+       "partly": 66,
+       "absent": 154
+      },
+      "correction": {
+       "n": 92,
+       "kept": 13,
+       "partly": 8,
+       "absent": 71
+      },
+      "task": {
+       "n": 566,
+       "kept": 28,
+       "partly": 79,
+       "absent": 459
+      },
+      "question": {
+       "n": 311,
+       "kept": 23,
+       "partly": 30,
+       "absent": 258
+      },
+      "info": {
+       "n": 188,
+       "kept": 7,
+       "partly": 14,
+       "absent": 167
+      },
+      "ack": {
+       "n": 15,
+       "kept": 0,
+       "partly": 0,
+       "absent": 15
+      }
+     },
+     "compactions_with_rules": 113,
+     "compactions_with_a_rule_not_fully_kept": 94
+    }
+   }
+  }
+ },
+ "second_judge": {
+  "compactions": 50,
+  "messages": 1482,
+  "same_state": 1227,
+  "kept_vs_absent_flips": 107,
+  "lasting_both": 382,
+  "lasting_first_only": 149,
+  "lasting_second_only": 39,
+  "lasting_neither": 912,
+  "rule_same_call": 1398,
+  "rules_that_matter": {
+   "first": {
+    "recent": {
+     "kept": 71,
+     "partly": 7,
+     "absent": 5
+    },
+    "older": {
+     "kept": 55,
+     "partly": 45,
+     "absent": 51
+    }
+   },
+   "second": {
+    "recent": {
+     "kept": 64,
+     "partly": 14,
+     "absent": 5
+    },
+    "older": {
+     "kept": 56,
+     "partly": 35,
+     "absent": 56
+    }
+   }
+  },
+  "both_call_it_a_rule_that_matters": {
+   "same": 148,
+   "different": 41,
+   "kept_vs_absent": 2
+  }
+ },
+ "swechat_reading": {
+  "compactions": 24,
+  "items": 1045,
+  "tokens_read": 8075591,
+  "bands": {
+   "auto_under_200k": {
+    "compactions": 8,
+    "in_force": 192,
+    "withdrawn": 4,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 2,
+    "by_origin": {
+     "user": {
+      "n": 28,
+      "kept": 25,
+      "partly": 2,
+      "lost": 0,
+      "contradicted": 1
+     },
+     "instruction_file": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 83,
+      "kept": 54,
+      "partly": 24,
+      "lost": 4,
+      "contradicted": 1
+     },
+     "tool_output": {
+      "n": 66,
+      "kept": 33,
+      "partly": 28,
+      "lost": 5,
+      "contradicted": 0
+     },
+     "earlier_summary": {
+      "n": 15,
+      "kept": 11,
+      "partly": 1,
+      "lost": 3,
+      "contradicted": 0
+     }
+    }
+   },
+   "manual": {
+    "compactions": 4,
+    "in_force": 192,
+    "withdrawn": 14,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 1,
+    "by_origin": {
+     "user": {
+      "n": 27,
+      "kept": 15,
+      "partly": 8,
+      "lost": 4,
+      "contradicted": 0
+     },
+     "instruction_file": {
+      "n": 1,
+      "kept": 0,
+      "partly": 0,
+      "lost": 1,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 116,
+      "kept": 46,
+      "partly": 37,
+      "lost": 32,
+      "contradicted": 1
+     },
+     "tool_output": {
+      "n": 43,
+      "kept": 15,
+      "partly": 15,
+      "lost": 13,
+      "contradicted": 0
+     },
+     "earlier_summary": {
+      "n": 5,
+      "kept": 4,
+      "partly": 1,
+      "lost": 0,
+      "contradicted": 0
+     }
+    }
+   },
+   "auto_200k_900k": {
+    "compactions": 6,
+    "in_force": 166,
+    "withdrawn": 1,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 0,
+    "by_origin": {
+     "user": {
+      "n": 31,
+      "kept": 28,
+      "partly": 3,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "instruction_file": {
+      "n": 4,
+      "kept": 1,
+      "partly": 1,
+      "lost": 2,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 61,
+      "kept": 37,
+      "partly": 21,
+      "lost": 3,
+      "contradicted": 0
+     },
+     "tool_output": {
+      "n": 64,
+      "kept": 32,
+      "partly": 23,
+      "lost": 9,
+      "contradicted": 0
+     },
+     "earlier_summary": {
+      "n": 6,
+      "kept": 5,
+      "partly": 1,
+      "lost": 0,
+      "contradicted": 0
+     }
+    }
+   },
+   "auto_900k_plus": {
+    "compactions": 6,
+    "in_force": 418,
+    "withdrawn": 58,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 1,
+    "by_origin": {
+     "user": {
+      "n": 77,
+      "kept": 37,
+      "partly": 28,
+      "lost": 12,
+      "contradicted": 0
+     },
+     "instruction_file": {
+      "n": 3,
+      "kept": 1,
+      "partly": 2,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 183,
+      "kept": 48,
+      "partly": 86,
+      "lost": 49,
+      "contradicted": 0
+     },
+     "tool_output": {
+      "n": 144,
+      "kept": 34,
+      "partly": 53,
+      "lost": 56,
+      "contradicted": 1
+     },
+     "earlier_summary": {
+      "n": 11,
+      "kept": 6,
+      "partly": 3,
+      "lost": 2,
+      "contradicted": 0
+     }
+    }
+   },
+   "all": {
+    "compactions": 24,
+    "in_force": 968,
+    "withdrawn": 77,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 4,
+    "by_origin": {
+     "user": {
+      "n": 163,
+      "kept": 105,
+      "partly": 41,
+      "lost": 16,
+      "contradicted": 1
+     },
+     "instruction_file": {
+      "n": 8,
+      "kept": 2,
+      "partly": 3,
+      "lost": 3,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 443,
+      "kept": 185,
+      "partly": 168,
+      "lost": 88,
+      "contradicted": 2
+     },
+     "tool_output": {
+      "n": 317,
+      "kept": 114,
+      "partly": 119,
+      "lost": 83,
+      "contradicted": 1
+     },
+     "earlier_summary": {
+      "n": 37,
+      "kept": 26,
+      "partly": 6,
+      "lost": 5,
+      "contradicted": 0
+     }
+    }
+   }
+  }
+ },
+ "own_reading": {
+  "compactions": 8,
+  "items": 387,
+  "tokens_read": 2405251,
+  "bands": {
+   "auto_idle": {
+    "compactions": 5,
+    "in_force": 139,
+    "withdrawn": 4,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 0,
+    "by_origin": {
+     "user": {
+      "n": 29,
+      "kept": 27,
+      "partly": 2,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "instruction_file": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 66,
+      "kept": 54,
+      "partly": 11,
+      "lost": 1,
+      "contradicted": 0
+     },
+     "tool_output": {
+      "n": 40,
+      "kept": 24,
+      "partly": 13,
+      "lost": 3,
+      "contradicted": 0
+     },
+     "earlier_summary": {
+      "n": 4,
+      "kept": 3,
+      "partly": 1,
+      "lost": 0,
+      "contradicted": 0
+     }
+    }
+   },
+   "auto_900k_plus": {
+    "compactions": 3,
+    "in_force": 219,
+    "withdrawn": 25,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 1,
+    "by_origin": {
+     "user": {
+      "n": 48,
+      "kept": 26,
+      "partly": 21,
+      "lost": 1,
+      "contradicted": 0
+     },
+     "instruction_file": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 109,
+      "kept": 47,
+      "partly": 45,
+      "lost": 16,
+      "contradicted": 1
+     },
+     "tool_output": {
+      "n": 62,
+      "kept": 25,
+      "partly": 24,
+      "lost": 13,
+      "contradicted": 0
+     },
+     "earlier_summary": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "lost": 0,
+      "contradicted": 0
+     }
+    }
+   },
+   "all": {
+    "compactions": 8,
+    "in_force": 358,
+    "withdrawn": 29,
+    "withdrawn_shown_as_current": 0,
+    "contradicted": 1,
+    "by_origin": {
+     "user": {
+      "n": 77,
+      "kept": 53,
+      "partly": 23,
+      "lost": 1,
+      "contradicted": 0
+     },
+     "instruction_file": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "lost": 0,
+      "contradicted": 0
+     },
+     "claude": {
+      "n": 175,
+      "kept": 101,
+      "partly": 56,
+      "lost": 17,
+      "contradicted": 1
+     },
+     "tool_output": {
+      "n": 102,
+      "kept": 49,
+      "partly": 37,
+      "lost": 16,
+      "contradicted": 0
+     },
+     "earlier_summary": {
+      "n": 4,
+      "kept": 3,
+      "partly": 1,
+      "lost": 0,
+      "contradicted": 0
+     }
+    }
+   }
+  }
+ },
+ "own_meaning": {
+  "compactions": 15,
+  "sessions": 9,
+  "messages": 234,
+  "bands": {
+   "auto_idle": {
+    "compactions": 10,
+    "sessions": 6,
+    "recent": {
+     "messages": 139,
+     "rules_that_matter": {
+      "n": 8,
+      "kept": 8,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 42,
+      "kept": 41,
+      "partly": 1,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 3,
+       "kept": 3,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 6,
+       "kept": 6,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 71,
+       "kept": 71,
+       "partly": 0,
+       "absent": 0
+      },
+      "question": {
+       "n": 41,
+       "kept": 35,
+       "partly": 4,
+       "absent": 2
+      },
+      "info": {
+       "n": 4,
+       "kept": 4,
+       "partly": 0,
+       "absent": 0
+      },
+      "ack": {
+       "n": 4,
+       "kept": 4,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 8,
+     "compactions_with_a_rule_not_fully_kept": 0
+    },
+    "older": {
+     "messages": 55,
+     "rules_that_matter": {
+      "n": 2,
+      "kept": 2,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 20,
+      "kept": 5,
+      "partly": 8,
+      "absent": 7
+     },
+     "by_kind": {
+      "rule": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 27,
+       "kept": 7,
+       "partly": 7,
+       "absent": 13
+      },
+      "question": {
+       "n": 23,
+       "kept": 6,
+       "partly": 1,
+       "absent": 16
+      },
+      "info": {
+       "n": 2,
+       "kept": 0,
+       "partly": 2,
+       "absent": 0
+      },
+      "ack": {
+       "n": 1,
+       "kept": 0,
+       "partly": 0,
+       "absent": 1
+      }
+     },
+     "compactions_with_rules": 2,
+     "compactions_with_a_rule_not_fully_kept": 0
+    }
+   },
+   "auto_900k_plus": {
+    "compactions": 5,
+    "sessions": 5,
+    "recent": {
+     "messages": 40,
+     "rules_that_matter": {
+      "n": 3,
+      "kept": 3,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 33,
+      "kept": 25,
+      "partly": 8,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 2,
+       "kept": 2,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 34,
+       "kept": 24,
+       "partly": 10,
+       "absent": 0
+      },
+      "question": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      },
+      "info": {
+       "n": 2,
+       "kept": 2,
+       "partly": 0,
+       "absent": 0
+      },
+      "ack": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 2,
+     "compactions_with_a_rule_not_fully_kept": 0
+    },
+    "older": {
+     "messages": 0,
+     "rules_that_matter": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 0,
+      "kept": 0,
+      "partly": 0,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      },
+      "question": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      },
+      "info": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      },
+      "ack": {
+       "n": 0,
+       "kept": 0,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 0,
+     "compactions_with_a_rule_not_fully_kept": 0
+    }
+   },
+   "all": {
+    "compactions": 15,
+    "sessions": 9,
+    "recent": {
+     "messages": 179,
+     "rules_that_matter": {
+      "n": 11,
+      "kept": 11,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 75,
+      "kept": 66,
+      "partly": 9,
+      "absent": 0
+     },
+     "by_kind": {
+      "rule": {
+       "n": 4,
+       "kept": 4,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 8,
+       "kept": 8,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 105,
+       "kept": 95,
+       "partly": 10,
+       "absent": 0
+      },
+      "question": {
+       "n": 42,
+       "kept": 36,
+       "partly": 4,
+       "absent": 2
+      },
+      "info": {
+       "n": 6,
+       "kept": 6,
+       "partly": 0,
+       "absent": 0
+      },
+      "ack": {
+       "n": 4,
+       "kept": 4,
+       "partly": 0,
+       "absent": 0
+      }
+     },
+     "compactions_with_rules": 10,
+     "compactions_with_a_rule_not_fully_kept": 0
+    },
+    "older": {
+     "messages": 55,
+     "rules_that_matter": {
+      "n": 2,
+      "kept": 2,
+      "partly": 0,
+      "absent": 0
+     },
+     "every_message_that_matters": {
+      "n": 20,
+      "kept": 5,
+      "partly": 8,
+      "absent": 7
+     },
+     "by_kind": {
+      "rule": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      },
+      "correction": {
+       "n": 1,
+       "kept": 1,
+       "partly": 0,
+       "absent": 0
+      },
+      "task": {
+       "n": 27,
+       "kept": 7,
+       "partly": 7,
+       "absent": 13
+      },
+      "question": {
+       "n": 23,
+       "kept": 6,
+       "partly": 1,
+       "absent": 16
+      },
+      "info": {
+       "n": 2,
+       "kept": 0,
+       "partly": 2,
+       "absent": 0
+      },
+      "ack": {
+       "n": 1,
+       "kept": 0,
+       "partly": 0,
+       "absent": 1
+      }
+     },
+     "compactions_with_rules": 2,
+     "compactions_with_a_rule_not_fully_kept": 0
+    }
+   }
+  }
+ }
+}

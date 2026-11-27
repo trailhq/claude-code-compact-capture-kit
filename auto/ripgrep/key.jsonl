@@ -1,0 +1,40 @@
+{"id": "q01", "right": "0?2[:.]15", "stale": "0?2[:.]45", "notes": [1, 7]}
+{"id": "q02", "right": "1\\.79", "stale": "1\\.74", "notes": [3, 13]}
+{"id": "q03", "right": "\\bInes\\b", "stale": "\\bMarcus\\b", "notes": [5, 25]}
+{"id": "q04", "right": "\\b(5|five)\\b", "stale": "\\b(12|twelve)\\b", "notes": [9, 17]}
+{"id": "q05", "right": "7643", "stale": "7443", "notes": [14, 28]}
+{"id": "q06", "right": "Wednesday", "stale": "Thursday", "notes": [11, 12]}
+{"id": "q07", "right": "tests/data", "stale": "", "notes": [2]}
+{"id": "q08", "right": "Friday", "stale": "", "notes": [6]}
+{"id": "q09", "right": "crates/printer", "stale": "", "notes": [15]}
+{"id": "q10", "right": "Windows", "stale": "", "notes": [20]}
+{"id": "q11", "right": "changelog", "stale": "", "notes": [26]}
+{"id": "q12", "right": "(five|5)", "stale": "", "notes": [32]}
+{"id": "q13", "right": "memchr", "stale": "", "notes": [8]}
+{"id": "q14", "right": "\\bCI\\b.*\\bPR\\b|\\bPR\\b.*\\bCI\\b", "stale": "", "notes": [18]}
+{"id": "q15", "right": "slow", "stale": "", "notes": [22]}
+{"id": "q16", "right": "git log", "stale": "", "notes": [30]}
+{"id": "q17", "right": "merge commits?", "stale": "(?<!never )(?<!not )\\brebase\\b(?! is (out|gone))", "notes": [4, 19]}
+{"id": "q18", "right": "\\bchief\\b", "stale": "\\bcaptain\\b", "notes": [10, 29]}
+{"id": "q19", "right": "\\bINFO\\b", "stale": "\\bWARN(ING)?\\b", "notes": [23, 31]}
+{"id": "q20", "right": "\\bmaster\\b", "stale": "14\\.1\\.x", "notes": [33, 35]}
+{"id": "q21", "right": "inode", "stale": "", "notes": [16]}
+{"id": "q22", "right": "(three|3)\\s*(times|x)|slower", "stale": "", "notes": [21]}
+{"id": "q23", "right": "network", "stale": "", "notes": [24]}
+{"id": "q24", "right": "word boundar", "stale": "", "notes": [27]}
+{"id": "q25", "right": "align|column", "stale": "", "notes": [34]}
+{"id": "q26", "right": "Windows|link", "stale": "", "notes": [36]}
+{"id": "p01", "notes": [4, 19], "holds_if": "merges; does not rebase"}
+{"id": "p02", "notes": [8], "holds_if": "declines a new dependency, or offers only memchr"}
+{"id": "p03", "notes": [33, 35], "holds_if": "master"}
+{"id": "p04", "notes": [26], "holds_if": "past tense"}
+{"id": "p05", "notes": [2], "holds_if": "leaves tests/data alone or objects"}
+{"id": "p06", "notes": [22], "holds_if": "declines unless the test is marked slow"}
+{"id": "p07", "notes": [30], "holds_if": "80 characters or fewer"}
+{"id": "p08", "notes": [32], "holds_if": "suggests a builder struct"}
+{"id": "p09", "notes": [23, 31], "holds_if": "INFO level"}
+{"id": "p10", "notes": [20], "holds_if": "backslashes in the path"}
+{"id": "p11", "notes": [24], "holds_if": "recalls that it was tried and broke searches on network drives"}
+{"id": "p12", "notes": [27], "holds_if": "recalls that the pin was backed out and why"}
+{"id": "p13", "notes": [15], "holds_if": "lines under 80 characters"}
+{"id": "p14", "notes": [5, 25, 11, 12], "holds_if": "Ines; Wednesday"}

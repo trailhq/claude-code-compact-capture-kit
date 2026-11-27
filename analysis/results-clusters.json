@@ -1,0 +1,508 @@
+{
+ "index": {
+  "sessions": 17968,
+  "claude_code_sessions": 12417,
+  "selection_rule_sessions": 299,
+  "selection_rule_repositories": 74,
+  "selection_rule_strategies": {
+   "manual-commit": 299
+  }
+ },
+ "who": {
+  "compactions": 383,
+  "sessions": 147,
+  "repositories": 47,
+  "owners": 38,
+  "users": 32,
+  "compactions_by_user_top6": [
+   166,
+   47,
+   26,
+   15,
+   14,
+   13
+  ],
+  "created_first": "2026-06-01",
+  "created_last": "2026-09-04"
+ },
+ "bands": {
+  "manual": {
+   "compactions": 187,
+   "users": 22,
+   "top_user_compactions": 78,
+   "median_messages_typed_since_last_compaction": 7
+  },
+  "auto_under_200k": {
+   "compactions": 47,
+   "users": 4,
+   "top_user_compactions": 26,
+   "median_messages_typed_since_last_compaction": 2
+  },
+  "auto_200k_900k": {
+   "compactions": 54,
+   "users": 5,
+   "top_user_compactions": 30,
+   "median_messages_typed_since_last_compaction": 4.0
+  },
+  "auto_900k_plus": {
+   "compactions": 87,
+   "users": 14,
+   "top_user_compactions": 31,
+   "median_messages_typed_since_last_compaction": 25
+  },
+  "auto_idle": {
+   "compactions": 8,
+   "users": 4,
+   "top_user_compactions": 3,
+   "median_messages_typed_since_last_compaction": 14.0
+  }
+ },
+ "top_user": {
+  "compactions": 166,
+  "sessions": 60,
+  "users": 1,
+  "recent": {
+   "n": 217,
+   "kept": 164,
+   "partly": 29,
+   "absent": 24
+  },
+  "older": {
+   "n": 348,
+   "kept": 63,
+   "partly": 108,
+   "absent": 177
+  }
+ },
+ "everyone_else": {
+  "compactions": 217,
+  "sessions": 87,
+  "users": 31,
+  "recent": {
+   "n": 404,
+   "kept": 358,
+   "partly": 26,
+   "absent": 20
+  },
+  "older": {
+   "n": 458,
+   "kept": 219,
+   "partly": 92,
+   "absent": 147
+  }
+ },
+ "user_by_user": {
+  "users_with_5_recent_and_5_older_rules": 15,
+  "recent_share_higher": 13,
+  "median_recent_share": 0.914,
+  "median_older_share": 0.181,
+  "mean_recent_share": 0.904,
+  "mean_older_share": 0.288,
+  "kept_recent_of_n_kept_older_of_n": [
+   [
+    164,
+    217,
+    63,
+    348
+   ],
+   [
+    66,
+    82,
+    7,
+    68
+   ],
+   [
+    5,
+    5,
+    123,
+    123
+   ],
+   [
+    40,
+    47,
+    8,
+    41
+   ],
+   [
+    4,
+    5,
+    45,
+    56
+   ],
+   [
+    30,
+    35,
+    7,
+    23
+   ],
+   [
+    27,
+    27,
+    4,
+    28
+   ],
+   [
+    30,
+    30,
+    0,
+    16
+   ],
+   [
+    32,
+    35,
+    1,
+    9
+   ],
+   [
+    14,
+    14,
+    2,
+    19
+   ],
+   [
+    19,
+    21,
+    0,
+    10
+   ],
+   [
+    11,
+    11,
+    9,
+    19
+   ],
+   [
+    10,
+    10,
+    4,
+    16
+   ],
+   [
+    8,
+    8,
+    2,
+    13
+   ],
+   [
+    4,
+    6,
+    3,
+    6
+   ]
+  ]
+ },
+ "one_session": {
+  "id": "0ed7b101",
+  "compactions": 26,
+  "older": {
+   "n": 123,
+   "kept": 123,
+   "partly": 0,
+   "absent": 0
+  },
+  "most_older_messages_at_one_compaction": 29,
+  "all_other_sessions_older": {
+   "n": 683,
+   "kept": 159,
+   "partly": 200,
+   "absent": 324
+  }
+ },
+ "by_order": {
+  "1": {
+   "compactions": 147,
+   "users": 32,
+   "recent": {
+    "n": 302,
+    "kept": 259,
+    "partly": 27,
+    "absent": 16
+   },
+   "older": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
+   },
+   "older_top_user": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
+   },
+   "older_everyone_else": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
+   },
+   "older_without_the_one_session": {
+    "n": 0,
+    "kept": 0,
+    "partly": 0,
+    "absent": 0
+   },
+   "users_with_older_rules": 0
+  },
+  "2": {
+   "compactions": 76,
+   "users": 22,
+   "recent": {
+    "n": 116,
+    "kept": 93,
+    "partly": 10,
+    "absent": 13
+   },
+   "older": {
+    "n": 154,
+    "kept": 31,
+    "partly": 57,
+    "absent": 66
+   },
+   "older_top_user": {
+    "n": 54,
+    "kept": 10,
+    "partly": 23,
+    "absent": 21
+   },
+   "older_everyone_else": {
+    "n": 100,
+    "kept": 21,
+    "partly": 34,
+    "absent": 45
+   },
+   "older_without_the_one_session": {
+    "n": 153,
+    "kept": 30,
+    "partly": 57,
+    "absent": 66
+   },
+   "users_with_older_rules": 17
+  },
+  "3": {
+   "compactions": 42,
+   "users": 13,
+   "recent": {
+    "n": 39,
+    "kept": 35,
+    "partly": 4,
+    "absent": 0
+   },
+   "older": {
+    "n": 116,
+    "kept": 20,
+    "partly": 44,
+    "absent": 52
+   },
+   "older_top_user": {
+    "n": 62,
+    "kept": 10,
+    "partly": 26,
+    "absent": 26
+   },
+   "older_everyone_else": {
+    "n": 54,
+    "kept": 10,
+    "partly": 18,
+    "absent": 26
+   },
+   "older_without_the_one_session": {
+    "n": 114,
+    "kept": 18,
+    "partly": 44,
+    "absent": 52
+   },
+   "users_with_older_rules": 10
+  },
+  "4+": {
+   "compactions": 118,
+   "users": 13,
+   "recent": {
+    "n": 164,
+    "kept": 135,
+    "partly": 14,
+    "absent": 15
+   },
+   "older": {
+    "n": 536,
+    "kept": 231,
+    "partly": 99,
+    "absent": 206
+   },
+   "older_top_user": {
+    "n": 232,
+    "kept": 43,
+    "partly": 59,
+    "absent": 130
+   },
+   "older_everyone_else": {
+    "n": 304,
+    "kept": 188,
+    "partly": 40,
+    "absent": 76
+   },
+   "older_without_the_one_session": {
+    "n": 416,
+    "kept": 111,
+    "partly": 99,
+    "absent": 206
+   },
+   "users_with_older_rules": 12
+  }
+ },
+ "recent_by_messages_typed_since_last_compaction": {
+  "1-9": {
+   "compactions": 175,
+   "users": 19,
+   "all": {
+    "n": 90,
+    "kept": 86,
+    "partly": 2,
+    "absent": 2
+   },
+   "top_user": {
+    "n": 48,
+    "kept": 47,
+    "partly": 1,
+    "absent": 0
+   },
+   "everyone_else": {
+    "n": 42,
+    "kept": 39,
+    "partly": 1,
+    "absent": 2
+   }
+  },
+  "10-19": {
+   "compactions": 78,
+   "users": 15,
+   "all": {
+    "n": 130,
+    "kept": 120,
+    "partly": 7,
+    "absent": 3
+   },
+   "top_user": {
+    "n": 60,
+    "kept": 51,
+    "partly": 6,
+    "absent": 3
+   },
+   "everyone_else": {
+    "n": 70,
+    "kept": 69,
+    "partly": 1,
+    "absent": 0
+   }
+  },
+  "20-39": {
+   "compactions": 64,
+   "users": 18,
+   "all": {
+    "n": 209,
+    "kept": 171,
+    "partly": 20,
+    "absent": 18
+   },
+   "top_user": {
+    "n": 54,
+    "kept": 35,
+    "partly": 11,
+    "absent": 8
+   },
+   "everyone_else": {
+    "n": 155,
+    "kept": 136,
+    "partly": 9,
+    "absent": 10
+   }
+  },
+  "40+": {
+   "compactions": 27,
+   "users": 9,
+   "all": {
+    "n": 192,
+    "kept": 145,
+    "partly": 26,
+    "absent": 21
+   },
+   "top_user": {
+    "n": 55,
+    "kept": 31,
+    "partly": 11,
+    "absent": 13
+   },
+   "everyone_else": {
+    "n": 137,
+    "kept": 114,
+    "partly": 15,
+    "absent": 8
+   }
+  }
+ },
+ "text_search": {
+  "recent": {
+   "n": 5013,
+   "word_for_word": 3058,
+   "mostly": 262
+  },
+  "older": {
+   "n": 5633,
+   "word_for_word": 373,
+   "mostly": 10
+  },
+  "first_compaction_recent": {
+   "n": 2366,
+   "word_for_word": 1521,
+   "mostly": 130
+  },
+  "second_compaction_recent": {
+   "n": 943,
+   "word_for_word": 541,
+   "mostly": 49
+  },
+  "second_compaction_older": {
+   "n": 1181,
+   "word_for_word": 34,
+   "mostly": 3
+  }
+ },
+ "replay_sessions": [
+  {
+   "session": "0d4c4262",
+   "user": "user 1",
+   "is_top_user": true
+  },
+  {
+   "session": "27642e0f",
+   "user": "user 2",
+   "is_top_user": false
+  },
+  {
+   "session": "73009f6a",
+   "user": "user 1",
+   "is_top_user": true
+  },
+  {
+   "session": "cd25197e",
+   "user": "user 3",
+   "is_top_user": false
+  },
+  {
+   "session": "2cae28a4",
+   "user": "user 1",
+   "is_top_user": true
+  },
+  {
+   "session": "5a7b375c",
+   "user": "user 4",
+   "is_top_user": false
+  },
+  {
+   "session": "ede0cb33",
+   "user": "user 1",
+   "is_top_user": true
+  }
+ ],
+ "replay_users": 4
+}
