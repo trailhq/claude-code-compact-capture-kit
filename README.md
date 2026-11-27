@@ -16,7 +16,7 @@ The repository holds labels, counts and scripts. It holds no session transcripts
 | The 1M-token scripted session: 26 questions, seven summaries, auto memory on and off | `analysis/results-session-a.json` | `analysis/freeze3.py` | the raw run, which is not published |
 | The examples quoted in the post | `analysis/results-examples.json` | `analysis/freeze5.py` | the raw runs, which are not published |
 
-The two charts are `analysis/figure-01-rules-after-compactions.png` and `analysis/figure-03-kept-by-compaction.png`. `analysis/make_chart_v5.py` draws them from the results files. The post's second picture is a screenshot of `/context`, so there is no script for it.
+The two charts are `analysis/figure-01-rules-after-compactions.png` and `analysis/figure-03-kept-by-compaction.png`. `analysis/make_figures.py` draws them from the results files, in Trail's brand style. The post's second picture is a screenshot of `/context`, so there is no script for it.
 
 ## What you can rerun from this repository
 
@@ -27,10 +27,10 @@ git clone https://github.com/trailhq/claude-code-compact-capture-kit.git ~/compa
 cd ~/compact-capture-kit
 KIT=$PWD python3 analysis/freeze1.py     # writes analysis/results-real.json
 KIT=$PWD python3 analysis/freeze2.py     # writes analysis/results-replay.json
-python3 analysis/make_chart_v5.py        # redraws the two charts; needs matplotlib
+python3 analysis/make_figures.py         # redraws the two charts; needs matplotlib
 ```
 
-A chart you redraw can differ from ours by a pixel, because fonts and matplotlib versions differ.
+The charts are set in Trail's typefaces: Switzer and Erode from Fontshare, and JetBrains Mono. They are not in this repository. To use them, put their files in one folder and pass it as a third argument: `python3 analysis/make_figures.py analysis analysis <fonts folder>`. Without them the script uses matplotlib's default face, so the lettering differs from ours and the numbers do not.
 
 `freeze4.py` also reproduces its file, once you have SWE-chat's index. It needs pyarrow and `data/SWE-chat/sessions.parquet`, which you download yourself (see "The dataset").
 
@@ -75,7 +75,7 @@ This repository holds what we derived from it: labels, counts and session ids. T
 ## What is not here, and why
 
 - **SWE-chat transcripts and their index.** They are the dataset's to give out.
-- **The replay's questions, answer keys and answers.** They restate what SWE-chat users typed. `analysis/results-examples.json` keeps only the four answers graded wrong, which the post lists, and one of them traced in full.
+- **The replay's questions, answer keys and answers.** They restate what SWE-chat users typed. `analysis/results-examples.json` keeps the four answers graded wrong, and one of them traced in full.
 - **Prompts and replies of the judges (`raw/`).** They hold message text.
 - **The raw output of our own runs.** A transcript carries the account's email address and organisation ID.
 - **The author's own Claude Code sessions.** They were judged the same way, and only their counts are in `results-real.json`, under `own_meaning` and `own_reading`. `freeze1.py` keeps those counts as they are when the label files are absent.
